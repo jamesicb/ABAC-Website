@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const FRAME_COUNT = 120;
+  const FRAME_COUNT = 100;
   const FRAME_W = 1280;
   const FRAME_H = 720;
   const framePath = (i) => `assets/sequence/f${String(i + 1).padStart(3, '0')}.webp`;
@@ -67,7 +67,18 @@
     return -1;
   }
 
-  const targetIndex = () => Math.min(FRAME_COUNT - 1, Math.round(progress * (FRAME_COUNT - 1)));
+  // Scroll progress to frame. The film is uneven (the wall changes quickly,
+  // the pull-back is long), so each caption gets its own stretch of footage.
+  const TIMELINE = [[0, 0], [0.16, 4], [0.36, 13], [0.56, 36], [0.78, 62], [1, FRAME_COUNT - 1]];
+  function targetIndex() {
+    for (let k = 1; k < TIMELINE.length; k++) {
+      if (progress <= TIMELINE[k][0]) {
+        const [p0, f0] = TIMELINE[k - 1], [p1, f1] = TIMELINE[k];
+        return Math.round(f0 + (f1 - f0) * ((progress - p0) / (p1 - p0)));
+      }
+    }
+    return FRAME_COUNT - 1;
+  }
 
   let cw = 0, ch = 0, dpr = 1;
   function resize() {
@@ -84,8 +95,9 @@
   const ease = (t) => t * t * (3 - 2 * t);
 
   // Where to centre the crop across the film (fraction of frame width).
-  // The close-up drifts toward the door, then settles on the whole house.
-  const FOCUS = [[0, 0.5], [0.32, 0.55], [0.45, 0.62], [0.6, 0.6], [0.8, 0.5], [1, 0.47]];
+  // The close-up follows the new layers, then settles on the house with the
+  // untouched house next door kept in view as the before.
+  const FOCUS = [[0, 0.56], [0.36, 0.56], [0.5, 0.52], [0.62, 0.6], [0.72, 0.58], [0.88, 0.46], [1, 0.45]];
   function focusAt(p) {
     for (let k = 1; k < FOCUS.length; k++) {
       if (p <= FOCUS[k][0]) {
@@ -106,8 +118,8 @@
     let yCenter = ch / 2;
     if (portrait) {
       // On tall screens the close-up fills the screen, then the camera
-      // pulls back so the whole house fits across the width at the end.
-      const houseFit = (cw / FRAME_W) * 1.55;
+      // pulls back so both houses are in view across the width at the end.
+      const houseFit = (cw / FRAME_W) * 1.2;
       const t = ease(clamp01((progress - 0.62) / 0.3));
       scale = lerp(cover, Math.max(houseFit, cw / FRAME_W), t);
       yCenter = lerp(ch / 2, ch * 0.4, t);
