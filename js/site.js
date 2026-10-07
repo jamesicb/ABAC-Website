@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const FRAME_COUNT = 100;
+  const FRAME_COUNT = 113;
   const FRAME_W = 1280;
   const FRAME_H = 720;
   const framePath = (i) => `assets/sequence/f${String(i + 1).padStart(3, '0')}.webp`;
@@ -69,7 +69,7 @@
 
   // Scroll progress to frame. The film is uneven (the wall changes quickly,
   // the pull-back is long), so each caption gets its own stretch of footage.
-  const TIMELINE = [[0, 0], [0.16, 4], [0.36, 13], [0.56, 36], [0.78, 62], [1, FRAME_COUNT - 1]];
+  const TIMELINE = [[0, 0], [0.16, 4], [0.36, 14], [0.56, 34], [0.78, 58], [1, FRAME_COUNT - 1]];
   function targetIndex() {
     for (let k = 1; k < TIMELINE.length; k++) {
       if (progress <= TIMELINE[k][0]) {
@@ -97,7 +97,7 @@
   // Where to centre the crop across the film (fraction of frame width).
   // The close-up follows the new layers, then settles on the house with the
   // untouched house next door kept in view as the before.
-  const FOCUS = [[0, 0.56], [0.36, 0.56], [0.5, 0.52], [0.62, 0.6], [0.72, 0.58], [0.88, 0.46], [1, 0.45]];
+  const FOCUS = [[0, 0.5], [0.36, 0.48], [0.56, 0.5], [0.7, 0.55], [0.85, 0.5], [1, 0.47]];
   function focusAt(p) {
     for (let k = 1; k < FOCUS.length; k++) {
       if (p <= FOCUS[k][0]) {
