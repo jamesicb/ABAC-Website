@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Absolute Acrylics | External Wall Insulation Dublin</title>
 <meta name="description" content="External wall insulation for Dublin homes. SEAI registered, 10-year guarantee, and we apply for your SEAI grant for you. Get a quote: 086 365 4911.">
-<meta name="theme-color" content="#1d2124">
+<meta name="theme-color" content="#252b29">
 <meta property="og:title" content="Absolute Acrylics | External Wall Insulation Dublin">
 <meta property="og:description" content="SEAI registered external wall insulation. 10-year guarantee. We apply for your SEAI grant for you.">
 <meta property="og:image" content="assets/images/og-finished-home.jpg">
@@ -13,45 +13,56 @@
 <link rel="preload" as="image" href="assets/sequence/f001.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Instrument+Sans:wght@400..600&display=swap">
 <link rel="stylesheet" href="css/site.css">
-<script>document.documentElement.classList.add('js')</script>
+<script>
+  // The scroll film runs only with JavaScript, without a reduced-motion
+  // preference and without Save-Data. Everyone else gets the static opening.
+  (function () {
+    var c = navigator.connection;
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches || (c && c.saveData);
+    document.documentElement.classList.add(still ? 'still' : 'motion');
+  })();
+</script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#content">Skip to main content</a>
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
     <a class="brand" href="#top" aria-label="Absolute Acrylics, back to top">
       <b>Absolute Acrylics</b>
-      <span>External wall insulation</span>
+      <span>External wall insulation, Dublin</span>
     </a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#why">Why insulate</a></li>
-      <li><a href="#grant">SEAI grant</a></li>
-      <li><a href="#process">How it works</a></li>
-      <li><a href="#finishes">Finishes</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
+    <nav class="nav-menu" id="nav-menu" aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="#work">Our Work</a></li>
+        <li><a href="#process">How it works</a></li>
+        <li><a href="#grant">SEAI grant</a></li>
+        <li><a href="#finishes">Finishes</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a class="menu-phone" href="tel:+353863654911">Call 086 365 4911</a>
+    </nav>
     <a class="nav-phone" href="tel:+353863654911">086 365 4911</a>
-    <a class="btn btn-primary" href="#quote">Get a Quote</a>
-    <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+    <a class="btn btn-primary nav-cta" href="#quote">Get a Quote</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-menu"><span class="sr">Menu</span><i></i><i></i><i></i></button>
   </div>
 </header>
 
 <main id="main">
-  <!-- Cinematic scroll: the wall, layer by layer -->
-  <section class="film" id="top" aria-label="Your wall, layer by layer">
+  <!-- Opening: one real Dublin job, layer by layer, as you scroll -->
+  <section class="film" id="top" aria-labelledby="film-title">
     <div class="film-stage">
-      <img class="film-poster" src="assets/sequence/f001.webp" alt="Close-up of an old stone-effect cladding wall under pebbledash, beside a window" width="1280" height="720">
+      <img class="film-poster" src="assets/sequence/f001.webp" alt="" width="1280" height="720">
       <canvas id="film-canvas" aria-hidden="true"></canvas>
-      <div class="film-shade"></div>
+      <div class="film-shade" aria-hidden="true"></div>
 
       <div class="film-copy">
-        <div class="beat is-on" data-from="0" data-to="0.16">
-          <p class="label">External wall insulation <i>/ Dublin</i></p>
-          <h1>A warmer home starts on the outside.</h1>
-          <p>We insulate the outside walls of Dublin homes and finish them in acrylic render. Scroll to watch one of our Dublin jobs change, layer by layer.</p>
+        <div class="beat is-on" data-stage="0">
+          <p class="kicker">External wall insulation in Dublin</p>
+          <h1 id="film-title">A warmer home starts on the outside.</h1>
+          <p>We insulate the outside walls of Dublin homes and finish them in render or brick. Scroll to see one of our jobs change, layer by layer.</p>
           <div class="actions">
             <a class="btn btn-primary" href="#quote">Get a Quote</a>
             <a class="btn btn-ghost" href="tel:+353863654911">
@@ -61,33 +72,28 @@
           </div>
         </div>
 
-        <div class="beat" data-from="0.18" data-to="0.36">
-          <p class="label">Layer 1 <i>/ The wall as it is</i></p>
-          <h2>Dated cladding and pebbledash on a cold wall.</h2>
-          <p>This is how this house looked before we started: stone-effect cladding below, pebbledash above. The outside walls carry heat away all winter.</p>
+        <div class="beat" data-stage="1">
+          <p class="kicker">Before</p>
+          <h2>Stone cladding and pebbledash on a cold wall.</h2>
+          <p>This is how the house looked before we started. Outside walls without insulation lose heat all winter.</p>
         </div>
 
-        <div class="beat" data-from="0.38" data-to="0.56">
-          <p class="label">Layer 2 <i>/ Insulation, mesh and basecoat</i></p>
-          <h2>Wrapped in insulation, sealed in basecoat.</h2>
-          <p>Insulation boards go onto the outside of the wall. Reinforcing mesh is set into a basecoat over them to give the finish a solid base.</p>
+        <div class="beat" data-stage="2">
+          <p class="kicker">Insulation</p>
+          <h2>Insulation boards, then mesh and basecoat.</h2>
+          <p>Boards are fixed to the outside of the wall. Reinforcing mesh set into a basecoat gives the finish a solid base.</p>
         </div>
 
-        <div class="beat" data-from="0.58" data-to="0.78">
-          <p class="label">Layer 3 <i>/ The finish</i></p>
-          <h2>Brick to the lower front, render above.</h2>
-          <p>The finish is what you see every day. This home went from cladding and pebbledash to a brick finish below and acrylic render above.</p>
+        <div class="beat" data-stage="3">
+          <p class="kicker">Finish</p>
+          <h2>Brick on the ground floor, render above.</h2>
+          <p>The finish is the part you see every day. This house has a brick finish below and smooth render above.</p>
         </div>
 
-        <div class="beat" data-from="0.8" data-to="1.01">
-          <p class="label">Finished <i>/ Before and after</i></p>
-          <h2>Same house. Warmer home.</h2>
-          <p>The house next door shows where it started.</p>
-          <ul class="beat-facts">
-            <li>SEAI registered</li>
-            <li>We apply for your SEAI grant</li>
-            <li>10-year guarantee</li>
-          </ul>
+        <div class="beat" data-stage="4">
+          <p class="kicker">Completed</p>
+          <h2 class="beat-final">Same <u>house</u>. Warmer <u>home</u>.</h2>
+          <p><a class="text-link" href="#work">See the real before and after photos of this house</a></p>
           <div class="actions">
             <a class="btn btn-primary" href="#quote">Get a Quote</a>
             <a class="btn btn-ghost" href="#grant">How the grant works</a>
@@ -95,100 +101,157 @@
         </div>
       </div>
 
-      <ol class="film-rail" aria-hidden="true">
-        <li data-beat="0">Start</li>
-        <li data-beat="1">Old wall</li>
-        <li data-beat="2">Insulation</li>
-        <li data-beat="3">Finish</li>
-        <li data-beat="4">Finished</li>
-      </ol>
-      <div class="scroll-hint label" aria-hidden="true">Scroll</div>
+      <nav class="film-rail" aria-label="Transformation stages">
+        <ol>
+          <li><button type="button" data-go="0" aria-current="step">Start</button></li>
+          <li><button type="button" data-go="1">Before</button></li>
+          <li><button type="button" data-go="2">Insulation</button></li>
+          <li><button type="button" data-go="3">Finish</button></li>
+          <li><button type="button" data-go="4">Completed</button></li>
+        </ol>
+      </nav>
+
+      <p class="film-note">Visualisation based on a real Absolute Acrylics project.</p>
+      <p class="scroll-hint" aria-hidden="true">Scroll to see the transformation</p>
+      <a class="film-skip" href="#content">Skip transformation</a>
       <div class="film-progress" aria-hidden="true"><span id="film-progress"></span></div>
     </div>
   </section>
 
-  <section class="facts" aria-label="Why homeowners choose Absolute Acrylics">
+  <!-- Static opening for reduced motion, Save-Data and no JavaScript -->
+  <section class="opening" aria-labelledby="opening-title">
+    <div class="opening-media">
+      <img src="assets/images/completed-house.webp" srcset="assets/images/completed-house-800.webp 800w, assets/images/completed-house.webp 1280w" sizes="100vw" alt="The finished house: brick finish on the ground floor and render above, at dusk" width="1280" height="720">
+    </div>
+    <div class="wrap opening-in">
+      <p class="kicker">External wall insulation in Dublin</p>
+      <h1 id="opening-title">A warmer home starts on the outside.</h1>
+      <p class="lede">We insulate the outside walls of Dublin homes and finish them in render or brick.</p>
+      <ol class="opening-stages">
+        <li><b>Before</b> <span>Stone cladding and pebbledash, before any work.</span></li>
+        <li><b>Insulation</b> <span>Boards fixed to the outside wall, then mesh and basecoat.</span></li>
+        <li><b>Finish</b> <span>Brick on the ground floor, render above.</span></li>
+        <li><b>Completed</b> <span>Same <u>house</u>. Warmer <u>home</u>.</span></li>
+      </ol>
+      <div class="actions">
+        <a class="btn btn-primary" href="#quote">Get a Quote</a>
+        <a class="btn btn-ghost" href="tel:+353863654911">Call 086 365 4911</a>
+      </div>
+      <p class="opening-note">Image: visualisation based on a real Absolute Acrylics project. <a href="#work">See the real photos</a>.</p>
+    </div>
+  </section>
+
+  <section class="facts" id="content" tabindex="-1" aria-label="Why homeowners choose Absolute Acrylics">
     <ul class="wrap">
-      <li><b>SEAI registered</b><span>Registered with the Sustainable Energy Authority of Ireland.</span></li>
-      <li><b>Grant handled for you</b><span>We apply for the SEAI grant on your behalf.</span></li>
-      <li><b>10-year guarantee</b><span>Our work is covered by a 10-year guarantee.</span></li>
-      <li><b>Mostly Dublin</b><span>Most of our work is in homes across Dublin.</span></li>
+      <li><b>SEAI registered</b></li>
+      <li><b>We apply for your SEAI grant</b></li>
+      <li><b>10-year guarantee</b></li>
+      <li><b>Dublin-based installers</b></li>
     </ul>
   </section>
 
-  <section class="section" id="why">
+  <section class="section" id="why" aria-labelledby="why-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="label">Why external wall insulation</p>
-        <h2>Insulate the house without giving up a room.</h2>
-        <p>External wall insulation goes on the outside of your walls. The house is wrapped from the outside, so the inside of your home stays as it is.</p>
+        <p class="eyebrow">Why external wall insulation</p>
+        <h2 id="why-title">A warmer home, without losing indoor space.</h2>
+        <p>The insulation goes on the outside of your walls, so the inside of your home stays as it is.</p>
       </div>
       <div class="why-grid">
         <article>
           <h3>Warmth stays in</h3>
-          <p>Outside walls lose heat. A layer of insulation across the whole wall helps keep the heat you pay for inside the house.</p>
+          <p>A layer of insulation across the whole outside wall helps keep the heat you pay for inside.</p>
         </article>
         <article>
           <h3>No space lost indoors</h3>
-          <p>Because the insulation is fixed to the outside, your rooms keep their size and your skirting, sockets and radiators stay where they are.</p>
+          <p>Rooms keep their size. Skirting, sockets and radiators stay where they are.</p>
         </article>
         <article>
           <h3>A new face for the house</h3>
-          <p>Dated pebbledash or tired render is covered by a fresh acrylic render finish, so the house looks new as well as feeling warmer.</p>
+          <p>Dated pebbledash or cladding is covered by a fresh render or brick finish.</p>
         </article>
         <article>
           <h3>The work happens outside</h3>
-          <p>The job is done from the outside of the house, so you can keep living in your home while it happens.</p>
+          <p>You can keep living at home while we work on the walls.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="section grant" id="grant">
+  <section class="section alt" id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Our work</p>
+        <h2 id="work-title">One Dublin home, before and after.</h2>
+        <p>These are real photos of the house in our opening sequence, taken before we started and when the walls were finished.</p>
+      </div>
+      <div class="ba">
+        <figure>
+          <img src="assets/images/work-before-800.webp" srcset="assets/images/work-before-800.webp 800w, assets/images/work-before.webp 1200w" sizes="(max-width: 760px) 100vw, 580px" alt="The house before: pebbledash on the upper floor and grey stone-effect cladding around the ground-floor window and doors" width="1200" height="900" loading="lazy" decoding="async">
+          <figcaption><span class="tag">Before</span> Pebbledash above, stone-effect cladding below.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/images/work-after-800.webp" srcset="assets/images/work-after-800.webp 800w, assets/images/work-after.webp 1200w" sizes="(max-width: 760px) 100vw, 580px" alt="The same house after: smooth off-white render on the upper floor and a red brick finish on the ground floor" width="1200" height="900" loading="lazy" decoding="async">
+          <figcaption><span class="tag tag-after">After</span> Smooth render above, brick finish below.</figcaption>
+        </figure>
+      </div>
+      <dl class="case">
+        <div><dt>Location</dt><dd>Dublin</dd></div>
+        <div><dt>Work</dt><dd>External wall insulation</dd></div>
+        <div><dt>Finish</dt><dd>Brick finish on the ground floor, acrylic render above</dd></div>
+      </dl>
+      <p class="case-note">The after photo was taken as the walls were finished, before the driveway was cleared.</p>
+    </div>
+  </section>
+
+  <section class="section grant" id="grant" aria-labelledby="grant-title">
     <div class="wrap grant-in">
       <div class="section-head">
-        <p class="label">SEAI grant</p>
-        <h2>The SEAI grant, applied for on your behalf.</h2>
-        <p>Homeowners can avail of the SEAI grant for external wall insulation. We are SEAI registered, and we make the grant application for you, so you don't have to deal with the forms yourself.</p>
+        <p class="eyebrow">SEAI grant</p>
+        <h2 id="grant-title">We apply for the SEAI grant for you.</h2>
+        <p>Homeowners can get the SEAI grant for external wall insulation. We are SEAI registered and make the grant application on your behalf, so you don't have to deal with the forms.</p>
         <div><a class="btn btn-primary" href="#quote">Ask about the grant</a></div>
       </div>
       <div class="grant-card">
-        <p class="label">Who does what</p>
+        <h3>Who does what</h3>
         <dl class="grant-rows">
-          <div><dt>Getting in touch for a quote</dt><dd class="you">You</dd></div>
-          <div><dt>Applying for the SEAI grant</dt><dd>Absolute Acrylics</dd></div>
-          <div><dt>Insulating and finishing the walls</dt><dd>Absolute Acrylics</dd></div>
-          <div><dt>Standing behind the work for 10 years</dt><dd>Absolute Acrylics</dd></div>
+          <div><dt>Get in touch for a quote</dt><dd class="you">You</dd></div>
+          <div><dt>Apply for the SEAI grant</dt><dd>Our team</dd></div>
+          <div><dt>Insulate and finish the walls</dt><dd>Our team</dd></div>
         </dl>
         <p class="grant-note">Grant eligibility and amounts are set by SEAI. We'll go through what applies to your home when we quote.</p>
       </div>
     </div>
   </section>
 
-  <section class="section on-stone" id="process">
+  <section class="section" id="process" aria-labelledby="process-title">
     <div class="wrap">
       <div class="section-head">
-        <p class="label">How it works</p>
-        <h2>From first call to finished wall.</h2>
-        <p>From the quote to the final coat, with the grant paperwork handled for you along the way.</p>
+        <p class="eyebrow">How it works</p>
+        <h2 id="process-title">From first call to finished wall.</h2>
       </div>
       <div class="process-in">
-        <ol class="steps">
-          <li><h3>Get in touch</h3><p>Call 086 365 4911 or send the quote form with a few details about your home.</p></li>
-          <li><h3>Your quote</h3><p>We talk through your home and the finish you want, and give you a quote.</p></li>
-          <li><h3>Your SEAI grant</h3><p>We apply for the SEAI grant on your behalf, so you don't have to do it yourself.</p></li>
-          <li><h3>Insulation, mesh and basecoat</h3><p>Insulation boards are fixed to the outside walls, then covered with reinforcing mesh set into a basecoat.</p></li>
-          <li><h3>Your finish</h3><p>The walls are finished in acrylic render, with brick where you want it, such as the lower front of the house.</p></li>
-          <li><h3>10-year guarantee</h3><p>The finished work is covered by our 10-year guarantee.</p></li>
-        </ol>
+        <div>
+          <ol class="steps">
+            <li><h3>Get in touch</h3><p>Call 086 365 4911 or send the quote form with a few details about your home.</p></li>
+            <li><h3>Quote and grant</h3><p>We talk through your home and the finish you want, give you a quote, and apply for the SEAI grant for you.</p></li>
+            <li><h3>Insulation, mesh and basecoat</h3><p>Insulation boards are fixed to the outside walls, then covered with reinforcing mesh set into a basecoat.</p></li>
+            <li><h3>Your finish</h3><p>The walls are finished in acrylic render, with brick where you want it, such as the ground floor.</p></li>
+          </ol>
+          <div class="aftercare">
+            <h3>Aftercare</h3>
+            <p>Once the job is done, our work is covered by a 10-year guarantee.</p>
+          </div>
+        </div>
         <figure class="cutaway">
-          <img src="assets/images/layers-cutaway.webp" srcset="assets/images/layers-cutaway-800.webp 800w, assets/images/layers-cutaway.webp 1600w" sizes="(max-width: 860px) 100vw, 560px" alt="Cutaway of a house corner showing block wall, insulation board with fixings, mesh in basecoat, and the finished render and brick" width="1600" height="1195" loading="lazy" decoding="async">
+          <img src="assets/images/layers-cutaway-800.webp" srcset="assets/images/layers-cutaway-800.webp 800w, assets/images/layers-cutaway.webp 1600w" sizes="(max-width: 860px) 100vw, 560px" alt="Illustration of a wall corner in layers: existing wall, insulation board with fixings, mesh in basecoat, and the render and brick finish" width="1600" height="1195" loading="lazy" decoding="async">
           <figcaption>
+            <span class="tag">Illustration</span>
             <ol>
-              <li><b>01</b> Existing wall</li>
-              <li><b>02</b> Insulation board</li>
-              <li><b>03</b> Mesh and basecoat</li>
-              <li><b>04</b> Render or brick finish</li>
+              <li>Existing wall</li>
+              <li>Insulation board</li>
+              <li>Mesh and basecoat</li>
+              <li>Render or brick finish</li>
             </ol>
           </figcaption>
         </figure>
@@ -196,60 +259,65 @@
     </div>
   </section>
 
-  <section class="section" id="finishes">
-    <div class="wrap finish-in">
-      <img src="assets/images/render-brick-detail.webp" srcset="assets/images/render-brick-detail-800.webp 800w, assets/images/render-brick-detail.webp 1600w" sizes="(max-width: 860px) 100vw, 540px" alt="Close-up of smooth cream acrylic render meeting red brick below a charcoal window sill" width="1600" height="1195" loading="lazy" decoding="async">
-      <div>
-        <div class="section-head">
-          <p class="label">Finishes</p>
-          <h2>The part you'll see every day.</h2>
-          <p>The insulation does the work, and the finish is how your home looks for years after. We'll go through the options for your house when we quote.</p>
-        </div>
-        <div class="finish-list">
-          <article>
-            <span class="swatch" style="background:#ece3d3"></span>
-            <h3>Acrylic render</h3>
-            <p>A clean, even render finish over the insulated wall.</p>
-          </article>
-          <article>
-            <span class="swatch" style="background:#a4513a"></span>
-            <h3>Brick to the lower front</h3>
-            <p>Brick can be added to part of the house, like the lower front, with render above.</p>
-          </article>
-        </div>
+  <section class="section alt" id="finishes" aria-labelledby="finishes-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Finishes</p>
+        <h2 id="finishes-title">The part you'll see every day.</h2>
+        <p>The insulation does the work. The finish is how your home looks for years after. These close-ups are from the house in our before and after photos.</p>
       </div>
+      <div class="finish-grid">
+        <figure>
+          <img src="assets/images/finish-render.webp" alt="Close-up of the smooth off-white render, with the neighbour's pebbledash at the left edge for comparison" width="746" height="420" loading="lazy" decoding="async">
+          <figcaption><h3>Acrylic render</h3><p>A smooth, even render over the insulated wall. The rough pebbledash at the edge is the house next door.</p></figcaption>
+        </figure>
+        <figure>
+          <img src="assets/images/finish-brick.webp" alt="Close-up of the red brick finish around a ground-floor window" width="746" height="420" loading="lazy" decoding="async">
+          <figcaption><h3>Brick finish</h3><p>Brick on part of the house, like the ground floor, with render above.</p></figcaption>
+        </figure>
+      </div>
+      <p class="finish-more">We'll go through the finish options for your house when we quote.</p>
     </div>
   </section>
 
-  <section class="section on-stone" id="area">
-    <div class="wrap area">
-      <div>
-        <p class="label" style="color:var(--amber-deep)">Where we work</p>
-        <h2 style="margin-top:14px">We work mostly across Dublin.</h2>
-        <p>If your home is in Dublin, we can help. If you're just outside it, call and ask.</p>
-      </div>
-      <div class="actions">
-        <a class="btn btn-dark" href="tel:+353863654911">Call 086 365 4911</a>
-        <a class="btn btn-primary" href="#quote">Get a Quote</a>
-      </div>
+  <section class="section-sm" id="other" aria-labelledby="other-title">
+    <div class="wrap other-in">
+      <h2 id="other-title">We also do attic and cavity wall insulation.</h2>
+      <p>Alongside external wall insulation, we insulate attics and fill cavity walls with pumped insulation. Ask about either when you get in touch.</p>
     </div>
   </section>
 
-  <section class="section" id="faq">
+  <section class="section alt" id="faq" aria-labelledby="faq-title">
     <div class="wrap faq-in">
       <div class="section-head">
-        <p class="label">Questions</p>
-        <h2>Before you call.</h2>
-        <p>Short answers to the things homeowners ask first. Anything else, call 086 365 4911.</p>
+        <p class="eyebrow">Questions</p>
+        <h2 id="faq-title">Before you call.</h2>
+        <p>Short answers to what homeowners ask first. Anything else, call <a href="tel:+353863654911">086 365 4911</a>.</p>
       </div>
       <div class="faq-list">
-        <details open>
-          <summary>Do I have to apply for the SEAI grant myself?</summary>
-          <p>No. We apply for the SEAI grant on your behalf, so you don't have to do it yourself.</p>
+        <details>
+          <summary>Is external wall insulation right for my house?</summary>
+          <p>It depends on the house and its walls. We'll look at your home and tell you honestly when we quote.</p>
         </details>
         <details>
-          <summary>Are you SEAI registered?</summary>
-          <p>Yes, Absolute Acrylics is SEAI registered.</p>
+          <summary>Will it disrupt life at home?</summary>
+          <p>The work is done from the outside, so you can keep living at home. Your rooms stay the same size.</p>
+        </details>
+        <details>
+          <summary>How long does the job take?</summary>
+          <p>It depends on the size of the house and the finish. We'll give you an idea when we quote.</p>
+        </details>
+        <details>
+          <summary>What affects the price?</summary>
+          <p>Mainly the size of the walls and the finish you choose. Send the quote form or call and we'll price your home.</p>
+        </details>
+        <details>
+          <summary>What finishes can I choose?</summary>
+          <p>Acrylic render, with brick on part of the house, such as the ground floor, if you want it. We'll go through the options with you.</p>
+        </details>
+        <details>
+          <summary>Do I have to apply for the SEAI grant myself?</summary>
+          <p>No. We're SEAI registered and apply for the grant on your behalf. Eligibility and amounts are set by SEAI, and we'll go through what applies to you.</p>
         </details>
         <details>
           <summary>Is the work guaranteed?</summary>
@@ -257,81 +325,77 @@
         </details>
         <details>
           <summary>Do you cover my area?</summary>
-          <p>We work mostly across Dublin. If you're not sure whether we cover you, call 086 365 4911 and ask.</p>
-        </details>
-        <details>
-          <summary>Will I lose any space inside?</summary>
-          <p>No. External wall insulation is fixed to the outside of your walls, so your rooms stay the same size.</p>
-        </details>
-        <details>
-          <summary>How do I get a price?</summary>
-          <p>Fill in the quote form below or call 086 365 4911. We'll talk through your home and give you a quote.</p>
+          <p>Most of our work is in Dublin, and we take on some projects further afield. Call 086 365 4911 to check.</p>
         </details>
       </div>
     </div>
   </section>
 
-  <section class="section quote" id="quote">
-    <img class="quote-bg" src="assets/images/finished-home-evening-800.webp" srcset="assets/images/finished-home-evening-800.webp 800w, assets/images/finished-home-evening.webp 1600w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  <section class="quote" id="quote" aria-labelledby="quote-title">
+    <img class="quote-bg" src="assets/images/completed-house-800.webp" srcset="assets/images/completed-house-800.webp 800w, assets/images/completed-house.webp 1280w" sizes="100vw" alt="" loading="lazy" decoding="async">
     <div class="wrap quote-in">
       <div>
         <div class="section-head">
-          <p class="label">Get a Quote</p>
-          <h2>Tell us about your home.</h2>
+          <p class="eyebrow">Get a Quote</p>
+          <h2 id="quote-title">Tell us about your home.</h2>
           <p>Send a few details and we'll be in touch about your quote and your SEAI grant. Prefer to talk? Call us.</p>
         </div>
         <div class="contact-lines">
-          <a href="tel:+353863654911"><span class="label">Phone</span><strong>086 365 4911</strong></a>
-          <a href="mailto:fiona.abac@gmail.com"><span class="label">Email</span><strong>fiona.abac@gmail.com</strong></a>
+          <a href="tel:+353863654911"><span>Phone</span><strong>086 365 4911</strong></a>
+          <a href="mailto:fiona.abac@gmail.com"><span>Email</span><strong>fiona.abac@gmail.com</strong></a>
         </div>
+        <p class="coverage"><b>Where we work.</b> Mostly Dublin, with occasional projects further afield. Not sure if we cover you? Call and ask.</p>
       </div>
 
-      <form class="form" id="quote-form" novalidate>
-        <h3>Request a quote</h3>
+      <form class="form" id="quote-form" novalidate aria-labelledby="form-title">
+        <h3 id="form-title">Request a quote</h3>
+        <p class="form-req">Fields marked <span aria-hidden="true">*</span><span class="sr">with an asterisk</span> are required.</p>
+        <div class="form-errors" id="form-errors" tabindex="-1" hidden></div>
         <div class="row">
           <div class="field">
-            <label for="q-name">Your name</label>
-            <input id="q-name" name="name" autocomplete="name" required>
-            <span class="err" aria-live="polite"></span>
+            <label for="q-name">Your name <span class="req" aria-hidden="true">*</span></label>
+            <input id="q-name" name="name" autocomplete="name" required aria-describedby="q-name-err">
+            <span class="err" id="q-name-err"></span>
           </div>
           <div class="field">
-            <label for="q-phone">Phone</label>
-            <input id="q-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
-            <span class="err" aria-live="polite"></span>
+            <label for="q-phone">Phone <span class="req" aria-hidden="true">*</span></label>
+            <input id="q-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="q-phone-err">
+            <span class="err" id="q-phone-err"></span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="q-area">Area or Eircode <span class="req" aria-hidden="true">*</span></label>
+            <input id="q-area" name="area" autocomplete="postal-code" required aria-describedby="q-area-hint q-area-err">
+            <span class="hint" id="q-area-hint">For example, Clontarf or D03</span>
+            <span class="err" id="q-area-err"></span>
+          </div>
+          <div class="field">
+            <label for="q-email">Email <small>(optional)</small></label>
+            <input id="q-email" name="email" type="email" autocomplete="email" aria-describedby="q-email-err">
+            <span class="err" id="q-email-err"></span>
           </div>
         </div>
         <div class="field">
-          <label for="q-email">Email <small>(optional)</small></label>
-          <input id="q-email" name="email" type="email" autocomplete="email">
-          <span class="err" aria-live="polite"></span>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="q-area">Area or Eircode</label>
-            <input id="q-area" name="area" autocomplete="postal-code" placeholder="e.g. Clontarf, D03" required>
-            <span class="err" aria-live="polite"></span>
-          </div>
-          <div class="field">
-            <label for="q-type">Type of house</label>
-            <select id="q-type" name="house_type">
-              <option value="">Choose one</option>
-              <option>Semi-detached</option>
-              <option>Detached</option>
-              <option>Terraced</option>
-              <option>Bungalow</option>
-              <option>Other</option>
-            </select>
-            <span class="err"></span>
-          </div>
+          <label for="q-type">Type of house <small>(optional)</small></label>
+          <select id="q-type" name="house_type">
+            <option value="">Choose one</option>
+            <option>Semi-detached</option>
+            <option>Detached</option>
+            <option>Terraced</option>
+            <option>Bungalow</option>
+            <option>Other</option>
+          </select>
         </div>
         <div class="field">
           <label for="q-msg">Anything else? <small>(optional)</small></label>
-          <textarea id="q-msg" name="message" placeholder="The finish you'd like, the best time to call, or questions about the SEAI grant"></textarea>
+          <textarea id="q-msg" name="message" aria-describedby="q-msg-hint"></textarea>
+          <span class="hint" id="q-msg-hint">The finish you'd like, the best time to call, or questions about the grant.</span>
         </div>
-        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
         <button class="btn btn-primary" type="submit" id="q-submit">Send quote request</button>
-        <div class="form-status" id="form-status" role="status" hidden></div>
-        <p class="form-foot">Your details go to Absolute Acrylics and are only used to reply about your quote.</p>
+        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        <p class="form-foot">We only use your details to reply about your quote. <a href="privacy.html">Privacy notice</a></p>
       </form>
     </div>
   </section>
@@ -339,12 +403,11 @@
 
 <footer class="foot">
   <div class="wrap foot-in">
-    <a class="brand" href="#top"><b>Absolute Acrylics</b><span>External wall insulation · Dublin</span></a>
+    <a class="brand" href="#top"><b>Absolute Acrylics</b><span>External wall insulation, Dublin</span></a>
     <ul>
       <li><a href="tel:+353863654911">086 365 4911</a></li>
       <li><a href="mailto:fiona.abac@gmail.com">fiona.abac@gmail.com</a></li>
-      <li>SEAI registered</li>
-      <li>10-year guarantee</li>
+      <li><a href="privacy.html">Privacy notice</a></li>
     </ul>
     <p>© <span id="year">2026</span> Absolute Acrylics</p>
   </div>
