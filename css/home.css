@@ -66,7 +66,11 @@ svg { flex: none; }
 .first { --card-w: clamp(380px, 32vw, 520px); --overlap: clamp(90px, 8vw, 130px); position: relative; padding-bottom: 56px; }
 .photo { margin-left: calc(var(--card-w) - var(--overlap)); }
 .photo-img {
-  width: 100%; height: auto; aspect-ratio: 16 / 9.2; min-height: 600px;
+  width: 100%; height: auto; aspect-ratio: 16 / 9.2;
+  /* Up to 600px tall, but shorter on short screens so the heading below
+     the photo still shows without scrolling */
+  min-height: clamp(500px, calc(100vh - 200px), 600px); max-height: max(500px, calc(100vh - 200px));
+  min-height: clamp(500px, calc(100svh - 200px), 600px); max-height: max(500px, calc(100svh - 200px));
   object-fit: cover; object-position: 50% 40%; border-radius: 24px; background: var(--pale);
 }
 
@@ -110,6 +114,13 @@ svg { flex: none; }
 .form-status .copy { display: inline-flex; align-items: center; border: 0; border-radius: 8px; background: var(--navy-2); color: var(--white); padding: 8px 12px; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; }
 .form-foot { margin: 0; font-size: 13px; color: var(--muted); }
 
+/* ---------- Heading under the photo ---------- */
+.why h2 {
+  margin: 0 auto; padding-top: 4px; padding-bottom: 44px; text-align: center;
+  font-family: var(--display); font-weight: 600; font-size: clamp(26px, 2.1vw, 34px);
+  line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance;
+}
+
 /* ---------- Services row ---------- */
 .services { background: var(--pale); }
 .svc-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
@@ -126,7 +137,7 @@ svg { flex: none; }
    the left side of a full-width photo. */
 @media (max-width: 1023px) {
   .photo { margin-left: 0; }
-  .photo-img { aspect-ratio: auto; height: 600px; min-height: 0; object-position: 65% 40%; }
+  .photo-img { aspect-ratio: auto; height: clamp(520px, calc(100vh - 200px), 600px); height: clamp(520px, calc(100svh - 200px), 600px); min-height: 0; max-height: none; object-position: 65% 40%; }
   .card { left: calc(clamp(16px, 5vw, 80px) + 24px); width: 360px; padding: 28px; }
 }
 
@@ -150,6 +161,7 @@ svg { flex: none; }
   .card { margin: -48px 8px 0; padding: 22px 18px; border-radius: 18px; }
   .card-sub { font-size: 16px; margin-bottom: 18px; }
   .first { padding-bottom: 40px; }
+  .why h2 { padding-bottom: 32px; }
   .svc-list { grid-template-columns: repeat(2, 1fr); }
   .svc-list li { border-bottom: 1px solid var(--line); }
   .svc-list li:nth-child(2n) { border-right: 1px solid var(--line); }
