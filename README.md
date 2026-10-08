@@ -2,8 +2,8 @@
 
 Static site: `index.html`, `privacy.html`, `css/home.css`, `js/home.js`, and media in `assets/`.
 
-- The homepage has a slim header (logo and an "Our services" link), then a large rounded before and after photo slider with the free quote card overlapping its left edge, then a row of service tiles. On narrower screens the card sits below the photo.
-- The slider uses `assets/images/compare-before-*.webp` and `compare-after-*.webp`. The before photo was warped to line up with the after photo (same house, same framing) and the skip's lettering is blurred. Drag, click or use the arrow keys on the divider.
+- The homepage has a slim header (logo and an "Our services" link), then a large rounded photo of the finished job with the free quote card overlapping its left edge, then a row of service tiles. On narrower screens the card sits below the photo.
+- The photo is `assets/images/finished-house-*.webp`, cropped from James's after photo of the real job (`assets/source/job-after.jpg`).
 - The quote card asks for name, phone number, email (optional) and address. Clicking a service tile fills in that service and jumps to the card. `index.html#enquire` jumps straight to it.
 - `privacy.html` still uses the older `css/site.css`.
 - The earlier cinematic scroll version lives on the `claude/cinematic-scroll-site-wiweu9` branch.

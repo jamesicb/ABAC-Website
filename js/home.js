@@ -1,61 +1,7 @@
 (() => {
   'use strict';
 
-  /* ---------------- Before / after slider ---------------- */
-  const compare = document.getElementById('compare');
-  const handle = document.getElementById('handle');
   const card = document.getElementById('enquire');
-  let pos = 50;
-
-  function setPos(p) {
-    pos = Math.min(100, Math.max(0, p));
-    compare.style.setProperty('--pos', `${pos}%`);
-    const r = Math.round(pos);
-    handle.setAttribute('aria-valuenow', String(r));
-    handle.setAttribute('aria-valuetext', `${r}% before, ${100 - r}% after`);
-  }
-
-  function fromEvent(e) {
-    const rect = compare.getBoundingClientRect();
-    setPos(((e.clientX - rect.left) / rect.width) * 100);
-  }
-
-  let dragging = false;
-  compare.addEventListener('pointerdown', (e) => {
-    if (e.button !== 0) return;
-    dragging = true;
-    compare.classList.add('dragging', 'touched');
-    compare.setPointerCapture(e.pointerId);
-    fromEvent(e);
-  });
-  compare.addEventListener('pointermove', (e) => { if (dragging) fromEvent(e); });
-  const stop = () => { dragging = false; compare.classList.remove('dragging'); };
-  compare.addEventListener('pointerup', stop);
-  compare.addEventListener('pointercancel', stop);
-
-  handle.addEventListener('keydown', (e) => {
-    const step = e.shiftKey ? 10 : 2;
-    const keys = { ArrowLeft: pos - step, ArrowDown: pos - step, ArrowRight: pos + step, ArrowUp: pos + step, Home: 0, End: 100, PageDown: pos - 10, PageUp: pos + 10 };
-    if (!(e.key in keys)) return;
-    e.preventDefault();
-    compare.classList.add('touched');
-    setPos(keys[e.key]);
-  });
-
-  // On the wide layout the quote card covers the photo's left edge. Measure
-  // how much, so the Before label and drag hint sit in the visible part, and
-  // start the divider in the middle of that visible part.
-  function measureOverlap() {
-    const c = compare.getBoundingClientRect();
-    const k = card.getBoundingClientRect();
-    const beside = k.left < c.left && k.top < c.bottom && k.bottom > c.top;
-    const overlap = beside ? Math.max(0, k.right - c.left) : 0;
-    compare.style.setProperty('--overlap', `${overlap}px`);
-    return overlap;
-  }
-  const startOverlap = measureOverlap();
-  if (startOverlap) setPos(((startOverlap + (compare.clientWidth - startOverlap) / 2) / compare.clientWidth) * 100);
-  window.addEventListener('resize', measureOverlap);
 
   /* ---------------- Service tiles fill in the service and jump to the form ---------------- */
   const form = document.getElementById('quote-form');
