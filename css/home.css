@@ -140,17 +140,6 @@ svg { flex: none; }
 .svc:hover svg { transform: translateY(-3px); }
 .svc:target, li:target .svc { background: var(--white); }
 
-/* ---------- Call back tab ---------- */
-.callback-tab {
-  position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 45;
-  writing-mode: vertical-rl; rotate: 180deg;
-  display: flex; align-items: center; gap: 12px; padding: 20px 14px; border: 0; cursor: pointer;
-  background: var(--navy-2); color: var(--white); font-family: var(--display); font-weight: 500; font-size: 17px;
-  border-radius: 0 6px 6px 0; box-shadow: 0 6px 20px rgba(15, 39, 66, .25);
-}
-.callback-tab:hover { background: var(--blue); }
-.callback-tab svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; rotate: 90deg; }
-
 /* ---------- Dialogs and forms ---------- */
 .modal { border: 0; padding: 0; border-radius: 8px; width: min(560px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); color: var(--ink); background: var(--white); box-shadow: 0 30px 80px rgba(0, 0, 0, .3); }
 .modal::backdrop { background: rgba(15, 39, 66, .6); }
@@ -227,7 +216,7 @@ svg { flex: none; }
   .head-cta { display: none; }
   .burger { margin-left: auto; }
   .hero { --frame-y: 10px; --head-h: 92px; }
-  .compare { height: min(132.8vw, calc(100vh - var(--head-h) - 2 * var(--frame-y) - 56px)); height: min(132.8vw, calc(100svh - var(--head-h) - 2 * var(--frame-y) - 56px - env(safe-area-inset-bottom, 0px))); min-height: 300px; border-width: 3px; }
+  .compare { height: min(132.8vw, calc(100vh - var(--head-h) - 2 * var(--frame-y))); height: min(132.8vw, calc(100svh - var(--head-h) - 2 * var(--frame-y))); min-height: 300px; border-width: 3px; }
   .tag { top: 14px; font-size: 12px; padding: 5px 10px; }
   .tag-before { left: 14px; }
   .tag-after { right: 14px; }
@@ -236,9 +225,6 @@ svg { flex: none; }
   .hero-down { display: none; }
   .svc { padding: 32px 10px 28px; gap: 14px; font-size: 16px; }
   .svc svg { width: 50px; height: 50px; }
-  .callback-tab { top: auto; bottom: 0; right: 0; left: 0; transform: none; rotate: none; writing-mode: horizontal-tb; justify-content: center; border-radius: 0; padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px)); font-size: 16px; }
-  .callback-tab svg { rotate: none; }
-  body { padding-bottom: 56px; }
   .lead-form { padding: 24px 18px; }
   .row { grid-template-columns: 1fr; }
 }

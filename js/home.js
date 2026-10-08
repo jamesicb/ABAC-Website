@@ -111,7 +111,7 @@
     // Click on the dimmed backdrop closes the dialog.
     dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   });
-  if (location.hash === '#enquire' || location.hash === '#callback') openDialog(location.hash.slice(1));
+  if (location.hash === '#enquire') openDialog('enquire');
 
   /* ---------------- Forms (FormSubmit) ---------------- */
   const QUOTE_EMAIL = 'fiona.abac@gmail.com';

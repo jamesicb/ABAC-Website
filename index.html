@@ -145,11 +145,6 @@
   </section>
 </main>
 
-<button class="callback-tab" type="button" data-open="callback">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5 9 3l1.6 4.2-2 1.4a11 11 0 0 0 6.8 6.8l1.4-2L21 15l-.5 2.4a2 2 0 0 1-2 1.6A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 1.6-2Z"/></svg>
-  <span>Request a call back</span>
-</button>
-
 <dialog class="modal" id="enquire" aria-labelledby="enquire-title">
   <form class="lead-form" novalidate data-kind="Enquiry">
     <button class="modal-x" type="button" data-close aria-label="Close">&times;</button>
@@ -198,38 +193,6 @@
     <button class="btn btn-solid btn-wide" type="submit">Send enquiry</button>
     <div class="form-status" role="status" aria-live="polite"></div>
     <p class="form-foot">We only use your details to reply to you. <a href="privacy.html">Privacy notice</a></p>
-  </form>
-</dialog>
-
-<dialog class="modal" id="callback" aria-labelledby="callback-title">
-  <form class="lead-form" novalidate data-kind="Call back request">
-    <button class="modal-x" type="button" data-close aria-label="Close">&times;</button>
-    <h2 id="callback-title">Request a call back</h2>
-    <p class="lead-intro">Leave your number and we'll ring you back. Fields marked * are required.</p>
-    <div class="form-errors" tabindex="-1" hidden></div>
-    <div class="field">
-      <label for="c-name">Your name *</label>
-      <input id="c-name" name="name" autocomplete="name" required>
-      <span class="err"></span>
-    </div>
-    <div class="field">
-      <label for="c-phone">Phone *</label>
-      <input id="c-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
-      <span class="err"></span>
-    </div>
-    <div class="field">
-      <label for="c-time">Best time to call</label>
-      <select id="c-time" name="best_time">
-        <option>Any time</option>
-        <option>Morning</option>
-        <option>Afternoon</option>
-        <option>Evening</option>
-      </select>
-    </div>
-    <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
-    <button class="btn btn-solid btn-wide" type="submit">Request call back</button>
-    <div class="form-status" role="status" aria-live="polite"></div>
-    <p class="form-foot">We only use your details to call you back. <a href="privacy.html">Privacy notice</a></p>
   </form>
 </dialog>
 
