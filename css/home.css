@@ -76,8 +76,9 @@ svg { flex: none; }
 
 .card {
   position: absolute; z-index: 5; top: calc((100% - 56px) / 2);
-  /* Centred on the photo, 10% smaller, and nudged left by 5% of its width */
-  transform: translate(-5%, -50%) scale(.9); transform-origin: 0 50%;
+  /* Centred on the photo and shrunk to 0.765 (10% then 15% smaller). It shrinks
+     towards its right edge, so it overlaps the photo by the same amount. */
+  transform: translate(-15%, -50%) scale(.765); transform-origin: 100% 50%;
   left: clamp(16px, 5vw, 80px); width: var(--card-w);
   background: var(--white); border-radius: 24px; padding: 32px;
   box-shadow: 0 10px 40px rgba(15, 39, 66, .16);
@@ -113,6 +114,16 @@ svg { flex: none; }
 .form-status pre { white-space: pre-wrap; background: var(--white); padding: 10px; border-radius: 6px; margin: 4px 0; font-size: 13px; }
 .form-status .copy { display: inline-flex; align-items: center; border: 0; border-radius: 8px; background: var(--navy-2); color: var(--white); padding: 8px 12px; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; }
 .form-foot { margin: 0; font-size: 13px; color: var(--muted); }
+
+/* The card is drawn smaller on laptops and tablets, so its smallest text
+   starts a little bigger to stay readable once shrunk. */
+@media (min-width: 700px) {
+  .card-sub { font-size: 18px; }
+  .cell label { font-size: 15px; }
+  .cell input { font-size: 17.5px; }
+  .cta { font-size: 19px; }
+  .form-foot { font-size: 15px; }
+}
 
 /* ---------- Heading under the photo ---------- */
 .why h2 {
