@@ -63,14 +63,22 @@ svg { flex: none; }
 /* ---------- First section: photo with overlapping quote card ---------- */
 /* Proportions follow Airbnb's: the photo starts about a quarter of the way
    in, is roughly 16:9, and the card overlaps its left edge, centred on it. */
-.first { --card-w: clamp(380px, 32vw, 520px); --overlap: clamp(90px, 8vw, 130px); position: relative; padding-bottom: 56px; }
+.first {
+  --card-w: clamp(380px, 32vw, 520px); --overlap: clamp(90px, 8vw, 130px);
+  /* Base photo height: 16:9.2 of its width, kept between 500px and 600px
+     unless the screen is tall enough for more, and shorter on short screens
+     so the heading below still shows without scrolling. */
+  --ph-ratio: calc((min(100vw, 1640px) - 2 * clamp(16px, 5vw, 80px) - var(--card-w) + var(--overlap)) * .575);
+  --ph-min: clamp(500px, calc((100vh - 190px) / 1.05), 600px);
+  --ph-max: max(500px, calc((100vh - 190px) / 1.05));
+  --ph: max(var(--ph-min), min(var(--ph-ratio), var(--ph-max)));
+  position: relative; padding-bottom: 56px;
+  /* The photo is 10% taller than the base, growing 5% up and 5% down */
+  margin-top: calc(var(--ph) * -.05);
+}
 .photo { margin-left: calc(var(--card-w) - var(--overlap)); }
 .photo-img {
-  width: 100%; height: auto; aspect-ratio: 16 / 9.2;
-  /* Up to 600px tall, but shorter on short screens so the heading below
-     the photo still shows without scrolling */
-  min-height: clamp(500px, calc(100vh - 200px), 600px); max-height: max(500px, calc(100vh - 200px));
-  min-height: clamp(500px, calc(100svh - 200px), 600px); max-height: max(500px, calc(100svh - 200px));
+  width: 100%; height: calc(var(--ph) * 1.1);
   object-fit: cover; object-position: 50% 40%; border-radius: 24px; background: var(--pale);
 }
 
@@ -147,8 +155,9 @@ svg { flex: none; }
 /* Tablets: no room for the photo beside the card, so the card sits over
    the left side of a full-width photo. */
 @media (max-width: 1023px) {
+  .first { margin-top: 0; }
   .photo { margin-left: 0; }
-  .photo-img { aspect-ratio: auto; height: clamp(520px, calc(100vh - 200px), 600px); height: clamp(520px, calc(100svh - 200px), 600px); min-height: 0; max-height: none; object-position: 65% 40%; }
+  .photo-img { height: clamp(520px, calc(100vh - 200px), 600px); height: clamp(520px, calc(100svh - 200px), 600px); object-position: 65% 40%; }
   .card { left: calc(clamp(16px, 5vw, 80px) + 24px); width: 360px; padding: 28px; }
 }
 
