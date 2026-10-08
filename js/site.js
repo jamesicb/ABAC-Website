@@ -20,7 +20,7 @@
     { from: 0.12, to: 0.25, at: 0.185 }, // Before
     { from: 0.29, to: 0.47, at: 0.38 },  // Insulation
     { from: 0.52, to: 0.68, at: 0.60 },  // Finish
-    { from: 0.84, to: 1.01, at: 0.96 },  // Completed
+    { from: 0.84, to: 1.01, at: 0.96 },  // Completed: the house alone, no text
   ];
   // Scroll progress to frame index.
   const TIMELINE = [[0, 0], [0.10, 0], [0.25, 3], [0.29, 10], [0.47, 30], [0.52, 40], [0.68, 56], [0.84, 98], [1, FRAME_COUNT - 1]];
@@ -130,13 +130,12 @@
       const img = frames[idx];
       const cover = Math.max(cw / FRAME_W, ch / FRAME_H);
       let scale = cover;
-      let yCenter = ch / 2;
+      const yCenter = ch / 2;
       if (ch > cw * 1.05) {
         // Tall screens: the close-up fills the screen, then the camera pulls
-        // back so the whole house fits across the width, above the copy.
+        // back so the whole house fits across the width.
         const t = ease(clamp01((progress - 0.66) / 0.24));
         scale = lerp(cover, (cw / FRAME_W) * 1.2, t);
-        yCenter = lerp(ch / 2, ch * 0.4, t);
       }
       const dw = FRAME_W * scale, dh = FRAME_H * scale;
       const focus = along(FOCUS, progress, true);
@@ -191,6 +190,8 @@
     function readScroll() {
       progress = filmTotal > 0 ? clamp01((window.scrollY - filmTop) / filmTotal) : 0;
       film.classList.toggle('is-moving', progress > 0.02);
+      // Completed stage: show only the house.
+      film.classList.toggle('is-clean', progress >= STAGES[4].from);
       bar.style.width = (progress * 100).toFixed(2) + '%';
       updateStages();
       if (targetIndex() !== current) needsDraw = true;
@@ -274,6 +275,8 @@
       past = motion ? b < window.innerHeight - 1 : b <= navH() + 1;
     }
     nav.classList.toggle('is-solid', past);
+    // The header steps aside on the Completed stage, and returns as the film scrolls away.
+    nav.classList.toggle('is-hidden', motion && !past && film.classList.contains('is-clean') && !nav.classList.contains('is-open'));
     if (quick && quoteSection) {
       const q = quoteSection.getBoundingClientRect();
       const inQuote = q.top < window.innerHeight * 0.85 && q.bottom > 0;
