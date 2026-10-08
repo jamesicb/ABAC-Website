@@ -100,7 +100,7 @@ svg { flex: none; }
 .hero { position: relative; background: var(--navy); }
 .compare {
   position: relative; overflow: hidden; user-select: none; -webkit-user-select: none;
-  height: clamp(340px, 56vw, 740px); max-height: calc(100vh - 280px); min-height: 340px;
+  height: clamp(425px, 70vw, 925px); max-height: calc((100vh - 280px) * 1.25); min-height: 425px;
   touch-action: pan-y; cursor: ew-resize;
 }
 .compare-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; pointer-events: none; -webkit-user-drag: none; }
@@ -222,7 +222,7 @@ svg { flex: none; }
   .badge-low { font-size: 7px; letter-spacing: .02em; }
   .head-cta { display: none; }
   .burger { margin-left: auto; }
-  .compare { height: auto; aspect-ratio: 4 / 3.4; max-height: none; min-height: 0; }
+  .compare { height: auto; aspect-ratio: 4 / 4.25; max-height: none; min-height: 0; }
   .tag { top: 14px; font-size: 12px; padding: 5px 10px; }
   .tag-before { left: 14px; }
   .tag-after { right: 14px; }
