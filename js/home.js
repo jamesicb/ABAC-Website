@@ -62,8 +62,9 @@
   }
 
   function fromEvent(e) {
+    // Measure inside the frame's border, where the photos sit.
     const rect = compare.getBoundingClientRect();
-    setPos(((e.clientX - rect.left) / rect.width) * 100);
+    setPos(((e.clientX - rect.left - compare.clientLeft) / compare.clientWidth) * 100);
   }
 
   let dragging = false;

@@ -97,10 +97,11 @@ svg { flex: none; }
 .burger { display: none; }
 
 /* ---------- Hero: before / after ---------- */
-.hero { position: relative; background: var(--navy); }
+.hero { --frame-gap: clamp(10px, 2.5vw, 36px); position: relative; background: var(--white); padding-block: var(--frame-gap); }
 .compare {
   position: relative; overflow: hidden; user-select: none; -webkit-user-select: none;
-  height: clamp(425px, 70vw, 925px); max-height: calc((100vh - 280px) * 1.25); min-height: 425px;
+  width: 95%; margin-inline: auto; border: 4px solid var(--navy-2); border-radius: 4px; background: var(--navy);
+  height: clamp(531px, 87.5vw, 1156px); max-height: calc((100vh - 280px) * 1.5625); min-height: 531px;
   touch-action: pan-y; cursor: ew-resize;
 }
 .compare-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; pointer-events: none; -webkit-user-drag: none; }
@@ -120,7 +121,7 @@ svg { flex: none; }
 .tag-after { right: 22px; background: rgba(31, 138, 91, .9); }
 .compare-hint { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); margin: 0; z-index: 2; background: rgba(255, 255, 255, .92); color: var(--navy); font-weight: 600; font-size: 14px; padding: 8px 16px; border-radius: 99px; pointer-events: none; transition: opacity .3s; white-space: nowrap; z-index: 4; }
 .compare.touched .compare-hint { opacity: 0; }
-.hero-down { position: absolute; left: 32px; bottom: -28px; z-index: 4; width: 56px; height: 56px; border-radius: 50%; background: var(--white); color: var(--navy-2); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(15, 39, 66, .25); }
+.hero-down { position: absolute; left: calc(2.5% + 32px); bottom: calc(var(--frame-gap) - 28px); z-index: 4; width: 56px; height: 56px; border-radius: 50%; background: var(--white); color: var(--navy-2); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(15, 39, 66, .25); }
 .hero-down svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .hero-down:hover { color: var(--green); }
 
@@ -222,7 +223,7 @@ svg { flex: none; }
   .badge-low { font-size: 7px; letter-spacing: .02em; }
   .head-cta { display: none; }
   .burger { margin-left: auto; }
-  .compare { height: auto; aspect-ratio: 4 / 4.25; max-height: none; min-height: 0; }
+  .compare { height: 132.8vw; max-height: none; min-height: 0; border-width: 3px; }
   .tag { top: 14px; font-size: 12px; padding: 5px 10px; }
   .tag-before { left: 14px; }
   .tag-after { right: 14px; }
