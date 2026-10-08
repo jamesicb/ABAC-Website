@@ -93,46 +93,33 @@ svg { flex: none; }
 .burger { display: none; }
 
 /* ---------- Hero: before / after ---------- */
-.hero { --frame-y: 16px; --head-h: 84px; position: relative; background: var(--white); padding-block: var(--frame-y); }
+.hero { --head-h: 84px; position: relative; background: var(--navy); }
 .compare {
   position: relative; overflow: hidden; user-select: none; -webkit-user-select: none;
-  width: 95%; margin-inline: auto;
-  /* How far the photo edges fade into the page */
-  --fade-x: 7%; --fade-top: 6%; --fade-bottom: 12%;
   /* As tall as the screen allows below the header, so the whole photo shows without scrolling. */
-  height: min(clamp(531px, 87.5vw, 1156px), calc(100vh - var(--head-h) - 2 * var(--frame-y)));
-  height: min(clamp(531px, 87.5vw, 1156px), calc(100svh - var(--head-h) - 2 * var(--frame-y)));
+  height: min(clamp(531px, 87.5vw, 1156px), calc(100vh - var(--head-h)));
+  height: min(clamp(531px, 87.5vw, 1156px), calc(100svh - var(--head-h)));
   min-height: 360px;
   touch-action: pan-y; cursor: ew-resize;
 }
-.compare-img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; pointer-events: none; -webkit-user-drag: none;
-  -webkit-mask-image:
-    linear-gradient(to right, transparent, #000 var(--fade-x), #000 calc(100% - var(--fade-x)), transparent),
-    linear-gradient(to bottom, transparent, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to right, transparent, #000 var(--fade-x), #000 calc(100% - var(--fade-x)), transparent),
-    linear-gradient(to bottom, transparent, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent);
-  mask-composite: intersect;
-}
+.compare-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; pointer-events: none; -webkit-user-drag: none; }
 .compare-before { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
 .handle {
   position: absolute; top: 0; bottom: 0; left: var(--pos); width: 44px; margin-left: -22px;
   display: flex; align-items: center; justify-content: center; cursor: ew-resize; z-index: 3;
 }
-.handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; margin-left: -2px; background: linear-gradient(to bottom, transparent, var(--white) var(--fade-top), var(--white) calc(100% - var(--fade-bottom)), transparent); filter: drop-shadow(0 0 5px rgba(0, 0, 0, .35)); }
+.handle::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; margin-left: -2px; background: var(--white); box-shadow: 0 0 10px rgba(0, 0, 0, .35); }
 .handle-knob { position: relative; width: 56px; height: 56px; border-radius: 50%; background: var(--white); color: var(--navy-2); display: grid; place-items: center; box-shadow: 0 4px 16px rgba(0, 0, 0, .3); transition: transform .15s; }
 .handle-knob svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .handle:focus-visible { outline: none; }
 .handle:focus-visible .handle-knob { outline: 3px solid var(--green-2); outline-offset: 3px; }
 .compare.dragging .handle-knob { transform: scale(1.08); }
-.tag { position: absolute; top: calc(var(--fade-top) + 14px); z-index: 2; background: rgba(15, 39, 66, .82); color: var(--white); font-family: var(--display); font-weight: 500; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; padding: 7px 14px; border-radius: 3px; pointer-events: none; transition: opacity .2s; }
-.tag-before { left: calc(var(--fade-x) + 14px); }
-.tag-after { right: calc(var(--fade-x) + 14px); background: rgba(31, 138, 91, .9); }
-.compare-hint { position: absolute; left: 50%; bottom: calc(var(--fade-bottom) + 8px); transform: translateX(-50%); margin: 0; z-index: 2; background: rgba(255, 255, 255, .92); color: var(--navy); font-weight: 600; font-size: 14px; padding: 8px 16px; border-radius: 99px; pointer-events: none; transition: opacity .3s; white-space: nowrap; z-index: 4; }
+.tag { position: absolute; top: 22px; z-index: 2; background: rgba(15, 39, 66, .82); color: var(--white); font-family: var(--display); font-weight: 500; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; padding: 7px 14px; border-radius: 3px; pointer-events: none; transition: opacity .2s; }
+.tag-before { left: 22px; }
+.tag-after { right: 22px; background: rgba(31, 138, 91, .9); }
+.compare-hint { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); margin: 0; z-index: 2; background: rgba(255, 255, 255, .92); color: var(--navy); font-weight: 600; font-size: 14px; padding: 8px 16px; border-radius: 99px; pointer-events: none; transition: opacity .3s; white-space: nowrap; z-index: 4; }
 .compare.touched .compare-hint { opacity: 0; }
-.hero-down { position: absolute; left: calc(2.5% + 28px); bottom: var(--frame-y); z-index: 4; width: 56px; height: 56px; border-radius: 50%; background: var(--white); color: var(--navy-2); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(15, 39, 66, .25); }
+.hero-down { position: absolute; left: 32px; bottom: 24px; z-index: 4; width: 56px; height: 56px; border-radius: 50%; background: var(--white); color: var(--navy-2); display: grid; place-items: center; box-shadow: 0 6px 18px rgba(15, 39, 66, .25); }
 .hero-down svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .hero-down:hover { color: var(--green); }
 
@@ -220,13 +207,13 @@ svg { flex: none; }
   .badge-low { font-size: 6.5px; letter-spacing: .02em; }
   .head-cta { display: none; }
   .burger { margin-left: auto; }
-  .hero { --frame-y: 10px; --head-h: 76px; }
-  .compare { height: min(132.8vw, calc(100vh - var(--head-h) - 2 * var(--frame-y))); height: min(132.8vw, calc(100svh - var(--head-h) - 2 * var(--frame-y))); min-height: 300px; --fade-x: 6%; --fade-top: 5%; --fade-bottom: 10%; }
-  .tag { top: calc(var(--fade-top) + 8px); font-size: 12px; padding: 5px 10px; }
-  .tag-before { left: calc(var(--fade-x) + 6px); }
-  .tag-after { right: calc(var(--fade-x) + 6px); }
+  .hero { --head-h: 76px; }
+  .compare { height: min(132.8vw, calc(100vh - var(--head-h))); height: min(132.8vw, calc(100svh - var(--head-h))); min-height: 300px; }
+  .tag { top: 14px; font-size: 12px; padding: 5px 10px; }
+  .tag-before { left: 14px; }
+  .tag-after { right: 14px; }
   .handle-knob { width: 46px; height: 46px; }
-  .compare-hint { bottom: calc(var(--fade-bottom) + 4px); font-size: 13px; }
+  .compare-hint { bottom: 14px; font-size: 13px; }
   .hero-down { display: none; }
   .svc { padding: 32px 10px 28px; gap: 14px; font-size: 16px; }
   .svc svg { width: 50px; height: 50px; }
