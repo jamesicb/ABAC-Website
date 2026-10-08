@@ -40,49 +40,49 @@ svg { flex: none; }
 
 /* ---------- Header ---------- */
 .site-head { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; }
-.topbar { background: var(--navy); color: var(--white); font-size: 15px; font-weight: 500; }
-.topbar-in { display: flex; justify-content: flex-end; gap: 36px; min-height: 40px; align-items: center; }
+.topbar { background: var(--navy); color: var(--white); font-size: 14px; font-weight: 500; }
+.topbar-in { display: flex; justify-content: flex-end; gap: 32px; min-height: 32px; align-items: center; }
 .topbar-link { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .topbar-link:hover span { text-decoration: underline; }
-.topbar-link svg { width: 17px; height: 17px; fill: none; stroke: #8fb4dc; stroke-width: 1.6; stroke-linejoin: round; }
+.topbar-link svg { width: 15px; height: 15px; fill: none; stroke: #8fb4dc; stroke-width: 1.6; stroke-linejoin: round; }
 
 .mainbar { background: var(--white); box-shadow: 0 1px 0 var(--line); }
-.mainbar-in { display: flex; align-items: center; gap: 18px; min-height: 92px; position: relative; }
+.mainbar-in { display: flex; align-items: center; gap: 18px; min-height: 68px; position: relative; }
 
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--navy); flex: none; }
-.brand-mark { width: 44px; height: 44px; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.brand-mark { width: 36px; height: 36px; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .bm-roof { stroke: var(--green-2); stroke-width: 4.5; }
 .bm-wall { stroke: var(--navy-2); stroke-width: 4.5; }
 .bm-layer { stroke: #7ea7d4; stroke-width: 3; }
-.brand-divider { width: 1.5px; height: 40px; background: var(--line); }
+.brand-divider { width: 1.5px; height: 32px; background: var(--line); }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
-.brand-text b { font-family: var(--display); font-weight: 600; font-size: 23px; letter-spacing: -0.01em; }
-.brand-text small { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-top: 4px; font-weight: 600; }
+.brand-text b { font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+.brand-text small { font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-top: 3px; font-weight: 600; }
 
 /* Hanging badge, like a ribbon dropping from the top bar */
 .badge {
-  align-self: flex-start; margin-top: -40px; flex: none; position: relative; z-index: 2;
-  width: 132px; padding: 18px 10px 30px; text-align: center; color: var(--white);
+  align-self: flex-start; margin-top: -32px; flex: none; position: relative; z-index: 2;
+  width: 106px; padding: 12px 8px 22px; text-align: center; color: var(--white);
   background: var(--green);
   clip-path: polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%);
   display: flex; flex-direction: column; line-height: 1;
 }
-.badge-top { font-family: var(--display); font-weight: 700; font-size: 38px; letter-spacing: -0.02em; }
-.badge-mid { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 8px; }
-.badge-low { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; margin-top: 4px; }
+.badge-top { font-family: var(--display); font-weight: 700; font-size: 29px; letter-spacing: -0.02em; }
+.badge-mid { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 6px; }
+.badge-low { font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700; margin-top: 4px; }
 
-.trust { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 16px; line-height: 1.25; color: var(--navy); font-weight: 500; flex: none; }
+.trust { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 14.5px; line-height: 1.25; color: var(--navy); font-weight: 500; flex: none; }
 .trust b { font-weight: 700; box-shadow: inset 0 -3px 0 #9fd8bb; }
-.trust svg { width: 22px; height: 22px; fill: var(--green-2); stroke: var(--white); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.trust svg { width: 20px; height: 20px; fill: var(--green-2); stroke: var(--white); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 
 .menu { margin-left: auto; }
 .menu-list { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 4px; }
-.menu-top { background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 10px 10px; font-size: 16.5px; font-weight: 500; color: var(--navy); border-radius: 4px; white-space: nowrap; }
+.menu-top { background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; font-size: 15.5px; font-weight: 500; color: var(--navy); border-radius: 4px; white-space: nowrap; }
 .menu-top:hover, .menu-top[aria-expanded="true"] { color: var(--blue); background: var(--pale); }
 .menu-top svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; transition: transform .2s; }
 .menu-top[aria-expanded="true"] svg { transform: rotate(180deg); }
 .has-drop { position: relative; }
-.drop { position: absolute; top: calc(100% + 18px); left: 0; min-width: 320px; background: var(--white); border: 1px solid var(--line); border-top: 3px solid var(--green); border-radius: 0 0 6px 6px; box-shadow: 0 18px 40px rgba(15, 39, 66, .16); padding: 10px; display: none; z-index: 50; }
+.drop { position: absolute; top: calc(100% + 12px); left: 0; min-width: 320px; background: var(--white); border: 1px solid var(--line); border-top: 3px solid var(--green); border-radius: 0 0 6px 6px; box-shadow: 0 18px 40px rgba(15, 39, 66, .16); padding: 10px; display: none; z-index: 50; }
 .has-drop.open .drop { display: block; }
 .drop a { display: block; padding: 10px 12px; border-radius: 4px; text-decoration: none; }
 .drop a:hover { background: var(--pale); }
@@ -93,11 +93,11 @@ svg { flex: none; }
 .facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .menu-phone, .menu-email { display: none; }
 
-.head-cta { flex: none; }
+.head-cta { flex: none; padding: 11px 22px; font-size: 16.5px; }
 .burger { display: none; }
 
 /* ---------- Hero: before / after ---------- */
-.hero { --frame-y: 16px; --head-h: 132px; position: relative; background: var(--white); padding-block: var(--frame-y); }
+.hero { --frame-y: 16px; --head-h: 100px; position: relative; background: var(--white); padding-block: var(--frame-y); }
 .compare {
   position: relative; overflow: hidden; user-select: none; -webkit-user-select: none;
   width: 95%; margin-inline: auto; border: 4px solid var(--navy-2); border-radius: 4px; background: var(--navy);
@@ -189,13 +189,13 @@ svg { flex: none; }
 }
 
 @media (max-width: 1180px) {
-  .burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; width: 46px; height: 46px; border: 0; background: var(--pale); border-radius: 4px; cursor: pointer; padding: 0 12px; }
+  .burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; width: 42px; height: 42px; border: 0; background: var(--pale); border-radius: 4px; cursor: pointer; padding: 0 12px; }
   .burger i { display: block; height: 2px; background: var(--navy); border-radius: 2px; transition: transform .2s, opacity .2s; }
   .burger[aria-expanded="true"] i:nth-child(2) { transform: translateY(7px) rotate(45deg); }
   .burger[aria-expanded="true"] i:nth-child(3) { opacity: 0; }
   .burger[aria-expanded="true"] i:nth-child(4) { transform: translateY(-7px) rotate(-45deg); }
-  .head-cta { margin-left: auto; padding: 11px 18px; font-size: 16px; }
-  .menu { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--white); border-top: 1px solid var(--line); box-shadow: 0 20px 40px rgba(15, 39, 66, .18); padding: 12px 24px 24px; max-height: calc(100dvh - 140px); overflow-y: auto; }
+  .head-cta { margin-left: auto; padding: 10px 18px; font-size: 15.5px; }
+  .menu { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--white); border-top: 1px solid var(--line); box-shadow: 0 20px 40px rgba(15, 39, 66, .18); padding: 12px 24px 24px; max-height: calc(100dvh - 110px); overflow-y: auto; }
   .menu.open { display: block; }
   .menu-list { flex-direction: column; align-items: stretch; gap: 0; }
   .menu-list > li { border-bottom: 1px solid var(--line); }
@@ -211,22 +211,22 @@ svg { flex: none; }
 
 @media (max-width: 640px) {
   .wrap { padding-inline: 16px; }
-  .topbar-in { justify-content: flex-start; gap: 12px; font-size: 14px; min-height: 36px; }
+  .topbar-in { justify-content: flex-start; gap: 12px; font-size: 13.5px; min-height: 32px; }
   .topbar-email { display: none; }
-  .topbar-link svg { width: 15px; height: 15px; }
-  .mainbar-in { min-height: 72px; gap: 10px; }
+  .topbar-link svg { width: 14px; height: 14px; }
+  .mainbar-in { min-height: 60px; gap: 10px; }
   .brand { gap: 8px; }
-  .brand-mark { width: 34px; height: 34px; }
+  .brand-mark { width: 30px; height: 30px; }
   .brand-divider { display: none; }
-  .brand-text b { font-size: 18px; }
-  .brand-text small { font-size: 9.5px; letter-spacing: .14em; }
-  .badge { margin-top: -36px; width: 66px; padding: 12px 4px 18px; }
-  .badge-top { font-size: 19px; }
-  .badge-mid { font-size: 7.5px; letter-spacing: .1em; margin-top: 4px; }
-  .badge-low { font-size: 7px; letter-spacing: .02em; }
+  .brand-text b { font-size: 17px; }
+  .brand-text small { font-size: 9px; letter-spacing: .14em; }
+  .badge { margin-top: -32px; width: 60px; padding: 10px 4px 15px; }
+  .badge-top { font-size: 17px; }
+  .badge-mid { font-size: 7px; letter-spacing: .1em; margin-top: 4px; }
+  .badge-low { font-size: 6.5px; letter-spacing: .02em; }
   .head-cta { display: none; }
   .burger { margin-left: auto; }
-  .hero { --frame-y: 10px; --head-h: 108px; }
+  .hero { --frame-y: 10px; --head-h: 92px; }
   .compare { height: min(132.8vw, calc(100vh - var(--head-h) - 2 * var(--frame-y) - 56px)); height: min(132.8vw, calc(100svh - var(--head-h) - 2 * var(--frame-y) - 56px - env(safe-area-inset-bottom, 0px))); min-height: 300px; border-width: 3px; }
   .tag { top: 14px; font-size: 12px; padding: 5px 10px; }
   .tag-before { left: 14px; }
