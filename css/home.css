@@ -47,31 +47,32 @@ svg { flex: none; }
 .head-link:hover { background: var(--pale); }
 
 /* ---------- First section: photo with overlapping quote card ---------- */
-.first { position: relative; padding-bottom: 56px; }
-.photo { margin-left: 25%; }
+/* Proportions follow Airbnb's: the photo starts about a quarter of the way
+   in, is roughly 16:9, and the card overlaps its left edge, centred on it. */
+.first { --card-w: clamp(380px, 32vw, 520px); --overlap: clamp(90px, 8vw, 130px); position: relative; padding-bottom: 56px; }
+.photo { margin-left: calc(var(--card-w) - var(--overlap)); }
 .photo-img {
-  width: 100%; object-fit: cover; object-position: 50% 35%; border-radius: 28px; background: var(--pale);
-  height: clamp(620px, calc(100vh - 140px), 720px);
-  height: clamp(620px, calc(100svh - 140px), 720px);
+  width: 100%; height: auto; aspect-ratio: 16 / 9.2; min-height: 600px;
+  object-fit: cover; object-position: 50% 40%; border-radius: 24px; background: var(--pale);
 }
 
 .card {
   position: absolute; z-index: 5; top: calc((100% - 56px) / 2); transform: translateY(-50%);
-  left: clamp(16px, 5vw, 80px); width: min(36%, 540px);
-  background: var(--white); border-radius: 28px; padding: 40px;
+  left: clamp(16px, 5vw, 80px); width: var(--card-w);
+  background: var(--white); border-radius: 24px; padding: 32px;
   box-shadow: 0 10px 40px rgba(15, 39, 66, .16);
 }
-.card h1 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(30px, 2.6vw, 42px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
-.card-sub { margin: 12px 0 24px; font-size: 18px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
+.card h1 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 2.3vw, 36px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
+.card-sub { margin: 10px 0 20px; font-size: 16.5px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
 
-.lead-form { display: grid; gap: 12px; }
+.lead-form { display: grid; gap: 10px; }
 .box { display: grid; border: 1.5px solid var(--field); border-radius: 14px; background: var(--white); }
 .box-split { grid-template-columns: 1fr 1fr; }
-.cell { position: relative; display: grid; gap: 2px; padding: 12px 18px 10px; min-width: 0; border-radius: 13px; }
+.cell { position: relative; display: grid; gap: 2px; padding: 10px 16px 8px; min-width: 0; border-radius: 13px; }
 .box-split .cell + .cell::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 1px; background: var(--field); }
 .cell:focus-within { box-shadow: 0 0 0 2px var(--navy-2); }
 .cell label { font-size: 13px; font-weight: 600; color: var(--ink); }
-.cell input { width: 100%; border: 0; padding: 2px 0; font: inherit; font-size: 17px; color: var(--ink); background: transparent; outline: none; }
+.cell input { width: 100%; border: 0; padding: 2px 0; font: inherit; font-size: 16px; color: var(--ink); background: transparent; outline: none; }
 .cell input::placeholder { color: #7c8797; }
 .field.has-err { box-shadow: 0 0 0 2px #b3261e; }
 .errs { margin: 0; padding: 10px 14px 10px 30px; background: #fdecea; border-radius: 10px; color: #8c1d18; font-size: 14.5px; }
@@ -105,16 +106,17 @@ svg { flex: none; }
 .svc:hover svg { transform: translateY(-3px); }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1280px) {
-  .card { width: min(40%, 480px); padding: 32px; }
-  .photo { margin-left: 30%; }
-}
-
-/* Below this the card no longer fits beside the photo: stack them, with
-   the card overlapping the bottom of the photo. */
+/* Tablets: no room for the photo beside the card, so the card sits over
+   the left side of a full-width photo. */
 @media (max-width: 1023px) {
   .photo { margin-left: 0; }
-  .photo-img { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; }
+  .photo-img { aspect-ratio: auto; height: 600px; min-height: 0; object-position: 65% 40%; }
+  .card { left: calc(clamp(16px, 5vw, 80px) + 24px); width: 360px; padding: 28px; }
+}
+
+/* Phones: stack them, with the card overlapping the bottom of the photo. */
+@media (max-width: 699px) {
+  .photo-img { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; object-position: 50% 40%; }
   .card { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; margin: -56px auto 0; padding: 28px; border-radius: 22px; }
 }
 
