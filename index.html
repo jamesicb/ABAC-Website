@@ -10,7 +10,7 @@
 <meta property="og:description" content="SEAI registered external wall insulation. 10-year guarantee. We apply for your SEAI grant for you.">
 <meta property="og:image" content="assets/images/og-finished-home.jpg">
 <meta property="og:type" content="website">
-<link rel="preload" as="image" href="assets/images/compare-after-1800.webp" imagesrcset="assets/images/compare-after-1000.webp 1000w, assets/images/compare-after-1800.webp 1800w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" href="assets/images/compare-after-1800.webp" imagesrcset="assets/images/compare-after-1000.webp 1000w, assets/images/compare-after-1800.webp 1800w" imagesizes="(min-width: 1024px) 75vw, 100vw" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap">
@@ -20,170 +20,101 @@
 <a class="skip" href="#main">Skip to main content</a>
 
 <header class="site-head" id="top">
-  <div class="topbar" aria-hidden="true"></div>
-
-  <div class="mainbar">
-    <div class="wrap mainbar-in">
-      <a class="brand" href="#top" aria-label="Absolute Acrylics, home">
-        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
-          <path class="bm-roof" d="M6 22 24 7l18 15"/>
-          <path class="bm-wall" d="M11 20v20h26V20"/>
-          <path class="bm-layer" d="M15 24v12h18V24"/>
-        </svg>
-        <span class="brand-divider" aria-hidden="true"></span>
-        <span class="brand-text"><b>Absolute Acrylics</b><small>External wall insulation</small></span>
-      </a>
-
-      <div class="badge" aria-label="SEAI registered contractor">
-        <span class="badge-top">SEAI</span>
-        <span class="badge-mid">Registered</span>
-        <span class="badge-low">Contractor</span>
-      </div>
-
-      <p class="trust">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>
-        <span>Every job backed by a<br><b>10-year guarantee</b></span>
-      </p>
-
-      <nav class="menu" id="menu" aria-label="Main">
-        <ul class="menu-list">
-          <li class="has-drop">
-            <button class="menu-top" type="button" aria-expanded="false" aria-controls="drop-services">Our Services<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
-            <div class="drop" id="drop-services">
-              <a href="#svc-ewi"><b>External wall insulation</b><span>Insulation boards and a new render or brick-effect finish</span></a>
-              <a href="#svc-attic"><b>Attic insulation</b><span>Keep the heat from escaping through the roof</span></a>
-              <a href="#svc-cavity"><b>Pumped cavity wall insulation</b><span>Insulation pumped into the gap in cavity walls</span></a>
-            </div>
-          </li>
-          <li class="has-drop">
-            <button class="menu-top" type="button" aria-expanded="false" aria-controls="drop-grants">SEAI Grants<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
-            <div class="drop drop-note" id="drop-grants">
-              <p><b>We apply for the grant for you</b>Homeowners can get an SEAI grant for insulation work. We're SEAI registered, so we make the application on your behalf and handle the paperwork.</p>
-              <button class="btn btn-small" type="button" data-open="enquire">Ask about your grant</button>
-            </div>
-          </li>
-          <li class="has-drop">
-            <button class="menu-top" type="button" aria-expanded="false" aria-controls="drop-about">About Us<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
-            <div class="drop drop-note" id="drop-about">
-              <ul class="facts">
-                <li><b>Dublin based</b>We work mostly across Dublin.</li>
-                <li><b>SEAI registered</b>Your work qualifies for the SEAI grant.</li>
-                <li><b>10-year guarantee</b>On the insulation work we carry out.</li>
-              </ul>
-            </div>
-          </li>
-          <li><button class="menu-top" type="button" data-open="enquire">Contact Us</button></li>
-        </ul>
-        <a class="menu-phone" href="tel:+353863654911">Call 086 365 4911</a>
-        <a class="menu-email" href="mailto:fiona.abac@gmail.com">fiona.abac@gmail.com</a>
-      </nav>
-
-      <button class="btn btn-solid head-cta" type="button" data-open="enquire">Enquire now</button>
-      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu"><span class="sr">Menu</span><i></i><i></i><i></i></button>
-    </div>
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="Absolute Acrylics, home">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <path class="bm-roof" d="M6 22 24 7l18 15"/>
+        <path class="bm-wall" d="M11 20v20h26V20"/>
+        <path class="bm-layer" d="M15 24v12h18V24"/>
+      </svg>
+      <span class="brand-text"><b>Absolute Acrylics</b><small>External wall insulation</small></span>
+    </a>
+    <a class="head-link" href="#services">Our services</a>
   </div>
 </header>
 
 <main id="main">
-  <section class="hero" aria-labelledby="hero-title">
-    <h1 class="sr" id="hero-title">Absolute Acrylics, external wall insulation in Dublin</h1>
-    <div class="compare" id="compare" style="--pos: 50%">
-      <img class="compare-img" src="assets/images/compare-after-1800.webp" srcset="assets/images/compare-after-1000.webp 1000w, assets/images/compare-after-1800.webp 1800w" sizes="100vw" width="1800" height="1147" alt="After: the same house with new insulated walls, a smooth light render upstairs and a red brick-effect finish downstairs.">
-      <div class="compare-before">
-        <img class="compare-img" src="assets/images/compare-before-1800.webp" srcset="assets/images/compare-before-1000.webp 1000w, assets/images/compare-before-1800.webp 1800w" sizes="100vw" width="1800" height="1147" alt="Before: a semi-detached Dublin house with old pebble-dash render and grey stone cladding.">
+  <section class="first wrap" aria-labelledby="quote-title">
+    <div class="photo">
+      <div class="compare" id="compare" style="--pos: 50%">
+        <img class="compare-img" src="assets/images/compare-after-1800.webp" srcset="assets/images/compare-after-1000.webp 1000w, assets/images/compare-after-1800.webp 1800w" sizes="(min-width: 1024px) 75vw, 100vw" width="1800" height="1147" alt="After: the same house with new insulated walls, a smooth light render upstairs and a red brick-effect finish downstairs.">
+        <div class="compare-before">
+          <img class="compare-img" src="assets/images/compare-before-1800.webp" srcset="assets/images/compare-before-1000.webp 1000w, assets/images/compare-before-1800.webp 1800w" sizes="(min-width: 1024px) 75vw, 100vw" width="1800" height="1147" alt="Before: a semi-detached Dublin house with old pebble-dash render and grey stone cladding.">
+        </div>
+        <span class="tag tag-before" aria-hidden="true">Before</span>
+        <span class="tag tag-after" aria-hidden="true">After</span>
+        <div class="handle" id="handle" role="slider" tabindex="0" aria-label="Before and after divider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50% before">
+          <span class="handle-knob"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+        </div>
+        <p class="compare-hint">Drag the line to compare</p>
       </div>
-      <span class="tag tag-before" aria-hidden="true">Before</span>
-      <span class="tag tag-after" aria-hidden="true">After</span>
-      <div class="handle" id="handle" role="slider" tabindex="0" aria-label="Before and after divider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50% before">
-        <span class="handle-knob"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span>
-      </div>
-      <p class="compare-hint">Drag the line to compare</p>
     </div>
-    <a class="hero-down" href="#services" aria-label="Scroll to our services">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg>
-    </a>
+
+    <div class="card" id="enquire">
+      <h1 id="quote-title">Enquire for a free quote today</h1>
+      <p class="card-sub">External wall insulation for Dublin homes. SEAI registered, with a 10-year guarantee.</p>
+      <form class="lead-form" id="quote-form" novalidate data-kind="Free quote request">
+        <div class="box">
+          <div class="cell field">
+            <label for="q-name">Name</label>
+            <input id="q-name" name="name" autocomplete="name" required placeholder="Your full name">
+          </div>
+        </div>
+        <div class="box box-split">
+          <div class="cell field">
+            <label for="q-phone">Phone number</label>
+            <input id="q-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="Your number">
+          </div>
+          <div class="cell field">
+            <label for="q-email">Email</label>
+            <input id="q-email" name="email" type="email" autocomplete="email" placeholder="Your email">
+          </div>
+        </div>
+        <div class="box">
+          <div class="cell field">
+            <label for="q-address">Address</label>
+            <input id="q-address" name="address" autocomplete="street-address" required placeholder="House, street and area">
+          </div>
+        </div>
+        <ul class="errs" id="q-errs" hidden></ul>
+        <input type="hidden" name="service" id="q-service" value="">
+        <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+        <button class="cta" type="submit">Enquire for free quote</button>
+        <div class="form-status" role="status" aria-live="polite"></div>
+        <p class="form-foot">We only use your details to reply about your quote. <a href="privacy.html">Privacy notice</a></p>
+      </form>
+    </div>
   </section>
 
   <section class="services" id="services" aria-label="Our services">
     <ul class="wrap svc-list">
-      <li id="svc-ewi">
-        <button class="svc" type="button" data-open="enquire" data-service="External wall insulation">
+      <li>
+        <a class="svc" href="#enquire" data-service="External wall insulation">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M6 10h36v28H6z"/><path d="M6 19h36M6 28h36M18 10v9M30 10v9M12 19v9M24 19v9M36 19v9M18 28v10M30 28v10"/></svg>
           <span>External Wall Insulation</span>
-        </button>
+        </a>
       </li>
-      <li id="svc-attic">
-        <button class="svc" type="button" data-open="enquire" data-service="Attic insulation">
+      <li>
+        <a class="svc" href="#enquire" data-service="Attic insulation">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M24 7 5 23h38z"/><path d="M10 23v18h28V23M14 18h20M18 14.5h12"/></svg>
           <span>Attic Insulation</span>
-        </button>
+        </a>
       </li>
-      <li id="svc-cavity">
-        <button class="svc" type="button" data-open="enquire" data-service="Pumped cavity wall insulation">
+      <li>
+        <a class="svc" href="#enquire" data-service="Pumped cavity wall insulation">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M8 8h10v32H8zM30 8h10v32H30z"/><path d="M21 14v4M27 14v4M21 22v4M27 22v4M21 30v4M27 30v4M24 4v6"/></svg>
           <span>Cavity Wall Insulation</span>
-        </button>
+        </a>
       </li>
-      <li id="svc-grant">
-        <button class="svc" type="button" data-open="enquire" data-service="SEAI grant">
+      <li>
+        <a class="svc" href="#enquire" data-service="SEAI grant">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path class="f" d="M11 5h20l8 8v30H11z"/><path d="M31 5v8h8M17 22h16M17 29h16M17 36h9"/></svg>
           <span>SEAI Grant Applications</span>
-        </button>
+        </a>
       </li>
     </ul>
   </section>
 </main>
-
-<dialog class="modal" id="enquire" aria-labelledby="enquire-title">
-  <form class="lead-form" novalidate data-kind="Enquiry">
-    <button class="modal-x" type="button" data-close aria-label="Close">&times;</button>
-    <h2 id="enquire-title">Enquire now</h2>
-    <p class="lead-intro">Tell us a little about your home and we'll get back to you with a quote. Fields marked * are required.</p>
-    <div class="form-errors" tabindex="-1" hidden></div>
-    <div class="row">
-      <div class="field">
-        <label for="e-name">Your name *</label>
-        <input id="e-name" name="name" autocomplete="name" required>
-        <span class="err"></span>
-      </div>
-      <div class="field">
-        <label for="e-phone">Phone *</label>
-        <input id="e-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
-        <span class="err"></span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="field">
-        <label for="e-area">Area or Eircode *</label>
-        <input id="e-area" name="area" autocomplete="postal-code" required placeholder="For example, Clontarf or D03">
-        <span class="err"></span>
-      </div>
-      <div class="field">
-        <label for="e-email">Email (optional)</label>
-        <input id="e-email" name="email" type="email" autocomplete="email">
-        <span class="err"></span>
-      </div>
-    </div>
-    <div class="field">
-      <label for="e-service">What are you interested in?</label>
-      <select id="e-service" name="service">
-        <option>External wall insulation</option>
-        <option>Attic insulation</option>
-        <option>Pumped cavity wall insulation</option>
-        <option>SEAI grant</option>
-        <option>Not sure yet</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="e-msg">Anything else? (optional)</label>
-      <textarea id="e-msg" name="message" rows="3"></textarea>
-    </div>
-    <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
-    <button class="btn btn-solid btn-wide" type="submit">Send enquiry</button>
-    <div class="form-status" role="status" aria-live="polite"></div>
-    <p class="form-foot">We only use your details to reply to you. <a href="privacy.html">Privacy notice</a></p>
-  </form>
-</dialog>
 
 <script src="js/home.js"></script>
 </body>
