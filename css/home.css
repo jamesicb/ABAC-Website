@@ -183,11 +183,12 @@ svg { flex: none; }
 }
 
 /* ---------- Services row ---------- */
-.services { background: var(--pale); }
+/* Only the tiles are tinted, so the page stays white either side of them,
+   with a thin frame round them */
 .svc-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); }
-.svc-list li { border-left: 1px solid var(--line); }
+.svc-list li { display: grid; background: var(--pale); border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
 .svc-list li:nth-child(2n) { border-right: 1px solid var(--line); }
-.svc-list li:nth-child(n+3) { border-top: 1px solid var(--line); }
+.svc-list li:nth-child(n+3) { border-bottom: 1px solid var(--line); }
 .svc { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 52px 16px 46px; text-align: center; font-size: 18px; font-weight: 500; color: var(--navy); text-decoration: none; transition: background .2s; }
 .svc:hover { background: var(--white); }
 .svc svg { width: 64px; height: 64px; fill: none; stroke: var(--navy-2); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
