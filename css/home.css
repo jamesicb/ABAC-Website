@@ -193,6 +193,10 @@ svg { flex: none; }
 .svc svg .f { fill: #cfe0f2; }
 .svc svg .f-bolt { fill: #ffd60a; }
 .svc svg .f-leaf { fill: #85bb65; }
+.svc svg .f-value { fill: #2563eb; }
+.svc svg .f-uplift { fill: #7c5ac7; }
+/* The arrow and smile sit on the darker fills, so they're drawn in white */
+.svc svg .on-fill { stroke: var(--white); }
 .svc sub { font-size: .7em; line-height: 0; }
 .svc:hover svg { transform: translateY(-3px); }
 
