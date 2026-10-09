@@ -183,12 +183,10 @@ svg { flex: none; }
 }
 
 /* ---------- Services row ---------- */
-/* Only the tiles are tinted, so the page stays white either side of them,
-   with a thin frame round them */
-.svc-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); }
-.svc-list li { display: grid; background: var(--pale); border-left: 1px solid var(--line); border-top: 1px solid var(--line); }
-.svc-list li:nth-child(2n) { border-right: 1px solid var(--line); }
-.svc-list li:nth-child(n+3) { border-bottom: 1px solid var(--line); }
+/* Four separate tinted tiles on white, two by two */
+.services { padding-bottom: 56px; }
+.svc-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.svc-list li { display: grid; overflow: hidden; background: var(--pale); border: 1px solid var(--line); border-radius: 16px; }
 .svc { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 52px 16px 46px; text-align: center; font-size: 18px; font-weight: 500; color: var(--navy); text-decoration: none; transition: background .2s; }
 .svc:hover { background: var(--white); }
 .svc svg { width: 64px; height: 64px; fill: none; stroke: var(--navy-2); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
@@ -229,6 +227,9 @@ svg { flex: none; }
   .card-sub { font-size: 16px; margin-bottom: 18px; }
   .first { padding-bottom: 40px; }
   .why h2 { padding-bottom: 32px; }
+  .services { padding-bottom: 32px; }
+  .svc-list { gap: 10px; }
+  .svc-list li { border-radius: 14px; }
   .svc { padding: 32px 10px 28px; gap: 14px; font-size: 16px; }
   .svc svg { width: 50px; height: 50px; }
 }
