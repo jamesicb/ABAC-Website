@@ -191,6 +191,8 @@ svg { flex: none; }
 .svc:hover { background: var(--white); }
 .svc svg { width: 64px; height: 64px; fill: none; stroke: var(--navy-2); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
 .svc svg .f { fill: #cfe0f2; }
+.svc svg .f-bolt { fill: #ffd60a; }
+.svc svg .f-leaf { fill: #85bb65; }
 .svc sub { font-size: .7em; line-height: 0; }
 .svc:hover svg { transform: translateY(-3px); }
 
