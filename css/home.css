@@ -215,6 +215,7 @@ svg { flex: none; }
 .more p { margin: 0 0 6px; font-size: 17px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
 /* Keeps a figure range like €40,000–€50,000 on one line */
 .nb { white-space: nowrap; }
+.more strong { font-weight: 700; color: var(--ink); }
 .more p.more-note { margin-top: -10px; font-size: 13.5px; line-height: 1.45; }
 .more-cta { display: grid; place-items: center; margin-top: 0; text-decoration: none; }
 
