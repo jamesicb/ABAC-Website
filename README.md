@@ -2,7 +2,7 @@
 
 Static site: `index.html`, `privacy.html`, `css/home.css`, `js/home.js`, and media in `assets/`.
 
-- The homepage has a slim header (logo, and an SEAI registered badge that dips over the photo), then a large rounded photo of the finished job with the free quote card overlapping its left edge, then a row of service tiles. On tablets the card sits over the left of a full-width photo, and on phones it sits below the photo.
+- The homepage has a slim header (logo, and three badges that dip over the photo: 10-year guarantee, SEAI grant and SEAI registered; phones under 560px wide show only the SEAI one), then a large rounded photo of the finished job with the free quote card overlapping its left edge, then a row of service tiles. On tablets the card sits over the left of a full-width photo, and on phones it sits below the photo.
 - The photo is `assets/images/finished-house-*.webp`, cropped from James's after photo of the real job (`assets/source/job-after.jpg`).
 - The quote card asks for name, phone number, email (optional) and address. Clicking a service tile fills in that service and jumps to the card. `index.html#enquire` jumps straight to it.
 - `privacy.html` still uses the older `css/site.css`.

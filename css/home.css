@@ -52,12 +52,14 @@ svg { flex: none; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand-text b { font-family: var(--display); font-weight: 600; font-size: 21px; letter-spacing: -0.01em; }
 .brand-text small { font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-top: 3px; font-weight: 600; }
-/* SEAI registered badge: hangs from the top of the page and dips over the photo */
+/* Badges (10-year guarantee, grant, SEAI registered): hang from the top of
+   the page and dip over the photo */
 .head-in { position: relative; }
-.seai-badge {
-  position: absolute; z-index: 10; top: 0; right: calc(clamp(16px, 5vw, 80px) + 32px); margin: 0;
-  filter: drop-shadow(0 4px 8px rgba(15, 39, 66, .28));
+.badges {
+  position: absolute; z-index: 10; top: 0; right: calc(clamp(16px, 5vw, 80px) + 32px);
+  display: flex; gap: 8px; margin: 0; padding: 0; list-style: none;
 }
+.badge { filter: drop-shadow(0 4px 8px rgba(15, 39, 66, .28)); }
 .sb-shape {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   width: 75px; height: 95px; padding-bottom: 13px;
@@ -66,8 +68,9 @@ svg { flex: none; }
 }
 .sb-icon { width: 17px; height: 17px; margin-bottom: 1px; fill: none; stroke: var(--white); stroke-width: 1.8; stroke-linejoin: round; }
 .sb-icon .sb-tick { stroke-width: 2.2; stroke-linecap: round; }
-.seai-badge b { font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1; letter-spacing: .02em; }
-.seai-badge small { font-size: 8.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.badge b { font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1; letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; }
+.badge b.b-long { font-size: 17px; line-height: 20px; }
+.badge small { font-size: 8.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 
 /* ---------- First section: photo with overlapping quote card ---------- */
 /* Proportions follow Airbnb's: the photo starts about a quarter of the way
@@ -185,7 +188,7 @@ svg { flex: none; }
   .brand-mark { width: 30px; height: 30px; }
   .brand-text b { font-size: 17px; }
   .brand-text small { font-size: 9px; letter-spacing: .14em; }
-  .seai-badge { right: 32px; }
+  .badges { right: 32px; }
   .photo-img { aspect-ratio: 1 / 1; border-radius: 18px; }
   .card { margin: -48px 8px 0; padding: 22px 18px; border-radius: 18px; }
   .card-sub { font-size: 16px; margin-bottom: 18px; }
@@ -198,9 +201,14 @@ svg { flex: none; }
   .svc svg { width: 50px; height: 50px; }
 }
 
+/* Small phones: only room for the SEAI badge beside the logo */
+@media (max-width: 560px) {
+  .badge:not(:last-child) { display: none; }
+}
+
 @media (max-width: 380px) {
   .box-split { grid-template-columns: 1fr; }
   .box-split .cell + .cell::before { left: 14px; right: 14px; top: 0; bottom: auto; width: auto; height: 1px; }
   .brand-text small { display: none; }
-  .seai-badge { right: 24px; }
+  .badges { right: 24px; }
 }
