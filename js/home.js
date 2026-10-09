@@ -10,18 +10,33 @@
   let current = 0;
   let timer = null;
 
+  // Photos after the first only download when they're next up, to keep the page light
+  function load(img) {
+    if (!img.dataset.src) return;
+    img.srcset = img.dataset.srcset;
+    img.src = img.dataset.src;
+    delete img.dataset.src;
+  }
+  function ready(img) { return !img.dataset.src && img.complete && img.naturalWidth > 0; }
+
   function show(i) {
     current = (i + slides.length) % slides.length;
+    load(slides[current]);
     slides.forEach((s, n) => s.classList.toggle('is-on', n === current));
     dots.forEach((d, n) => d.setAttribute('aria-current', String(n === current)));
+    load(slides[(current + 1) % slides.length]);
   }
   function play() {
     clearInterval(timer);
     timer = setInterval(() => {
       // Wait for the next photo to finish loading rather than fading to a blank box
-      if (slides[(current + 1) % slides.length].complete) show(current + 1);
+      const next = slides[(current + 1) % slides.length];
+      load(next);
+      if (ready(next)) show(current + 1);
     }, 3000);
   }
+  if (document.readyState === 'complete') load(slides[1]);
+  else addEventListener('load', () => load(slides[1]));
   function paused() { return pause.getAttribute('aria-pressed') === 'true'; }
 
   pause.addEventListener('click', () => {

@@ -109,6 +109,7 @@ svg { flex: none; }
 .photo-img.job-4 { object-position: 50% 30%; }
 .photo-img.job-5 { object-position: 50% 40%; }
 .photo-img.job-6 { object-position: 50% 35%; }
+.photo-img.job-7 { object-position: 50% 36%; }
 @media (prefers-reduced-motion: reduce) { .photo-img { transition: none; } }
 
 .photo-ctl {
@@ -243,4 +244,8 @@ svg { flex: none; }
   .box-split .cell + .cell::before { left: 14px; right: 14px; top: 0; bottom: auto; width: auto; height: 1px; }
   .brand-text small { display: none; }
   .badges { right: 24px; }
+  /* Narrower dot buttons so the controls stay clear of the SEAI badge */
+  .photo-ctl { gap: 0; }
+  .photo-ctl button { width: 20px; }
+  .photo-dot[aria-current="true"] { width: 26px; }
 }
