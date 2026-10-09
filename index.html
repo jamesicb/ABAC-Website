@@ -59,8 +59,19 @@
 
 <main id="main">
   <section class="first wrap" aria-labelledby="quote-title">
-    <div class="photo">
-      <img class="photo-img" src="assets/images/finished-house-1800.webp" srcset="assets/images/finished-house-1000.webp 1000w, assets/images/finished-house-1800.webp 1800w" sizes="(min-width: 1024px) 75vw, 100vw" width="1800" height="1147" alt="A Dublin semi-detached house after external wall insulation, with a smooth light render upstairs and a red brick-effect finish downstairs.">
+    <div class="photo" role="group" aria-label="Finished jobs">
+      <img class="photo-img job-1 is-on" src="assets/images/finished-house-1800.webp" srcset="assets/images/finished-house-1000.webp 1000w, assets/images/finished-house-1800.webp 1800w" sizes="(min-width: 1024px) 75vw, 100vw" width="1800" height="1147" alt="A Dublin semi-detached house after external wall insulation, with a smooth light render upstairs and a red brick-effect finish downstairs.">
+      <img class="photo-img job-2" src="assets/images/job-2-1800.webp" srcset="assets/images/job-2-1000.webp 1000w, assets/images/job-2-1400.webp 1400w, assets/images/job-2-1800.webp 1800w" sizes="(min-width: 1024px) 75vw, 100vw" width="1800" height="1560" fetchpriority="low" decoding="async" alt="A semi-detached house after external wall insulation, with a speckled render upstairs and a stone-effect finish downstairs.">
+      <img class="photo-img job-3" src="assets/images/job-3-1800.webp" srcset="assets/images/job-3-1000.webp 1000w, assets/images/job-3-1400.webp 1400w, assets/images/job-3-1800.webp 1800w" sizes="(min-width: 1024px) 75vw, 100vw" width="1800" height="1351" fetchpriority="low" decoding="async" alt="A house after external wall insulation, with a speckled render upstairs and a red brick-effect finish downstairs.">
+      <div class="photo-ctl">
+        <button class="photo-pause" type="button" aria-pressed="false" aria-label="Pause the photos">
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+        </button>
+        <button class="photo-dot" type="button" aria-label="Show job 1 of 3" aria-current="true"></button>
+        <button class="photo-dot" type="button" aria-label="Show job 2 of 3" aria-current="false"></button>
+        <button class="photo-dot" type="button" aria-label="Show job 3 of 3" aria-current="false"></button>
+      </div>
     </div>
 
     <div class="card" id="enquire">

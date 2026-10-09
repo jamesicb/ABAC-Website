@@ -3,6 +3,39 @@
 
   const card = document.getElementById('enquire');
 
+  /* ---------------- Job photos: show the next one every 3 seconds ---------------- */
+  const slides = [...document.querySelectorAll('.photo-img')];
+  const dots = [...document.querySelectorAll('.photo-dot')];
+  const pause = document.querySelector('.photo-pause');
+  let current = 0;
+  let timer = null;
+
+  function show(i) {
+    current = (i + slides.length) % slides.length;
+    slides.forEach((s, n) => s.classList.toggle('is-on', n === current));
+    dots.forEach((d, n) => d.setAttribute('aria-current', String(n === current)));
+  }
+  function play() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+      // Wait for the next photo to finish loading rather than fading to a blank box
+      if (slides[(current + 1) % slides.length].complete) show(current + 1);
+    }, 3000);
+  }
+  function paused() { return pause.getAttribute('aria-pressed') === 'true'; }
+
+  pause.addEventListener('click', () => {
+    const nowPaused = !paused();
+    pause.setAttribute('aria-pressed', String(nowPaused));
+    if (nowPaused) clearInterval(timer);
+    else play();
+  });
+  dots.forEach((d, n) => d.addEventListener('click', () => {
+    show(n);
+    if (!paused()) play();
+  }));
+  play();
+
   /* ---------------- Service tiles fill in the service and jump to the form ---------------- */
   const form = document.getElementById('quote-form');
   const nameInput = document.getElementById('q-name');

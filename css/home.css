@@ -93,11 +93,32 @@ svg { flex: none; }
      starts 10px below the logo */
   margin-top: -11px;
 }
-.photo { margin-left: calc(var(--card-w) - var(--overlap)); }
+.photo { position: relative; margin-left: calc(var(--card-w) - var(--overlap)); }
 .photo-img {
   width: 100%; height: calc(var(--ph) * 1.1);
   object-fit: cover; object-position: 50% 40%; border-radius: 24px; background: var(--pale);
 }
+
+/* Job photos take turns every 3 seconds (js/home.js). The first sets the
+   size; the others sit on top of it and fade in when it's their turn. */
+.photo .photo-img:not(:first-child) { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
+.photo-img { opacity: 0; transition: opacity .8s ease; }
+.photo-img.is-on { opacity: 1; }
+.photo-img.job-2 { object-position: 50% 45%; }
+.photo-img.job-3 { object-position: 50% 15%; }
+@media (prefers-reduced-motion: reduce) { .photo-img { transition: none; } }
+
+.photo-ctl {
+  position: absolute; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 2px;
+  padding: 2px 8px 2px 4px; border-radius: 99px; background: rgba(15, 39, 66, .55);
+}
+.photo-ctl button { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; }
+.photo-pause svg { width: 14px; height: 14px; stroke: var(--white); stroke-width: 3; stroke-linecap: round; fill: var(--white); stroke-linejoin: round; }
+.photo-pause .i-play, .photo-pause[aria-pressed="true"] .i-pause { display: none; }
+.photo-pause[aria-pressed="true"] .i-play { display: block; }
+.photo-dot::before { content: ""; width: 8px; height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .55); transition: width .3s, background .3s; }
+.photo-dot[aria-current="true"]::before { width: 18px; background: var(--white); }
+.photo-dot[aria-current="true"] { width: 30px; }
 
 .card {
   position: absolute; z-index: 5; top: calc((100% - 56px) / 2);
@@ -174,13 +195,17 @@ svg { flex: none; }
 @media (max-width: 1023px) {
   :root { --card-w: 360px; --card-x: 24px; }
   .photo { margin-left: 0; }
-  .photo-img { height: clamp(520px, calc(100vh - 200px), 600px); height: clamp(520px, calc(100svh - 200px), 600px); object-position: 65% 40%; }
+  .photo-img { height: clamp(520px, calc(100vh - 200px), 600px); height: clamp(520px, calc(100svh - 200px), 600px); }
+  .photo-img.job-1 { object-position: 65% 40%; }
   .card { padding: 28px; }
 }
 
 /* Phones: stack them, with the card overlapping the bottom of the photo. */
 @media (max-width: 699px) {
-  .photo-img { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; object-position: 50% 40%; }
+  .photo-img { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; }
+  .photo-img.job-1 { object-position: 50% 40%; }
+  /* The card covers the bottom of the photo here, so the controls go top left */
+  .photo-ctl { top: 12px; bottom: auto; left: 12px; right: auto; }
   .card { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; margin: -56px auto 0; padding: 28px; border-radius: 22px; }
   .first { margin-top: 0; }
   .brand { margin-left: 0; }
