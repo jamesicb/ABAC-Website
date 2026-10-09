@@ -60,7 +60,7 @@ svg { flex: none; }
 }
 .sb-shape {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-  width: 75px; height: 86px; padding-bottom: 12px;
+  width: 75px; height: 95px; padding-bottom: 13px;
   background: linear-gradient(180deg, #1f8a5b, #176f49); color: var(--white);
   clip-path: polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%);
 }
