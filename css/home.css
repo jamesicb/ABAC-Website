@@ -15,6 +15,10 @@
   --white: #ffffff;
   --display: "Lexend", "Segoe UI", system-ui, sans-serif;
   --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* Quote card width and how far it sits in from the page edge. The logo
+     uses these too, so its left side lines up with the card's. */
+  --card-w: clamp(380px, 32vw, 520px);
+  --card-x: 0px;
   color-scheme: light;
 }
 
@@ -35,7 +39,12 @@ svg { flex: none; }
 /* ---------- Header ---------- */
 .site-head { background: var(--white); }
 .head-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 80px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); }
+.brand {
+  display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy);
+  /* The card is drawn at 0.765 of its size from its right edge, so its
+     visible left side is 8.5% of its width in from where it is placed. */
+  margin-left: calc(var(--card-x) + var(--card-w) * .085);
+}
 .brand-mark { width: 36px; height: 36px; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .bm-roof { stroke: var(--green-2); stroke-width: 4.5; }
 .bm-wall { stroke: var(--navy-2); stroke-width: 4.5; }
@@ -64,17 +73,18 @@ svg { flex: none; }
 /* Proportions follow Airbnb's: the photo starts about a quarter of the way
    in, is roughly 16:9, and the card overlaps its left edge, centred on it. */
 .first {
-  --card-w: clamp(380px, 32vw, 520px); --overlap: clamp(90px, 8vw, 130px);
+  --overlap: clamp(90px, 8vw, 130px);
   /* Base photo height: 16:9.2 of its width, kept between 500px and 600px
      unless the screen is tall enough for more, and shorter on short screens
      so the heading below still shows without scrolling. */
   --ph-ratio: calc((min(100vw, 1640px) - 2 * clamp(16px, 5vw, 80px) - var(--card-w) + var(--overlap)) * .575);
-  --ph-min: clamp(500px, calc((100vh - 190px) / 1.05), 600px);
-  --ph-max: max(500px, calc((100vh - 190px) / 1.05));
+  --ph-min: clamp(500px, calc((100vh - 170px) / 1.1), 600px);
+  --ph-max: max(500px, calc((100vh - 170px) / 1.1));
   --ph: max(var(--ph-min), min(var(--ph-ratio), var(--ph-max)));
   position: relative; padding-bottom: 56px;
-  /* The photo is 10% taller than the base, growing 5% up and 5% down */
-  margin-top: calc(var(--ph) * -.05);
+  /* The header is 80px tall and the logo ends 59px down, so the photo
+     starts 10px below the logo */
+  margin-top: -11px;
 }
 .photo { margin-left: calc(var(--card-w) - var(--overlap)); }
 .photo-img {
@@ -87,7 +97,7 @@ svg { flex: none; }
   /* Centred on the photo and shrunk to 0.765 (10% then 15% smaller). It shrinks
      towards its right edge, so it overlaps the photo by the same amount. */
   transform: translate(-15%, -50%) scale(.765); transform-origin: 100% 50%;
-  left: clamp(16px, 5vw, 80px); width: var(--card-w);
+  left: calc(clamp(16px, 5vw, 80px) + var(--card-x)); width: var(--card-w);
   background: var(--white); border-radius: 24px; padding: 32px;
   box-shadow: 0 10px 40px rgba(15, 39, 66, .16);
 }
@@ -155,20 +165,23 @@ svg { flex: none; }
 /* Tablets: no room for the photo beside the card, so the card sits over
    the left side of a full-width photo. */
 @media (max-width: 1023px) {
-  .first { margin-top: 0; }
+  :root { --card-w: 360px; --card-x: 24px; }
   .photo { margin-left: 0; }
   .photo-img { height: clamp(520px, calc(100vh - 200px), 600px); height: clamp(520px, calc(100svh - 200px), 600px); object-position: 65% 40%; }
-  .card { left: calc(clamp(16px, 5vw, 80px) + 24px); width: 360px; padding: 28px; }
+  .card { padding: 28px; }
 }
 
 /* Phones: stack them, with the card overlapping the bottom of the photo. */
 @media (max-width: 699px) {
   .photo-img { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; object-position: 50% 40%; }
   .card { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; margin: -56px auto 0; padding: 28px; border-radius: 22px; }
+  .first { margin-top: 0; }
+  .brand { margin-left: 0; }
 }
 
 @media (max-width: 640px) {
   .head-in { min-height: 64px; }
+  .brand { margin-left: 8px; }
   .brand-mark { width: 30px; height: 30px; }
   .brand-text b { font-size: 17px; }
   .brand-text small { font-size: 9px; letter-spacing: .14em; }
@@ -193,4 +206,5 @@ svg { flex: none; }
   .box-split { grid-template-columns: 1fr; }
   .box-split .cell + .cell::before { left: 14px; right: 14px; top: 0; bottom: auto; width: auto; height: 1px; }
   .brand-text small { display: none; }
+  .seai-badge { right: 24px; }
 }
