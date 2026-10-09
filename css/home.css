@@ -52,7 +52,7 @@ svg { flex: none; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand-text b { font-family: var(--display); font-weight: 600; font-size: 21px; letter-spacing: -0.01em; }
 .brand-text small { font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-top: 3px; font-weight: 600; }
-/* Badges (10-year guarantee, grant, SEAI registered): hang from the top of
+/* Badges (10-year guarantee, Google rating, SEAI registered): hang from the top of
    the page and dip over the photo */
 .head-in { position: relative; }
 .badges {
@@ -69,7 +69,11 @@ svg { flex: none; }
 .sb-icon { width: 17px; height: 17px; margin-bottom: 1px; fill: none; stroke: var(--white); stroke-width: 1.8; stroke-linejoin: round; }
 .sb-icon .sb-tick { stroke-width: 2.2; stroke-linecap: round; }
 .badge b { font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1; letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; }
-.badge b.b-long { font-size: 17px; line-height: 20px; }
+/* Google rating badge: logo on a white disc, the rating, then five stars */
+.g-disc { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--white); margin-bottom: 2px; }
+.g-disc svg { width: 15px; height: 15px; }
+.badge-google b { font-size: 18px; }
+.stars { width: 52px; height: 10.4px; margin-top: 2px; fill: #fbbc04; }
 .badge small { font-size: 8.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 
 /* ---------- First section: photo with overlapping quote card ---------- */
