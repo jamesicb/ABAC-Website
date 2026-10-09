@@ -125,31 +125,69 @@
   <section class="services" id="services" aria-label="Benefits of insulating your home">
     <ul class="wrap svc-list">
       <li>
-        <a class="svc" href="#enquire">
+        <button class="svc" type="button" aria-haspopup="dialog" aria-controls="more-energy">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path class="f f-bolt" d="M27 4 11 27h12l-3 17 17-24H25z"/></svg>
-          <span>Energy Savings</span>
-        </a>
+          <span class="svc-label"><span>Energy Savings</span><small class="svc-hint">(click for details)</small></span>
+        </button>
       </li>
       <li>
-        <a class="svc" href="#enquire">
+        <button class="svc" type="button" aria-haspopup="dialog" aria-controls="more-value">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path class="f f-value" d="M9 22 24 9l15 13v20H9z"/><path d="M4 25 24 7l20 18M9 22v20h30V22"/><path class="on-fill" d="M24 37V23M18 29l6-6 6 6"/></svg>
-          <span>Property Value Increase</span>
-        </a>
+          <span class="svc-label"><span>Property Value Increase</span><small class="svc-hint">(click for details)</small></span>
+        </button>
       </li>
       <li>
-        <a class="svc" href="#enquire">
+        <button class="svc" type="button" aria-haspopup="dialog" aria-controls="more-uplift">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path class="f f-uplift" d="M9 22 24 9l15 13v20H9z"/><path d="M4 25 24 7l20 18M9 22v20h30V22"/><path class="on-fill" d="M20 27.5v1M28 27.5v1M18.5 32.5q5.5 5.5 11 0"/></svg>
-          <span>Property Uplift</span>
-        </a>
+          <span class="svc-label"><span>Property Uplift</span><small class="svc-hint">(click for details)</small></span>
+        </button>
       </li>
       <li>
-        <a class="svc" href="#enquire">
+        <button class="svc" type="button" aria-haspopup="dialog" aria-controls="more-co2">
           <svg viewBox="0 0 48 48" aria-hidden="true"><path class="f f-leaf" d="M41 7C21 7 8 17 8 31c0 4 1 7 3 10 15 0 30-10 30-34z"/><path d="M8 44 30 20"/></svg>
-          <span>CO<sub>2</sub> Reduction</span>
-        </a>
+          <span class="svc-label"><span>CO<sub>2</sub> Reduction</span><small class="svc-hint">(click for details)</small></span>
+        </button>
       </li>
     </ul>
   </section>
+
+  <!-- Details for each benefit tile -->
+  <dialog class="more" id="more-energy" aria-labelledby="more-energy-t">
+    <div class="more-in">
+      <form method="dialog"><button class="more-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></form>
+      <svg class="more-icon" viewBox="0 0 48 48" aria-hidden="true"><path class="f f-bolt" d="M27 4 11 27h12l-3 17 17-24H25z"/></svg>
+      <h3 id="more-energy-t">Energy Savings</h3>
+      <p>Insulation slows the heat escaping through your walls and attic, so your heating has less work to do. Your home warms up faster, holds its heat for longer, and costs less to keep warm.</p>
+      <a class="cta more-cta" href="#enquire">Get a free quote</a>
+    </div>
+  </dialog>
+  <dialog class="more" id="more-value" aria-labelledby="more-value-t">
+    <div class="more-in">
+      <form method="dialog"><button class="more-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></form>
+      <svg class="more-icon" viewBox="0 0 48 48" aria-hidden="true"><path class="f f-value" d="M9 22 24 9l15 13v20H9z"/><path d="M4 25 24 7l20 18M9 22v20h30V22"/><path class="on-fill" d="M24 37V23M18 29l6-6 6 6"/></svg>
+      <h3 id="more-value-t">Property Value Increase</h3>
+      <p>Insulating can lift your home's BER rating. A better BER rating tells buyers the home is cheaper to heat, which can make it more appealing when the time comes to sell.</p>
+      <a class="cta more-cta" href="#enquire">Get a free quote</a>
+    </div>
+  </dialog>
+  <dialog class="more" id="more-uplift" aria-labelledby="more-uplift-t">
+    <div class="more-in">
+      <form method="dialog"><button class="more-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></form>
+      <svg class="more-icon" viewBox="0 0 48 48" aria-hidden="true"><path class="f f-uplift" d="M9 22 24 9l15 13v20H9z"/><path d="M4 25 24 7l20 18M9 22v20h30V22"/><path class="on-fill" d="M20 27.5v1M28 27.5v1M18.5 32.5q5.5 5.5 11 0"/></svg>
+      <h3 id="more-uplift-t">Property Uplift</h3>
+      <p>External wall insulation is finished with a fresh new render, giving tired walls a clean, modern look. Inside, a warmer home with fewer draughts is simply nicer to live in.</p>
+      <a class="cta more-cta" href="#enquire">Get a free quote</a>
+    </div>
+  </dialog>
+  <dialog class="more" id="more-co2" aria-labelledby="more-co2-t">
+    <div class="more-in">
+      <form method="dialog"><button class="more-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></form>
+      <svg class="more-icon" viewBox="0 0 48 48" aria-hidden="true"><path class="f f-leaf" d="M41 7C21 7 8 17 8 31c0 4 1 7 3 10 15 0 30-10 30-34z"/><path d="M8 44 30 20"/></svg>
+      <h3 id="more-co2-t">CO<sub>2</sub> Reduction</h3>
+      <p>A home that loses less heat needs less energy to stay warm. Using less energy means less carbon from your home every winter.</p>
+      <a class="cta more-cta" href="#enquire">Get a free quote</a>
+    </div>
+  </dialog>
 </main>
 
 <script src="js/home.js"></script>

@@ -51,15 +51,22 @@
   }));
   play();
 
-  /* ---------------- Tiles jump to the form (and fill in a service if they name one) ---------------- */
+  /* ---------------- Benefit tiles open their details; "Get a free quote" jumps to the form ---------------- */
   const form = document.getElementById('quote-form');
   const nameInput = document.getElementById('q-name');
-  document.querySelectorAll('.svc').forEach((tile) => {
-    tile.addEventListener('click', (e) => {
+  function goToForm() {
+    card.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    nameInput.focus({ preventScroll: true });
+  }
+  document.querySelectorAll('.svc[aria-controls]').forEach((tile) => {
+    const dlg = document.getElementById(tile.getAttribute('aria-controls'));
+    tile.addEventListener('click', () => dlg.showModal());
+    // A click on the dimmed backdrop (outside the box) closes it
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    dlg.querySelector('.more-cta').addEventListener('click', (e) => {
       e.preventDefault();
-      if (tile.dataset.service) form.elements.service.value = tile.dataset.service;
-      card.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
-      nameInput.focus({ preventScroll: true });
+      dlg.close();
+      goToForm();
     });
   });
   if (location.hash === '#enquire') nameInput.focus({ preventScroll: true });
