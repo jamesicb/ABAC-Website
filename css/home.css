@@ -107,6 +107,7 @@ svg { flex: none; }
 .photo-img.job-2 { object-position: 50% 45%; }
 .photo-img.job-3 { object-position: 50% 15%; }
 .photo-img.job-4 { object-position: 50% 30%; }
+.photo-img.job-5 { object-position: 50% 40%; }
 @media (prefers-reduced-motion: reduce) { .photo-img { transition: none; } }
 
 .photo-ctl {
