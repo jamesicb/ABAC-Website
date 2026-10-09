@@ -51,13 +51,13 @@
   }));
   play();
 
-  /* ---------------- Service tiles fill in the service and jump to the form ---------------- */
+  /* ---------------- Tiles jump to the form (and fill in a service if they name one) ---------------- */
   const form = document.getElementById('quote-form');
   const nameInput = document.getElementById('q-name');
-  document.querySelectorAll('.svc[data-service]').forEach((tile) => {
+  document.querySelectorAll('.svc').forEach((tile) => {
     tile.addEventListener('click', (e) => {
       e.preventDefault();
-      form.elements.service.value = tile.dataset.service;
+      if (tile.dataset.service) form.elements.service.value = tile.dataset.service;
       card.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
       nameInput.focus({ preventScroll: true });
     });
