@@ -213,6 +213,7 @@ svg { flex: none; }
 .more-close svg { width: 18px; height: 18px; fill: none; stroke: var(--navy); stroke-width: 2.4; stroke-linecap: round; }
 .more h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); }
 .more p { margin: 0 0 6px; font-size: 17px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+.more p.more-note { margin-top: -10px; font-size: 13.5px; line-height: 1.45; }
 .more-cta { display: grid; place-items: center; margin-top: 0; text-decoration: none; }
 
 /* ---------- Responsive ---------- */
