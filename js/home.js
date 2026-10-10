@@ -71,6 +71,22 @@
   });
   if (location.hash === '#enquire') nameInput.focus({ preventScroll: true });
 
+  /* ---------------- Testimonial cards rise into place when scrolled to ---------------- */
+  const reviews = document.querySelector('.reviews');
+  if (reviews && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    reviews.classList.add('will-rise');
+    // Watch the list items, not the moving cards, so the start offset doesn't delay the trigger
+    const rise = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-up');
+        reviews.classList.add('is-up');
+        rise.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    reviews.querySelectorAll('.rev-list > li').forEach((li) => rise.observe(li));
+  }
+
   /* ---------------- Quote form (FormSubmit) ---------------- */
   const QUOTE_EMAIL = 'fiona.abac@gmail.com';
   const FORM_ENDPOINT = `https://formsubmit.co/ajax/${QUOTE_EMAIL}`;

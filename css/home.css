@@ -179,8 +179,8 @@ svg { flex: none; }
   .form-foot { font-size: 15px; }
 }
 
-/* ---------- Heading under the photo ---------- */
-.why h2 {
+/* ---------- Heading under the photo (and over the testimonials) ---------- */
+.why h2, .reviews h2 {
   margin: 0 auto; padding-top: 4px; padding-bottom: 44px; text-align: center;
   font-family: var(--display); font-weight: 600; font-size: clamp(26px, 2.1vw, 34px);
   line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance;
@@ -223,6 +223,37 @@ svg { flex: none; }
 .more p.more-note { margin-top: -10px; font-size: 13.5px; line-height: 1.45; }
 .more-cta { display: grid; place-items: center; margin-top: 0; text-decoration: none; }
 
+/* ---------- Testimonials ---------- */
+/* Cards 1 and 3 sit level under the heading; cards 2 and 4 sit lower by half
+   of --rise. When the row scrolls into view each card rises from below the
+   screen: 1 and 3 the full --rise, 2 and 4 half as far, so all four start
+   from the same line. */
+.reviews { --rise: 240px; padding-bottom: 64px; }
+.reviews h2 { padding-top: 24px; }
+.rev-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; align-items: start; }
+.rev-list li { --start: var(--rise); --rest: 0px; }
+.rev-list li:nth-child(even) { --start: calc(var(--rise) / 2); --rest: calc(var(--rise) / 2); }
+.rev { margin-top: var(--rest); overflow: hidden; background: var(--white); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 6px 24px rgba(15, 39, 66, .08); }
+.rev-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 40%; background: var(--pale); }
+.rev-body { display: grid; gap: 10px; padding: 18px 20px 20px; }
+.rev-top { display: flex; align-items: center; justify-content: space-between; }
+.rev-stars { width: 110px; height: 22px; fill: #fbbc04; }
+.rev-g { width: 24px; height: 24px; }
+.rev h3, .rev p:not(.rev-name) { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+.rev h3 { margin: 4px 0 0; font-family: var(--display); font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); -webkit-line-clamp: 2; line-clamp: 2; }
+.rev p { margin: 0; font-size: 15.5px; line-height: 1.45; color: var(--muted); -webkit-line-clamp: 3; line-clamp: 3; }
+.rev .rev-name { margin-top: 6px; font-size: 14.5px; font-weight: 600; }
+.rev-foot { margin: 0 auto; padding-top: 32px; text-align: center; font-size: 16px; color: var(--ink); }
+/* The rise itself; js/home.js adds these classes (not when reduced motion is on) */
+.reviews.will-rise .rev { opacity: 0; transform: translateY(var(--start)); transition: transform 1.1s cubic-bezier(.2, .7, .2, 1), opacity .5s ease; }
+.reviews.will-rise li.is-up .rev { opacity: 1; transform: none; }
+.reviews.will-rise li:nth-child(2) .rev { transition-delay: .12s; }
+.reviews.will-rise li:nth-child(3) .rev { transition-delay: .24s; }
+.reviews.will-rise li:nth-child(4) .rev { transition-delay: .36s; }
+/* The rating line waits until the cards have passed it */
+.reviews.will-rise .rev-foot { opacity: 0; transition: opacity .6s ease 1.1s; }
+.reviews.will-rise.is-up .rev-foot { opacity: 1; }
+
 /* ---------- Responsive ---------- */
 /* Tablets: no room for the photo beside the card, so the card sits over
    the left side of a full-width photo. */
@@ -232,6 +263,9 @@ svg { flex: none; }
   .photo-img { height: clamp(520px, calc(100vh - 200px), 600px); height: clamp(520px, calc(100svh - 200px), 600px); }
   .photo-img.job-1 { object-position: 65% 40%; }
   .card { padding: 28px; }
+  /* Two columns: 1 and 3 on the left, 2 and 4 lower on the right */
+  .reviews { --rise: 200px; }
+  .rev-list { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* Phones: stack them, with the card overlapping the bottom of the photo. */
@@ -259,6 +293,12 @@ svg { flex: none; }
   .why h2 { padding-bottom: 32px; }
   .services { padding-bottom: 32px; }
   .svc-list { gap: 10px; }
+  /* One column: no stagger, and each card rises as it comes into view */
+  .reviews { --rise: 120px; padding-bottom: 48px; }
+  .reviews h2 { padding-top: 16px; padding-bottom: 28px; }
+  .rev-list { grid-template-columns: 1fr; gap: 16px; }
+  .rev-list li:nth-child(even) { --start: var(--rise); --rest: 0px; }
+  .reviews.will-rise li .rev { transition-delay: 0s; }
   .svc-list li { border-radius: 14px; }
   .svc { padding: 32px 10px 28px; gap: 14px; font-size: 16px; }
   .svc-hint { font-size: 13px; }
