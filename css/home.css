@@ -235,14 +235,11 @@ svg { flex: none; }
 .rev-list li:nth-child(even) { --start: calc(var(--rise) / 2); --rest: calc(var(--rise) / 2); }
 .rev { margin-top: var(--rest); overflow: hidden; background: var(--white); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 6px 24px rgba(15, 39, 66, .08); }
 .rev-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 40%; background: var(--pale); }
-.rev-body { display: grid; gap: 10px; padding: 18px 20px 20px; }
-.rev-top { display: flex; align-items: center; justify-content: space-between; }
+.rev-body { display: grid; gap: 14px; padding: 20px 22px 22px; }
 .rev-stars { width: 110px; height: 22px; fill: #fbbc04; }
-.rev-g { width: 24px; height: 24px; }
-.rev h3, .rev p:not(.rev-name) { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
-.rev h3 { margin: 4px 0 0; font-family: var(--display); font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink); -webkit-line-clamp: 2; line-clamp: 2; }
-.rev p { margin: 0; font-size: 15.5px; line-height: 1.45; color: var(--muted); -webkit-line-clamp: 3; line-clamp: 3; }
-.rev .rev-name { margin-top: 6px; font-size: 14.5px; font-weight: 600; }
+.rev-quote { display: grid; gap: 10px; margin: 0; }
+.rev-quote p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink); }
+.rev-name { margin: 2px 0 0; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .rev-foot { margin: 0 auto; padding-top: 32px; text-align: center; font-size: 16px; color: var(--ink); }
 /* The rise itself; js/home.js adds these classes (not when reduced motion is on) */
 .reviews.will-rise .rev { opacity: 0; transform: translateY(var(--start)); transition: transform 2.2s cubic-bezier(.2, .7, .2, 1), opacity 1s ease; }
