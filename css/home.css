@@ -245,13 +245,13 @@ svg { flex: none; }
 .rev .rev-name { margin-top: 6px; font-size: 14.5px; font-weight: 600; }
 .rev-foot { margin: 0 auto; padding-top: 32px; text-align: center; font-size: 16px; color: var(--ink); }
 /* The rise itself; js/home.js adds these classes (not when reduced motion is on) */
-.reviews.will-rise .rev { opacity: 0; transform: translateY(var(--start)); transition: transform 1.1s cubic-bezier(.2, .7, .2, 1), opacity .5s ease; }
+.reviews.will-rise .rev { opacity: 0; transform: translateY(var(--start)); transition: transform 2.2s cubic-bezier(.2, .7, .2, 1), opacity 1s ease; }
 .reviews.will-rise li.is-up .rev { opacity: 1; transform: none; }
-.reviews.will-rise li:nth-child(2) .rev { transition-delay: .12s; }
-.reviews.will-rise li:nth-child(3) .rev { transition-delay: .24s; }
-.reviews.will-rise li:nth-child(4) .rev { transition-delay: .36s; }
+.reviews.will-rise li:nth-child(2) .rev { transition-delay: .24s; }
+.reviews.will-rise li:nth-child(3) .rev { transition-delay: .48s; }
+.reviews.will-rise li:nth-child(4) .rev { transition-delay: .72s; }
 /* The rating line waits until the cards have passed it */
-.reviews.will-rise .rev-foot { opacity: 0; transition: opacity .6s ease 1.1s; }
+.reviews.will-rise .rev-foot { opacity: 0; transition: opacity .6s ease 2.2s; }
 .reviews.will-rise.is-up .rev-foot { opacity: 1; }
 
 /* ---------- Responsive ---------- */
