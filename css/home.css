@@ -82,13 +82,17 @@ svg { flex: none; }
 .first {
   --overlap: clamp(90px, 8vw, 130px);
   /* Base photo height: 16:9.2 of its width, kept between 500px and 600px
-     unless the screen is tall enough for more, and shorter on short screens
-     so the heading below still shows without scrolling. */
+     unless the screen is tall enough for more. On short laptop screens the
+     floor drops below 500px so the whole "Why Insulate" heading still shows
+     without scrolling, with a little space under it. */
   --ph-ratio: calc((min(100vw, 1640px) - 2 * clamp(16px, 5vw, 80px) - var(--card-w) + var(--overlap)) * .575);
-  --ph-min: clamp(500px, calc((100vh - 170px) / 1.1), 600px);
-  --ph-max: max(500px, calc((100vh - 170px) / 1.1));
+  --ph-floor: clamp(380px, calc((100vh - 153px) / 1.1), 500px);
+  --ph-min: clamp(var(--ph-floor), calc((100vh - 170px) / 1.1), 600px);
+  --ph-max: max(var(--ph-floor), calc((100vh - 170px) / 1.1));
   --ph: max(var(--ph-min), min(var(--ph-ratio), var(--ph-max)));
-  position: relative; padding-bottom: 56px;
+  /* Gap between the photo and the heading below it */
+  --below: 24px;
+  position: relative; padding-bottom: var(--below);
   /* The header is 80px tall and the logo ends 59px down, so the photo
      starts 10px below the logo */
   margin-top: -11px;
@@ -125,7 +129,7 @@ svg { flex: none; }
 .photo-dot[aria-current="true"] { width: 30px; }
 
 .card {
-  position: absolute; z-index: 5; top: calc((100% - 56px) / 2);
+  position: absolute; z-index: 5; top: calc((100% - var(--below)) / 2);
   /* Centred on the photo and shrunk to 0.765 (10% then 15% smaller). It shrinks
      towards its right edge, so it overlaps the photo by the same amount. */
   transform: translate(-15%, -50%) scale(.765); transform-origin: 100% 50%;
