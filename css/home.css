@@ -233,7 +233,7 @@ svg { flex: none; }
 .rev-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; align-items: start; }
 .rev-list li { --start: var(--rise); --rest: 0px; }
 .rev-list li:nth-child(even) { --start: calc(var(--rise) / 2); --rest: calc(var(--rise) / 2); }
-.rev { margin-top: var(--rest); overflow: hidden; background: var(--white); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 6px 24px rgba(15, 39, 66, .08); }
+.rev { margin-top: var(--rest); overflow: hidden; background: var(--white); border: 1px solid #ccd7e6; /* --line, 50% stronger */ border-radius: 16px; box-shadow: 0 6px 24px rgba(15, 39, 66, .08); }
 .rev-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 40%; background: var(--pale); }
 .rev-body { display: grid; gap: 14px; padding: 20px 22px 22px; }
 .rev-stars { width: 110px; height: 22px; fill: #fbbc04; }
