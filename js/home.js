@@ -17,8 +17,26 @@
   }
   function ready(img) { return !img.dataset.src && img.complete && img.naturalWidth > 0; }
 
+  // The card's tiles show the figures for the house in the photo (data-ber etc. on each photo)
+  const heroTiles = document.querySelector('.hero-tiles');
+  const heroVals = [...heroTiles.querySelectorAll('.ht-val')];
+  let swapTimer = null;
+  function showFigures(img) {
+    const fill = () => heroVals.forEach((el) => {
+      const v = img.dataset[el.dataset.key] || '';
+      el.textContent = v;
+      el.hidden = !v;
+    });
+    clearTimeout(swapTimer);
+    // Fade the old figures out first, unless there are none showing
+    if (heroVals.every((el) => el.hidden)) { fill(); return; }
+    heroTiles.classList.add('is-swapping');
+    swapTimer = setTimeout(() => { fill(); heroTiles.classList.remove('is-swapping'); }, 300);
+  }
+
   function show(i) {
     current = (i + slides.length) % slides.length;
+    showFigures(slides[current]);
     load(slides[current]);
     slides.forEach((s, n) => s.classList.toggle('is-on', n === current));
     dots.forEach((d, n) => d.setAttribute('aria-current', String(n === current)));
@@ -47,6 +65,7 @@
     show(n);
     if (!paused()) play();
   }));
+  showFigures(slides[0]);
   play();
 
   /* ---------------- Benefit tiles open their details; "Get a free quote" jumps to the form ---------------- */
