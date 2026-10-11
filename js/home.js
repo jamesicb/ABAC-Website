@@ -1,8 +1,6 @@
 (() => {
   'use strict';
 
-  const card = document.getElementById('enquire');
-
   /* ---------------- Job photos: show the next one every 3 seconds ---------------- */
   const slides = [...document.querySelectorAll('.photo-img')];
   const dots = [...document.querySelectorAll('.photo-dot')];
@@ -52,9 +50,11 @@
   play();
 
   /* ---------------- Benefit tiles open their details; "Get a free quote" jumps to the form ---------------- */
-  const nameInput = document.getElementById('q-name');
+  // The quote form sits beside the FAQs (id "enquire")
+  const quoteBox = document.getElementById('enquire');
+  const nameInput = document.getElementById('q2-name');
   function goToForm() {
-    card.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    quoteBox.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
     nameInput.focus({ preventScroll: true });
   }
   document.querySelectorAll('.svc[aria-controls]').forEach((tile) => {
@@ -164,7 +164,7 @@
     }
   });
 
-  // Each quote form on the page (top card and the one beside the FAQs) works the same way
+  // Every quote form on the page works the same way (there's one now, beside the FAQs)
   function setupQuoteForm(form) {
     const kind = form.dataset.kind;
     const errs = form.querySelector('.errs');

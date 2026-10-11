@@ -58,7 +58,7 @@
 </header>
 
 <main id="main">
-  <section class="first wrap" aria-labelledby="quote-title">
+  <section class="first wrap" aria-labelledby="hero-title">
     <div class="photo" role="group" aria-label="Finished jobs">
       <img class="photo-img job-1 is-on" src="assets/images/finished-house-1800.webp" srcset="assets/images/finished-house-1000.webp 1000w, assets/images/finished-house-1800.webp 1800w" sizes="(min-width: 1024px) 75vw, 100vw" width="1800" height="1147" alt="A Dublin semi-detached house after external wall insulation, with a smooth light render upstairs and a red brick-effect finish downstairs.">
       <img class="photo-img job-5" data-src="assets/images/job-5-1800.webp" data-srcset="assets/images/job-5-1000.webp 1000w, assets/images/job-5-1400.webp 1400w, assets/images/job-5-1800.webp 1800w" sizes="(min-width: 1024px) 75vw, 100vw" width="1800" height="1350" fetchpriority="low" decoding="async" alt="A finished detached house with a red brick front and a white rendered porch.">
@@ -82,38 +82,14 @@
       </div>
     </div>
 
-    <div class="card" id="enquire">
-      <h1 id="quote-title">Enquire for a free quote today</h1>
-      <p class="card-sub">+400 Completed Projects</p>
-      <form class="lead-form" id="quote-form" novalidate data-kind="Free quote request">
-        <div class="box">
-          <div class="cell field">
-            <label for="q-name">Name</label>
-            <input id="q-name" name="name" autocomplete="name" required placeholder="Your full name">
-          </div>
-        </div>
-        <div class="box box-split">
-          <div class="cell field">
-            <label for="q-phone">Phone number</label>
-            <input id="q-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="Your number">
-          </div>
-          <div class="cell field">
-            <label for="q-email">Email</label>
-            <input id="q-email" name="email" type="email" autocomplete="email" placeholder="Your email">
-          </div>
-        </div>
-        <div class="box">
-          <div class="cell field">
-            <label for="q-address">Address</label>
-            <input id="q-address" name="address" autocomplete="street-address" required placeholder="House, street and area">
-          </div>
-        </div>
-        <ul class="errs" id="q-errs" hidden></ul>
-        <input type="hidden" name="service" id="q-service" value="">
-        <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
-        <button class="cta" type="submit">Enquire for free quote</button>
-        <p class="form-foot">We only use your details to reply about your quote. <a href="privacy.html">Privacy notice</a></p>
-      </form>
+    <div class="card">
+      <h1 id="hero-title">This home benefits from insulation</h1>
+      <ul class="hero-tiles">
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><path class="f f-ber-a" d="M7 7h16l5 5-5 5H7z"/><path class="f f-ber-c" d="M7 19h22l5 5-5 5H7z"/><path class="f f-ber-e" d="M7 31h28l5 5-5 5H7z"/></svg><span>BER Rating</span></li>
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><path class="f f-bolt" d="M27 4 11 27h12l-3 17 17-24H25z"/></svg><span>Energy Savings</span></li>
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><path class="f f-value" d="M9 22 24 9l15 13v20H9z"/><path d="M4 25 24 7l20 18M9 22v20h30V22"/><path class="on-fill" d="M24 37V23M18 29l6-6 6 6"/></svg><span>Property Value Increase</span></li>
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><path class="f f-leaf" d="M41 7C21 7 8 17 8 31c0 4 1 7 3 10 15 0 30-10 30-34z"/><path d="M8 44 30 20"/></svg><span>CO<sub>2</sub> Reduction</span></li>
+      </ul>
     </div>
   </section>
 
@@ -245,7 +221,7 @@
       </div>
     </div>
 
-    <div class="quote2">
+    <div class="quote2" id="enquire">
       <h2 id="quote2-title">Enquire for a free quote today</h2>
       <p class="card-sub">+400 Completed Projects</p>
       <form class="lead-form" id="quote-form-2" novalidate data-kind="Free quote request">
