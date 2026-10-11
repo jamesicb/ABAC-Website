@@ -257,7 +257,7 @@ svg { flex: none; }
 /* Two panels side by side, stretched to the same height */
 /* Sits above the testimonial cards so a card still rising slides up behind it */
 .faq-quote { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: stretch; padding-bottom: 72px; }
-.faq { display: flex; flex-direction: column; padding: 36px 40px 16px; background: var(--pale); border: 1px solid #ccd7e6; /* --line, 50% stronger, same as the form beside it */ border-radius: 24px; }
+.faq { display: flex; flex-direction: column; padding: 36px 40px 16px; background: var(--pale); border: 1px solid #b3c3da; /* --line, made 50% stronger twice; same as the form beside it */ border-radius: 24px; }
 /* js/home.js measures an invisible copy with each answer open to find the
    height that fits the longest one */
 .faq.faq-measure { position: absolute; top: 0; left: 0; visibility: hidden; pointer-events: none; }
@@ -286,7 +286,7 @@ svg { flex: none; }
   .faq-item[open]::details-content { block-size: auto; }
 }
 .faq-item a { color: var(--navy-2); }
-.quote2 { display: flex; flex-direction: column; justify-content: center; padding: 36px 40px; background: var(--white); border: 1px solid #ccd7e6; border-radius: 24px; box-shadow: 0 10px 40px rgba(15, 39, 66, .16); }
+.quote2 { display: flex; flex-direction: column; justify-content: center; padding: 36px 40px; background: var(--white); border: 1px solid #b3c3da; border-radius: 24px; box-shadow: 0 10px 40px rgba(15, 39, 66, .16); }
 
 /* ---------- Responsive ---------- */
 /* Tablets: no room for the photo beside the card, so the card sits over
