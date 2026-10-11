@@ -86,6 +86,45 @@
     reviews.querySelectorAll('.rev-list > li').forEach((li) => rise.observe(li));
   }
 
+  /* ---------------- FAQs: leave room for the longest answer ---------------- */
+  // Beside the form, the FAQs panel is kept tall enough for its longest answer,
+  // so opening one doesn't make either panel grow. Stacked (tablets, phones) it grows as normal.
+  const faq = document.querySelector('.faq');
+  const sideBySide = matchMedia('(min-width: 1024px)');
+  function fitFaq() {
+    faq.style.minHeight = '';
+    if (!sideBySide.matches) return;
+    // An invisible copy at the same width, opened one answer at a time
+    const copy = faq.cloneNode(true);
+    copy.classList.add('faq-measure');
+    copy.setAttribute('aria-hidden', 'true');
+    copy.inert = true;
+    copy.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'));
+    const items = [...copy.querySelectorAll('details')];
+    items.forEach((d) => d.removeAttribute('name'));
+    copy.style.width = `${faq.getBoundingClientRect().width}px`;
+    faq.after(copy);
+    let tallest = 0;
+    items.forEach((d) => {
+      items.forEach((o) => { o.open = o === d; });
+      tallest = Math.max(tallest, copy.getBoundingClientRect().height);
+    });
+    copy.remove();
+    faq.style.minHeight = `${Math.ceil(tallest)}px`;
+  }
+  if (faq) {
+    let queued = false;
+    const refit = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; fitFaq(); });
+    };
+    fitFaq();
+    // Text wrapping changes once the web fonts arrive and when the window is resized
+    if (document.fonts) document.fonts.ready.then(refit);
+    addEventListener('resize', refit);
+  }
+
   /* ---------------- Quote form (FormSubmit) ---------------- */
   const QUOTE_EMAIL = 'fiona.abac@gmail.com';
   const FORM_ENDPOINT = `https://formsubmit.co/ajax/${QUOTE_EMAIL}`;
