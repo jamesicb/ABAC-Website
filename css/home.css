@@ -246,26 +246,40 @@ svg { flex: none; }
 .rev-quote { display: grid; gap: 10px; margin: 0; }
 .rev-quote p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink); }
 .rev-name { margin: 2px 0 0; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.rev-foot { margin: 0 auto; padding-top: 32px; text-align: center; font-size: 16px; color: var(--ink); }
 /* The rise itself; js/home.js adds these classes (not when reduced motion is on) */
 .reviews.will-rise .rev { opacity: 0; transform: translateY(var(--start)); transition: transform 2.2s cubic-bezier(.2, .7, .2, 1), opacity 1s ease; }
 .reviews.will-rise li.is-up .rev { opacity: 1; transform: none; }
 .reviews.will-rise li:nth-child(2) .rev { transition-delay: .24s; }
 .reviews.will-rise li:nth-child(3) .rev { transition-delay: .48s; }
 .reviews.will-rise li:nth-child(4) .rev { transition-delay: .72s; }
-/* The rating line waits until the cards have passed it */
-.reviews.will-rise .rev-foot { opacity: 0; transition: opacity .6s ease 2.2s; }
-.reviews.will-rise.is-up .rev-foot { opacity: 1; }
 
 /* ---------- FAQs with a second quote form ---------- */
 /* Two panels side by side, stretched to the same height */
 .faq-quote { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: stretch; padding-bottom: 72px; }
-.faq { padding: 36px 40px 32px; background: var(--pale); border: 1px solid var(--line); border-radius: 24px; }
-.faq h2 { margin: 0 0 8px; font-family: var(--display); font-weight: 600; font-size: clamp(26px, 2.1vw, 34px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); }
-.faq-item { padding: 18px 0; border-bottom: 1px solid #ccd7e6; }
-.faq-item:last-child { padding-bottom: 0; border-bottom: 0; }
-.faq-item h3 { margin: 0 0 6px; font-family: var(--display); font-weight: 500; font-size: 18.5px; line-height: 1.35; color: var(--navy); }
-.faq-item p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+.faq { display: flex; flex-direction: column; padding: 36px 40px 16px; background: var(--pale); border: 1px solid var(--line); border-radius: 24px; }
+.faq h2 { margin: 0 0 12px; font-family: var(--display); font-weight: 600; font-size: clamp(26px, 2.1vw, 34px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); }
+/* The rows share out any spare height so the questions fill the panel
+   when it is stretched to match the form beside it */
+.faq-list { flex: 1; display: flex; flex-direction: column; }
+.faq-row { flex: 1 0 auto; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid #ccd7e6; }
+.faq-row:last-child { border-bottom: 0; }
+/* Each question is a drop-down: the arrow turns over and the answer opens below.
+   Opening one closes the others (name="faq" in index.html). */
+.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 0; list-style: none; cursor: pointer; transition: padding .35s ease; }
+.faq-item[open] summary { padding-bottom: 10px; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:focus-visible { outline: 3px solid var(--navy-2); outline-offset: 4px; border-radius: 8px; }
+.faq-item h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 18.5px; line-height: 1.35; color: var(--navy); }
+.faq-arrow { flex: none; width: 36px; height: 36px; padding: 8px; background: var(--white); border: 1px solid #ccd7e6; border-radius: 50%; fill: none; stroke: var(--navy); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s ease, background-color .2s ease; }
+.faq-item summary:hover .faq-arrow { background: #dbe7f5; }
+.faq-item[open] .faq-arrow { transform: rotate(180deg); }
+.faq-item p { margin: 0 56px 0 0; padding-bottom: 24px; font-size: 16px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+/* Slide the answer open where the browser supports it; elsewhere it just appears */
+@media (prefers-reduced-motion: no-preference) {
+  .faq { interpolate-size: allow-keywords; }
+  .faq-item::details-content { block-size: 0; overflow: hidden; transition: block-size .35s ease, content-visibility .35s allow-discrete; }
+  .faq-item[open]::details-content { block-size: auto; }
+}
 .faq-item a { color: var(--navy-2); }
 .quote2 { display: flex; flex-direction: column; justify-content: center; padding: 36px 40px; background: var(--white); border-radius: 24px; box-shadow: 0 10px 40px rgba(15, 39, 66, .16); }
 
@@ -318,6 +332,12 @@ svg { flex: none; }
   .reviews.will-rise li .rev { transition-delay: 0s; }
   .faq-quote { gap: 16px; padding-bottom: 40px; }
   .faq, .quote2 { padding: 26px 20px; border-radius: 18px; }
+  .faq { padding-bottom: 6px; }
+  .faq-item summary { gap: 14px; padding: 18px 0; }
+  .faq-item[open] summary { padding-bottom: 8px; }
+  .faq-item h3 { font-size: 17px; }
+  .faq-item p { margin-right: 0; padding-bottom: 20px; }
+  .faq-arrow { width: 32px; height: 32px; padding: 7px; }
   .svc-list li { border-radius: 14px; }
   .svc { padding: 32px 10px 28px; gap: 14px; font-size: 16px; }
   .svc-hint { font-size: 13px; }
