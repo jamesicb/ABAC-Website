@@ -137,7 +137,7 @@ svg { flex: none; }
   background: var(--white); border-radius: 24px; padding: 32px;
   box-shadow: 0 10px 40px rgba(15, 39, 66, .16);
 }
-.card h1 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 2.3vw, 36px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
+.card h1, .quote2 h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 2.3vw, 36px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
 .card-sub { margin: 10px 0 20px; font-size: 16.5px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
 
 .lead-form { display: grid; gap: 10px; }
@@ -177,6 +177,12 @@ svg { flex: none; }
   .cell input { font-size: 17.5px; }
   .cta { font-size: 19px; }
   .form-foot { font-size: 15px; }
+  /* The quote form beside the FAQs isn't shrunk, so it keeps the normal sizes */
+  .quote2 .card-sub { font-size: 16.5px; }
+  .quote2 .cell label { font-size: 13px; }
+  .quote2 .cell input { font-size: 16px; }
+  .quote2 .cta { font-size: 18px; }
+  .quote2 .form-foot { font-size: 13px; }
 }
 
 /* ---------- Heading under the photo (and over the testimonials) ---------- */
@@ -251,6 +257,18 @@ svg { flex: none; }
 .reviews.will-rise .rev-foot { opacity: 0; transition: opacity .6s ease 2.2s; }
 .reviews.will-rise.is-up .rev-foot { opacity: 1; }
 
+/* ---------- FAQs with a second quote form ---------- */
+/* Two panels side by side, stretched to the same height */
+.faq-quote { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: stretch; padding-bottom: 72px; }
+.faq { padding: 36px 40px 32px; background: var(--pale); border: 1px solid var(--line); border-radius: 24px; }
+.faq h2 { margin: 0 0 8px; font-family: var(--display); font-weight: 600; font-size: clamp(26px, 2.1vw, 34px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); }
+.faq-item { padding: 18px 0; border-bottom: 1px solid #ccd7e6; }
+.faq-item:last-child { padding-bottom: 0; border-bottom: 0; }
+.faq-item h3 { margin: 0 0 6px; font-family: var(--display); font-weight: 500; font-size: 18.5px; line-height: 1.35; color: var(--navy); }
+.faq-item p { margin: 0; font-size: 16px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+.faq-item a { color: var(--navy-2); }
+.quote2 { display: flex; flex-direction: column; justify-content: center; padding: 36px 40px; background: var(--white); border-radius: 24px; box-shadow: 0 10px 40px rgba(15, 39, 66, .16); }
+
 /* ---------- Responsive ---------- */
 /* Tablets: no room for the photo beside the card, so the card sits over
    the left side of a full-width photo. */
@@ -263,6 +281,8 @@ svg { flex: none; }
   /* Two columns: 1 and 3 on the left, 2 and 4 lower on the right */
   .reviews { --rise: 200px; }
   .rev-list { grid-template-columns: repeat(2, 1fr); }
+  /* FAQs above the form */
+  .faq-quote { grid-template-columns: minmax(0, 1fr); gap: 24px; }
 }
 
 /* Phones: stack them, with the card overlapping the bottom of the photo. */
@@ -296,6 +316,8 @@ svg { flex: none; }
   .rev-list { grid-template-columns: 1fr; gap: 16px; }
   .rev-list li:nth-child(even) { --start: var(--rise); --rest: 0px; }
   .reviews.will-rise li .rev { transition-delay: 0s; }
+  .faq-quote { gap: 16px; padding-bottom: 40px; }
+  .faq, .quote2 { padding: 26px 20px; border-radius: 18px; }
   .svc-list li { border-radius: 14px; }
   .svc { padding: 32px 10px 28px; gap: 14px; font-size: 16px; }
   .svc-hint { font-size: 13px; }
