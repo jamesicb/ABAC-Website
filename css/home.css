@@ -10,6 +10,8 @@
   --ink: #15233a;
   --muted: #5a6779;
   --line: #dde4ee;
+  /* Outline on the photo, quote cards, tiles, reviews and FAQs (--line made 50% stronger twice) */
+  --outline: #b3c3da;
   --field: #b7c2d0;
   --pale: #edf3fa;
   --white: #ffffff;
@@ -98,6 +100,8 @@ svg { flex: none; }
   margin-top: -11px;
 }
 .photo { position: relative; margin-left: calc(var(--card-w) - var(--overlap)); }
+/* Drawn over the photos rather than on them, so it stays steady while they fade */
+.photo::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--outline); border-radius: 24px; pointer-events: none; }
 .photo-img {
   width: 100%; height: calc(var(--ph) * 1.1);
   object-fit: cover; object-position: 50% 40%; border-radius: 24px; background: var(--pale);
@@ -135,7 +139,9 @@ svg { flex: none; }
   transform: translate(-15%, -50%) scale(.765); transform-origin: 100% 50%;
   left: calc(clamp(16px, 5vw, 80px) + var(--card-x)); width: var(--card-w);
   background: var(--white); border-radius: 24px; padding: 32px;
-  box-shadow: 0 10px 40px rgba(15, 39, 66, .16);
+  /* The outline is a ring rather than a border: browsers round borders to whole
+     pixels before the scale, which left it fainter than the others */
+  box-shadow: 0 0 0 calc(1px / .765) var(--outline), 0 10px 40px rgba(15, 39, 66, .16);
 }
 .card h1, .quote2 h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 2.3vw, 36px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
 .card-sub { margin: 10px 0 20px; font-size: 16.5px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
@@ -196,7 +202,7 @@ svg { flex: none; }
 /* Four separate tinted tiles on white, two by two */
 .services { padding-bottom: 56px; }
 .svc-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.svc-list li { display: grid; overflow: hidden; background: var(--pale); border: 1px solid var(--line); border-radius: 16px; }
+.svc-list li { display: grid; overflow: hidden; background: var(--pale); border: 1px solid var(--outline); border-radius: 16px; }
 .svc { display: flex; flex-direction: column; align-items: center; gap: 22px; width: 100%; padding: 52px 16px 46px; border: 0; background: none; text-align: center; font-family: inherit; font-size: 18px; font-weight: 500; color: var(--navy); cursor: pointer; transition: background .2s; }
 .svc:focus-visible { outline: 3px solid var(--navy-2); outline-offset: -3px; border-radius: 16px; }
 .svc-label { display: grid; gap: 4px; }
@@ -239,7 +245,7 @@ svg { flex: none; }
 .rev-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; align-items: start; }
 .rev-list li { --start: var(--rise); --rest: 0px; }
 .rev-list li:nth-child(even) { --start: calc(var(--rise) / 2); --rest: calc(var(--rise) / 2); }
-.rev { margin-top: var(--rest); overflow: hidden; background: var(--white); border: 1px solid #ccd7e6; /* --line, 50% stronger */ border-radius: 16px; box-shadow: 0 6px 24px rgba(15, 39, 66, .08); }
+.rev { margin-top: var(--rest); overflow: hidden; background: var(--white); border: 1px solid var(--outline); border-radius: 16px; box-shadow: 0 6px 24px rgba(15, 39, 66, .08); }
 .rev-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 40%; background: var(--pale); }
 .rev-body { display: grid; gap: 14px; padding: 20px 22px 22px; }
 .rev-stars { width: 110px; height: 22px; fill: #fbbc04; }
@@ -257,7 +263,7 @@ svg { flex: none; }
 /* Two panels side by side, stretched to the same height */
 /* Sits above the testimonial cards so a card still rising slides up behind it */
 .faq-quote { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: stretch; padding-bottom: 72px; }
-.faq { display: flex; flex-direction: column; padding: 36px 40px 16px; background: var(--pale); border: 1px solid #b3c3da; /* --line, made 50% stronger twice; same as the form beside it */ border-radius: 24px; }
+.faq { display: flex; flex-direction: column; padding: 36px 40px 16px; background: var(--pale); border: 1px solid var(--outline); border-radius: 24px; }
 /* js/home.js measures an invisible copy with each answer open to find the
    height that fits the longest one */
 .faq.faq-measure { position: absolute; top: 0; left: 0; visibility: hidden; pointer-events: none; }
@@ -286,7 +292,7 @@ svg { flex: none; }
   .faq-item[open]::details-content { block-size: auto; }
 }
 .faq-item a { color: var(--navy-2); }
-.quote2 { display: flex; flex-direction: column; justify-content: center; padding: 36px 40px; background: var(--white); border: 1px solid #b3c3da; border-radius: 24px; box-shadow: 0 10px 40px rgba(15, 39, 66, .16); }
+.quote2 { display: flex; flex-direction: column; justify-content: center; padding: 36px 40px; background: var(--white); border: 1px solid var(--outline); border-radius: 24px; box-shadow: 0 10px 40px rgba(15, 39, 66, .16); }
 
 /* ---------- Responsive ---------- */
 /* Tablets: no room for the photo beside the card, so the card sits over
@@ -307,10 +313,11 @@ svg { flex: none; }
 /* Phones: stack them, with the card overlapping the bottom of the photo. */
 @media (max-width: 699px) {
   .photo-img { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; }
+  .photo::after { border-radius: 22px; }
   .photo-img.job-1 { object-position: 50% 40%; }
   /* The card covers the bottom of the photo here, so the controls go top left */
   .photo-ctl { top: 12px; bottom: auto; left: 12px; right: auto; }
-  .card { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; margin: -56px auto 0; padding: 28px; border-radius: 22px; }
+  .card { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; margin: -56px auto 0; padding: 28px; border-radius: 22px; box-shadow: 0 0 0 1px var(--outline), 0 10px 40px rgba(15, 39, 66, .16); }
   .first { margin-top: 0; }
   .brand { margin-left: 0; }
 }
@@ -323,6 +330,7 @@ svg { flex: none; }
   .brand-text small { font-size: 9px; letter-spacing: .14em; }
   .badges { right: 32px; }
   .photo-img { aspect-ratio: 1 / 1; border-radius: 18px; }
+  .photo::after { border-radius: 18px; }
   .card { margin: -48px 8px 0; padding: 22px 18px; border-radius: 18px; }
   .card-sub { font-size: 16px; margin-bottom: 18px; }
   .first { padding-bottom: 40px; }
