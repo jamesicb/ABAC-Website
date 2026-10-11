@@ -112,7 +112,6 @@
         <input type="hidden" name="service" id="q-service" value="">
         <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
         <button class="cta" type="submit">Enquire for free quote</button>
-        <div class="form-status" role="status" aria-live="polite"></div>
         <p class="form-foot">We only use your details to reply about your quote. <a href="privacy.html">Privacy notice</a></p>
       </form>
     </div>
@@ -275,7 +274,6 @@
         <ul class="errs" hidden></ul>
         <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
         <button class="cta" type="submit">Enquire for free quote</button>
-        <div class="form-status" role="status" aria-live="polite"></div>
         <p class="form-foot">We only use your details to reply about your quote. <a href="privacy.html">Privacy notice</a></p>
       </form>
     </div>
@@ -321,6 +319,27 @@
       <p><strong>The planet will thank you!</strong></p>
       <p>Request your free quote and take the first step towards a warmer, greener home.</p>
       <a class="cta more-cta" href="#enquire">Get a free quote</a>
+    </div>
+  </dialog>
+  <!-- Shown by js/home.js after a quote form is sent, or if it fails to send -->
+  <dialog class="more" id="sent-ok" aria-labelledby="sent-ok-t">
+    <div class="more-in">
+      <form method="dialog"><button class="more-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></form>
+      <svg class="more-icon" viewBox="0 0 48 48" aria-hidden="true"><circle class="f f-ok" cx="24" cy="24" r="19"/><path class="on-fill" d="m15.5 24.5 6 6 11-12"/></svg>
+      <h3 id="sent-ok-t">Thank you for your enquiry</h3>
+      <p>Our secretary will be in touch, in due course, to book an appointment with you.</p>
+      <p>We hope you have an energy efficient day!</p>
+      <form method="dialog" class="more-act"><button class="cta more-cta">Close</button></form>
+    </div>
+  </dialog>
+  <dialog class="more" id="sent-fail" aria-labelledby="sent-fail-t">
+    <div class="more-in">
+      <form method="dialog"><button class="more-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></form>
+      <svg class="more-icon" viewBox="0 0 48 48" aria-hidden="true"><circle class="f f-warn" cx="24" cy="24" r="19"/><path class="on-fill" d="M24 14.5v11.5M24 33v.5"/></svg>
+      <h3 id="sent-fail-t">Your request didn't send</h3>
+      <p>Your details are still in the form. Please try again, call <a href="tel:+353863654911">086 365 4911</a>, or email the details below to <a href="mailto:fiona.abac@gmail.com">fiona.abac@gmail.com</a>.</p>
+      <pre class="sent-details"></pre>
+      <div class="sent-actions"><button type="button" class="copy">Copy details</button><a class="copy" href="mailto:fiona.abac@gmail.com">Open email</a></div>
     </div>
   </dialog>
 </main>

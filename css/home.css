@@ -167,12 +167,6 @@ svg { flex: none; }
 }
 .cta:hover { background: linear-gradient(90deg, var(--navy), var(--navy-2)); }
 .lead-form[aria-busy="true"] .cta { opacity: .7; }
-.form-status:empty { display: none; }
-.form-status { padding: 14px; border-radius: 10px; display: grid; gap: 6px; font-size: 15px; }
-.form-status.ok { background: #e6f4ec; color: #145c3c; }
-.form-status.fail { background: #fff5e5; color: #6b4300; }
-.form-status pre { white-space: pre-wrap; background: var(--white); padding: 10px; border-radius: 6px; margin: 4px 0; font-size: 13px; }
-.form-status .copy { display: inline-flex; align-items: center; border: 0; border-radius: 8px; background: var(--navy-2); color: var(--white); padding: 8px 12px; font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; }
 .form-foot { margin: 0; font-size: 13px; color: var(--muted); }
 
 /* The card is drawn smaller on laptops and tablets, so its smallest text
@@ -234,6 +228,14 @@ svg { flex: none; }
 .more strong { font-weight: 700; color: var(--ink); }
 .more p.more-note { margin-top: -10px; font-size: 13.5px; line-height: 1.45; }
 .more-cta { display: grid; place-items: center; margin-top: 0; text-decoration: none; }
+/* Pop-ups after a quote form is sent (or fails to send) */
+:is(.svc svg, .more-icon) .f-ok { fill: var(--green); stroke: var(--green); }
+:is(.svc svg, .more-icon) .f-warn { fill: #d97706; stroke: #d97706; }
+.more-act { justify-self: stretch; }
+.more a { color: var(--navy-2); }
+.sent-details { justify-self: stretch; margin: 0; padding: 12px 14px; border-radius: 10px; background: var(--pale); text-align: left; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13.5px; line-height: 1.5; }
+.sent-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.more .copy { display: inline-flex; align-items: center; border: 0; border-radius: 10px; background: var(--navy-2); color: var(--white); padding: 10px 16px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; }
 
 /* ---------- Testimonials ---------- */
 /* Cards 1 and 3 sit level under the heading; cards 2 and 4 sit lower by half

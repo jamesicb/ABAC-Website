@@ -128,7 +128,6 @@
   /* ---------------- Quote form (FormSubmit) ---------------- */
   const QUOTE_EMAIL = 'fiona.abac@gmail.com';
   const FORM_ENDPOINT = `https://formsubmit.co/ajax/${QUOTE_EMAIL}`;
-  const PHONE_LINK = '<a href="tel:+353863654911">086 365 4911</a>';
   const LABELS = { name: 'Name', phone: 'Phone', email: 'Email', address: 'Address', service: 'Interested in' };
   const checks = {
     name: (v) => (v.trim().length >= 2 ? '' : 'Enter your name.'),
@@ -139,10 +138,35 @@
 
   const summary = (data) => Object.entries(data).filter(([, v]) => v).map(([k, v]) => `${LABELS[k] || k}: ${v}`).join('\n');
 
+  // The result shows in a pop-up, so the form itself never grows
+  const sentOk = document.getElementById('sent-ok');
+  const sentFail = document.getElementById('sent-fail');
+  const failDetails = sentFail.querySelector('.sent-details');
+  const failMail = sentFail.querySelector('a.copy');
+  const copyBtn = sentFail.querySelector('button.copy');
+  [sentOk, sentFail].forEach((dlg) => dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); }));
+
+  function showFallback(kind, text) {
+    failDetails.textContent = text;
+    failMail.href = `mailto:${QUOTE_EMAIL}?subject=${encodeURIComponent(kind)}&body=${encodeURIComponent(text)}`;
+    copyBtn.textContent = 'Copy details';
+    sentFail.showModal();
+  }
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(`To: ${QUOTE_EMAIL}\n\n${failDetails.textContent}`);
+      copyBtn.textContent = 'Copied';
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(failDetails);
+      const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+      copyBtn.textContent = 'Selected, press copy';
+    }
+  });
+
   // Each quote form on the page (top card and the one beside the FAQs) works the same way
   function setupQuoteForm(form) {
     const kind = form.dataset.kind;
-    const status = form.querySelector('.form-status');
     const errs = form.querySelector('.errs');
     const submit = form.querySelector('[type="submit"]');
     const SUBMIT_LABEL = submit.textContent;
@@ -182,37 +206,6 @@
       if (fn && e.target.closest('.field').classList.contains('has-err')) setFieldError(e.target, fn(e.target.value));
     });
 
-    function showStatus(cls, html) {
-      status.className = `form-status ${cls}`;
-      status.innerHTML = html;
-    }
-
-    function showFallback(text) {
-      const mail = `mailto:${QUOTE_EMAIL}?subject=${encodeURIComponent(kind)}&body=${encodeURIComponent(text)}`;
-      showStatus('fail', `
-        <strong>Your request didn't send. Your details are still in the form.</strong>
-        <span>Please try again, call ${PHONE_LINK}, or email the details below to <a href="mailto:${QUOTE_EMAIL}">${QUOTE_EMAIL}</a>.</span>
-        <pre></pre>
-        <span style="display:flex;flex-wrap:wrap;gap:8px">
-          <button type="button" class="copy">Copy details</button>
-          <a class="copy" href="${mail}">Open email</a>
-        </span>`);
-      const pre = status.querySelector('pre');
-      pre.textContent = text;
-      status.querySelector('button.copy').addEventListener('click', async (e) => {
-        const btn = e.currentTarget;
-        try {
-          await navigator.clipboard.writeText(`To: ${QUOTE_EMAIL}\n\n${text}`);
-          btn.textContent = 'Copied';
-        } catch {
-          const range = document.createRange();
-          range.selectNodeContents(pre);
-          const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
-          btn.textContent = 'Selected, press copy';
-        }
-      });
-    }
-
     let sending = false;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -226,7 +219,6 @@
       form.setAttribute('aria-busy', 'true');
       submit.disabled = true;
       submit.textContent = 'Sending…';
-      showStatus('', '');
       const abort = new AbortController();
       const timer = setTimeout(() => abort.abort(), 20000);
       try {
@@ -246,10 +238,9 @@
         // Only call it sent when FormSubmit says it accepted the request.
         if (!res.ok || String(body.success) !== 'true') throw new Error(body.message || `HTTP ${res.status}`);
         form.reset();
-        const first = data.name.trim().split(/\s+/)[0].replace(/[<>&"']/g, '');
-        showStatus('ok', `<strong>Thanks, ${first}. Your quote request has been sent.</strong><span>We'll be in touch on the number you gave us. If it's urgent, call ${PHONE_LINK}.</span>`);
+        sentOk.showModal();
       } catch {
-        showFallback(text);
+        showFallback(kind, text);
       } finally {
         clearTimeout(timer);
         sending = false;

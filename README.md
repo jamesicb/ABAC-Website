@@ -14,4 +14,4 @@ Run locally with any static server, for example `python3 -m http.server 8080`, t
 
 ## Quote form
 
-Both quote forms (the top card and the one beside the FAQs) work the same way and post to FormSubmit (`https://formsubmit.co/ajax/fiona.abac@gmail.com`). The first time it is used, FormSubmit emails fiona.abac@gmail.com an activation link; requests arrive once that link is clicked. If sending fails, the visitor is shown the phone number and a copy of their details to email instead.
+Both quote forms (the top card and the one beside the FAQs) work the same way and post to FormSubmit (`https://formsubmit.co/ajax/fiona.abac@gmail.com`). The first time it is used, FormSubmit emails fiona.abac@gmail.com an activation link; requests arrive once that link is clicked. The result shows in a pop-up so the form never grows: after a successful send, a thank-you message (James's wording); if sending fails, the phone number and a copy of their details to email instead.
