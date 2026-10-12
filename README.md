@@ -21,10 +21,8 @@ Both quote forms (the top card and the one beside the FAQs) work the same way. E
 
 If both fail, a pop-up shows the phone number and a copy of their details to email instead.
 
-### Setting up Supabase
+### Supabase setup
 
-1. Create a Supabase project (pick the EU region, Ireland, since the customers are Irish).
-2. In SQL Editor, paste and run `supabase/quote_enquiries.sql`. It creates the table and lets the website add enquiries but not read, change or delete them.
-3. In Project Settings > API, copy the Project URL and the anon public key (or the publishable key) into `SUPABASE_URL` and `SUPABASE_ANON_KEY` at the top of the "Quote form" section of `js/home.js`. These are safe to have in the page. Never put the `service_role` or secret key in the site.
+The site uses the Supabase project `tfnjbqnagdfrexoegbdi` (EU, Frankfurt). The table was created from `supabase/quote_enquiries.sql`, which lets the website add enquiries but not read, change or delete them; run it in SQL Editor to recreate the table in another project.
 
-Until those two values are filled in, the form sends by email only.
+`SUPABASE_URL` and `SUPABASE_ANON_KEY` at the top of the "Quote form" section of `js/home.js` hold the project URL and its default publishable key. These are safe to have in the page. Never put the `service_role` or secret key in the site. Blank them to send by email only.

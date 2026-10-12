@@ -188,8 +188,8 @@
   // Each enquiry is saved to the quote_enquiries table in Supabase (see supabase/quote_enquiries.sql)
   // and emailed through FormSubmit. Only the public anon / publishable key belongs here, never the
   // service_role or secret key. Leave these blank to send by email only.
-  const SUPABASE_URL = '';
-  const SUPABASE_ANON_KEY = '';
+  const SUPABASE_URL = 'https://tfnjbqnagdfrexoegbdi.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_YAYhL3jvYUOkC0zZqc7CRw_-E-zueFx';
   const QUOTE_EMAIL = 'fiona.abac@gmail.com';
   const FORM_ENDPOINT = `https://formsubmit.co/ajax/${QUOTE_EMAIL}`;
 
