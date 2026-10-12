@@ -14,4 +14,17 @@ Run locally with any static server, for example `python3 -m http.server 8080`, t
 
 ## Quote form
 
-Both quote forms (the top card and the one beside the FAQs) work the same way and post to FormSubmit (`https://formsubmit.co/ajax/fiona.abac@gmail.com`). The first time it is used, FormSubmit emails fiona.abac@gmail.com an activation link; requests arrive once that link is clicked. The result shows in a pop-up so the form never grows: after a successful send, a thank-you message (James's wording); if sending fails, the phone number and a copy of their details to email instead.
+Both quote forms (the top card and the one beside the FAQs) work the same way. Each enquiry is sent two ways at once, and the visitor sees the thank-you pop-up (James's wording) if either one gets through:
+
+- **Supabase.** Saved as a row in the `quote_enquiries` table (name, phone, email, address, which form, the time it came in, and a `contacted` tick box for the team). Read them in the Supabase dashboard under Table Editor > `quote_enquiries`.
+- **Email.** Posted to FormSubmit (`https://formsubmit.co/ajax/fiona.abac@gmail.com`). The first time it is used, FormSubmit emails fiona.abac@gmail.com an activation link; emails arrive once that link is clicked.
+
+If both fail, a pop-up shows the phone number and a copy of their details to email instead.
+
+### Setting up Supabase
+
+1. Create a Supabase project (pick the EU region, Ireland, since the customers are Irish).
+2. In SQL Editor, paste and run `supabase/quote_enquiries.sql`. It creates the table and lets the website add enquiries but not read, change or delete them.
+3. In Project Settings > API, copy the Project URL and the anon public key (or the publishable key) into `SUPABASE_URL` and `SUPABASE_ANON_KEY` at the top of the "Quote form" section of `js/home.js`. These are safe to have in the page. Never put the `service_role` or secret key in the site.
+
+Until those two values are filled in, the form sends by email only.
