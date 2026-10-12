@@ -87,6 +87,11 @@
       goToForm();
     });
   });
+  // The button under the top card's tiles
+  document.querySelector('.hero-cta').addEventListener('click', (e) => {
+    e.preventDefault();
+    goToForm();
+  });
   if (location.hash === '#enquire') nameInput.focus({ preventScroll: true });
 
   /* ---------------- Testimonial cards rise into place when scrolled to ---------------- */
