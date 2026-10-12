@@ -207,6 +207,7 @@ svg { flex: none; }
 :is(.svc svg, .more-icon, .hero-tiles svg) .f-ber-a { fill: #2e9e4f; }
 :is(.svc svg, .more-icon, .hero-tiles svg) .f-ber-c { fill: #f2c200; }
 :is(.svc svg, .more-icon, .hero-tiles svg) .f-ber-e { fill: #ef7d2d; }
+:is(.svc svg, .more-icon, .hero-tiles svg) .s-euro { stroke: var(--green); stroke-width: 4.5; }
 /* The arrow and smile sit on the darker fills, so they're drawn in white */
 :is(.svc svg, .more-icon, .hero-tiles svg) .on-fill { stroke: var(--white); }
 .hero-tiles svg { flex: none; width: 36px; height: 36px; }
