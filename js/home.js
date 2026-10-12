@@ -19,7 +19,7 @@
 
   // The card's tiles show the figures for the house in the photo (data-ber etc. on each photo)
   const heroTiles = document.querySelector('.hero-tiles');
-  const heroVals = [...heroTiles.querySelectorAll('.ht-val')];
+  const heroVals = [...heroTiles.querySelectorAll('.ht-val, .ht-note')];
   let swapTimer = null;
   function showFigures(img) {
     const fill = () => heroVals.forEach((el) => {
