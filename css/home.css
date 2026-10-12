@@ -133,22 +133,45 @@ svg { flex: none; }
 .photo-dot[aria-current="true"]::before { width: 18px; background: var(--white); }
 .photo-dot[aria-current="true"] { width: 30px; }
 
-.card {
-  position: absolute; z-index: 5; top: calc((100% - var(--below)) / 2);
-  /* Centred on the photo and shrunk to 0.765 (10% then 15% smaller). It shrinks
-     towards its right edge, so it overlaps the photo by the same amount. */
-  /* Then raised by 10% of the photo's height, but never to within 16px of
-     the photo's top edge, so on short screens it rises only as far as there
-     is room (38.25% is half the card's shrunk height) */
-  --lift: clamp(0px, calc(var(--photo-h) * .5 - 38.25% - 16px), calc(var(--photo-h) * .1));
-  transform: translate(-15%, -50%) translateY(calc(-1 * var(--lift))) scale(.765); transform-origin: 100% 50%;
+/* The two cards over the photo: "This home benefits from insulation" and,
+   under it, the ECOMAP card. Both are shrunk to 0.765 (10% then 15% smaller)
+   towards their right edge, so they overlap the photo by the same amount.
+   Together they reach from 16px below the photo's top to 16px above its
+   bottom; on screens too short for both, the ECOMAP card hangs below it. */
+.hero-cards {
+  /* A quarter of the top card's height, which grows as the card narrows */
+  --eco-h: calc(146px + (520px - var(--card-w)) * .2);
+  --eco-gap: calc(16px / .765);
+  position: absolute; z-index: 5; top: 16px;
   left: calc(clamp(16px, 5vw, 80px) + var(--card-x)); width: var(--card-w);
-  background: var(--white); border-radius: 24px; padding: 32px;
+  min-height: calc((var(--photo-h) - 32px) / .765);
+  display: flex; flex-direction: column; gap: var(--eco-gap);
+  transform: translateX(-15%) scale(.765); transform-origin: 100% 0;
   /* Outlines here are rings rather than borders: browsers round borders to whole
      pixels before the scale, which left them fainter than the others */
   --ring: calc(1px / .765);
-  box-shadow: 0 0 0 var(--ring) var(--outline), 0 10px 40px rgba(15, 39, 66, .16);
 }
+.card, .eco-card { background: var(--white); border-radius: 24px; box-shadow: 0 0 0 var(--ring) var(--outline), 0 10px 40px rgba(15, 39, 66, .16); }
+.card {
+  padding: 32px;
+  /* Its middle sits 10% of the photo's height above the photo's middle where
+     there's room; otherwise as near that as it can without going within 16px
+     of the photo's top or crowding the ECOMAP card. If it's taller than the
+     photo less those 16px gaps, it's centred on the photo instead. */
+  transform: translateY(clamp(min(0px, calc(((var(--photo-h) - 32px) / .765 - 100%) / 2)), calc((var(--photo-h) * .4 - 16px) / .765 - 50%), calc((var(--photo-h) - 32px) / .765 - 100% - var(--eco-gap) - var(--eco-h))));
+}
+.eco-card {
+  position: relative; flex: none; margin-top: auto; height: var(--eco-h);
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px;
+  padding: 16px 32px;
+}
+.eco-card h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); }
+.eco-card p { margin: 0; font-size: 16.5px; line-height: 1.35; color: var(--muted); text-wrap: balance; }
+.eco-card a { display: inline-flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 16.5px; font-weight: 600; color: var(--navy-2); text-underline-offset: 3px; }
+.eco-card a svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+/* The whole card opens the map */
+.eco-card a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.eco-card:hover a { color: var(--navy); }
 .card h1, .quote2 h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 2.3vw, 36px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
 .card-sub { margin: 10px 0 20px; font-size: 16.5px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
 
@@ -322,6 +345,7 @@ svg { flex: none; }
   .first { --photo-h: clamp(520px, calc(100vh - 200px), 600px); --photo-h: clamp(520px, calc(100svh - 200px), 600px); }
   .photo-img.job-1 { object-position: 65% 40%; }
   .card { padding: 28px; }
+  .eco-card { padding: 16px 28px; }
   /* Two columns: 1 and 3 on the left, 2 and 4 lower on the right */
   .reviews { --rise: 200px; }
   .rev-list { grid-template-columns: repeat(2, 1fr); }
@@ -336,7 +360,11 @@ svg { flex: none; }
   .photo-img.job-1 { object-position: 50% 40%; }
   /* The card covers the bottom of the photo here, so the controls go top left */
   .photo-ctl { top: 12px; bottom: auto; left: 12px; right: auto; }
-  .card { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; margin: -56px auto 0; padding: 28px; border-radius: 22px; --ring: 1px; }
+  .hero-cards { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; min-height: 0; margin: -56px auto 0; gap: 12px; --ring: 1px; }
+  .card { transform: none; padding: 28px; border-radius: 22px; }
+  .eco-card { height: auto; margin-top: 0; padding: 18px 28px; border-radius: 22px; }
+  .eco-card h2 { font-size: 20px; }
+  .eco-card :is(p, a) { font-size: 15.5px; }
   .hero-tiles { grid-auto-rows: auto minmax(76px, auto); }
   .ht-head { padding: 14px 10px 12px; font-size: 16px; }
   .hero-tiles svg { width: 30px; height: 30px; }
@@ -357,7 +385,9 @@ svg { flex: none; }
   .badges { right: 32px; }
   .photo-img { aspect-ratio: 1 / 1; border-radius: 18px; }
   .photo::after { border-radius: 18px; }
-  .card { margin: -48px 8px 0; padding: 22px 18px; border-radius: 18px; }
+  .hero-cards { margin: -48px 8px 0; }
+  .card { padding: 22px 18px; border-radius: 18px; }
+  .eco-card { padding: 16px 18px; border-radius: 18px; }
   .card-sub { font-size: 16px; margin-bottom: 18px; }
   .first { padding-bottom: 40px; }
   .why h2 { padding-bottom: 32px; }

@@ -149,6 +149,41 @@
     addEventListener('resize', refit);
   }
 
+  /* ---------------- ECOMAP card: keep the section below clear of it ---------------- */
+  // On screens too short for both cards over the photo, the ECOMAP card hangs
+  // below it. The heading and tiles under the photo move down just enough to
+  // clear it (the heading only when it's beside the card, not off to its right).
+  const heroCards = document.querySelector('.hero-cards');
+  const ecoCard = document.querySelector('.eco-card');
+  const whyTitle = document.getElementById('why-title');
+  const svcList = document.querySelector('.svc-list');
+  function clearEco() {
+    whyTitle.style.marginTop = '';
+    svcList.style.marginTop = '';
+    if (getComputedStyle(heroCards).position !== 'absolute') return;
+    const gap = 24;
+    const eco = ecoCard.getBoundingClientRect();
+    const text = document.createRange();
+    text.selectNodeContents(whyTitle);
+    const t = text.getBoundingClientRect();
+    if (t.left < eco.right + gap && t.right > eco.left - gap && t.top < eco.bottom + gap) {
+      whyTitle.style.marginTop = `${Math.ceil(eco.bottom + gap - t.top)}px`;
+    }
+    const tiles = svcList.getBoundingClientRect();
+    if (tiles.top < eco.bottom + gap) svcList.style.marginTop = `${Math.ceil(eco.bottom + gap - tiles.top)}px`;
+  }
+  if (heroCards && ecoCard && whyTitle && svcList) {
+    let queued = false;
+    const refit = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; clearEco(); });
+    };
+    clearEco();
+    if (document.fonts) document.fonts.ready.then(refit);
+    addEventListener('resize', refit);
+  }
+
   /* ---------------- Quote form (FormSubmit) ---------------- */
   const QUOTE_EMAIL = 'fiona.abac@gmail.com';
   const FORM_ENDPOINT = `https://formsubmit.co/ajax/${QUOTE_EMAIL}`;
