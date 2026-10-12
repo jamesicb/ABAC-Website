@@ -184,9 +184,57 @@
     addEventListener('resize', refit);
   }
 
-  /* ---------------- Quote form (FormSubmit) ---------------- */
+  /* ---------------- Quote form (Supabase + FormSubmit) ---------------- */
+  // Each enquiry is saved to the quote_enquiries table in Supabase (see supabase/quote_enquiries.sql)
+  // and emailed through FormSubmit. Only the public anon / publishable key belongs here, never the
+  // service_role or secret key. Leave these blank to send by email only.
+  const SUPABASE_URL = 'https://tfnjbqnagdfrexoegbdi.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_YAYhL3jvYUOkC0zZqc7CRw_-E-zueFx';
   const QUOTE_EMAIL = 'fiona.abac@gmail.com';
   const FORM_ENDPOINT = `https://formsubmit.co/ajax/${QUOTE_EMAIL}`;
+
+  async function saveToSupabase(kind, data, signal) {
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) throw new Error('Supabase not set up');
+    const headers = {
+      'Content-Type': 'application/json',
+      apikey: SUPABASE_ANON_KEY,
+      // The site can add rows but not read them back, so ask for no reply body.
+      Prefer: 'return=minimal',
+    };
+    // Legacy anon keys are JWTs and go in Authorization too; new publishable keys go in apikey only.
+    if (SUPABASE_ANON_KEY.startsWith('eyJ')) headers.Authorization = `Bearer ${SUPABASE_ANON_KEY}`;
+    const res = await fetch(`${SUPABASE_URL.replace(/\/+$/, '')}/rest/v1/quote_enquiries`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        name: data.name.trim(),
+        phone: data.phone.trim(),
+        email: data.email ? data.email.trim() : null,
+        address: data.address.trim(),
+        form: kind,
+      }),
+      signal,
+    });
+    if (!res.ok) throw new Error(`Supabase HTTP ${res.status}`);
+  }
+
+  async function sendEmail(kind, data, signal) {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        ...data,
+        _subject: `${kind} from ${data.name}`,
+        _template: 'table',
+        _captcha: 'false',
+        ...(data.email ? { _replyto: data.email } : {}),
+      }),
+      signal,
+    });
+    const body = await res.json().catch(() => ({}));
+    // Only call it sent when FormSubmit says it accepted the request.
+    if (!res.ok || String(body.success) !== 'true') throw new Error(body.message || `HTTP ${res.status}`);
+  }
   const LABELS = { name: 'Name', phone: 'Phone', email: 'Email', address: 'Address', service: 'Interested in' };
   const checks = {
     name: (v) => (v.trim().length >= 2 ? '' : 'Enter your name.'),
@@ -281,21 +329,8 @@
       const abort = new AbortController();
       const timer = setTimeout(() => abort.abort(), 20000);
       try {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            ...data,
-            _subject: `${kind} from ${data.name}`,
-            _template: 'table',
-            _captcha: 'false',
-            ...(data.email ? { _replyto: data.email } : {}),
-          }),
-          signal: abort.signal,
-        });
-        const body = await res.json().catch(() => ({}));
-        // Only call it sent when FormSubmit says it accepted the request.
-        if (!res.ok || String(body.success) !== 'true') throw new Error(body.message || `HTTP ${res.status}`);
+        // It has reached us if either the Supabase save or the email went through.
+        await Promise.any([saveToSupabase(kind, data, abort.signal), sendEmail(kind, data, abort.signal)]);
         form.reset();
         sentOk.showModal();
       } catch {
