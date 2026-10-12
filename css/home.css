@@ -92,6 +92,7 @@ svg { flex: none; }
   --ph-min: clamp(var(--ph-floor), calc((100vh - 170px) / 1.1), 600px);
   --ph-max: max(var(--ph-floor), calc((100vh - 170px) / 1.1));
   --ph: max(var(--ph-min), min(var(--ph-ratio), var(--ph-max)));
+  --photo-h: calc(var(--ph) * 1.1);
   /* Gap between the photo and the heading below it */
   --below: 24px;
   position: relative; padding-bottom: var(--below);
@@ -103,7 +104,7 @@ svg { flex: none; }
 /* Drawn over the photos rather than on them, so it stays steady while they fade */
 .photo::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--outline); border-radius: 24px; pointer-events: none; }
 .photo-img {
-  width: 100%; height: calc(var(--ph) * 1.1);
+  width: 100%; height: var(--photo-h);
   object-fit: cover; object-position: 50% 40%; border-radius: 24px; background: var(--pale);
 }
 
@@ -136,7 +137,11 @@ svg { flex: none; }
   position: absolute; z-index: 5; top: calc((100% - var(--below)) / 2);
   /* Centred on the photo and shrunk to 0.765 (10% then 15% smaller). It shrinks
      towards its right edge, so it overlaps the photo by the same amount. */
-  transform: translate(-15%, -50%) scale(.765); transform-origin: 100% 50%;
+  /* Then raised by 10% of the photo's height, but never to within 16px of
+     the photo's top edge, so on short screens it rises only as far as there
+     is room (38.25% is half the card's shrunk height) */
+  --lift: clamp(0px, calc(var(--photo-h) * .5 - 38.25% - 16px), calc(var(--photo-h) * .1));
+  transform: translate(-15%, -50%) translateY(calc(-1 * var(--lift))) scale(.765); transform-origin: 100% 50%;
   left: calc(clamp(16px, 5vw, 80px) + var(--card-x)); width: var(--card-w);
   background: var(--white); border-radius: 24px; padding: 32px;
   /* Outlines here are rings rather than borders: browsers round borders to whole
@@ -314,7 +319,7 @@ svg { flex: none; }
 @media (max-width: 1023px) {
   :root { --card-w: 360px; --card-x: 24px; }
   .photo { margin-left: 0; }
-  .photo-img { height: clamp(520px, calc(100vh - 200px), 600px); height: clamp(520px, calc(100svh - 200px), 600px); }
+  .first { --photo-h: clamp(520px, calc(100vh - 200px), 600px); --photo-h: clamp(520px, calc(100svh - 200px), 600px); }
   .photo-img.job-1 { object-position: 65% 40%; }
   .card { padding: 28px; }
   /* Two columns: 1 and 3 on the left, 2 and 4 lower on the right */
