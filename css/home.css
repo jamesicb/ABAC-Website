@@ -173,7 +173,7 @@ svg { flex: none; }
 }
 .eco-card h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 24px; line-height: 1.12; letter-spacing: -0.01em; color: var(--ink); }
 .eco-card p { margin: 0; font-size: 18px; line-height: 1.3; color: var(--muted); text-wrap: balance; }
-.eco-card strong { font-weight: 700; }
+.eco-card strong { font-weight: 700; color: var(--ink); }
 .eco-card u { text-underline-offset: 3px; }
 /* The link is the largest text in the card */
 .eco-card a { display: inline-flex; align-items: center; gap: 6px; margin-top: 2px; font-family: var(--display); font-size: 30px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: var(--navy-2); text-underline-offset: 3px; }
