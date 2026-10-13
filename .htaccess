@@ -1,0 +1,2 @@
+# Repository files that aren't part of the website
+RedirectMatch 404 ^/(README\.md|\.hostinger/.*|supabase/.*|assets/(review|keyframes|source)/.*|(ab|v)[0-9a-z-]*\.png)$
