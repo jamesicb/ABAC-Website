@@ -213,7 +213,10 @@ svg { flex: none; }
 /* Each tile has a heading (icon and title) over the figure for the house in the
    photo. Tiles share their rows, so the headings line up even when one wraps. */
 .hero-tiles li { grid-row: span 2; display: grid; grid-template-rows: auto 1fr; grid-template-rows: subgrid; row-gap: 0; background: var(--pale); border-radius: 16px; box-shadow: inset 0 0 0 var(--ring) var(--outline); text-align: center; color: var(--navy); }
-.ht-head { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 12px 14px; box-shadow: 0 var(--ring) 0 #ccd7e6; font-size: 19px; font-weight: 600; line-height: 1.25; }
+/* Headings as big as fits each on one line beside its icon ("Property Value
+   Increase" takes two), scaling with the tiles' width, with the padding
+   trimmed so the card stays the same height */
+.ht-head { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 15px 6px 13px; box-shadow: 0 var(--ring) 0 #ccd7e6; font-size: clamp(19px, 5cqi, 22px); font-weight: 600; line-height: 1.15; }
 
 /* ---------- Heading under the photo (and over the testimonials) ---------- */
 .why h2, .reviews h2 {
@@ -250,7 +253,7 @@ svg { flex: none; }
 .hero-tiles svg { flex: none; width: 36px; height: 36px; }
 /* When the tiles are narrow (under about 200px each) the icon sits above the
    title, so the title gets the full width */
-@container (max-width: 412px) { .ht-head { flex-direction: column; gap: 6px; } }
+@container (max-width: 412px) { .ht-head { flex-direction: column; gap: 6px; padding: 13px 8px 11px; font-size: clamp(20px, 6.2cqi, 22px); } }
 /* Button under the tiles, as wide as the two tiles together; it jumps to the
    quote form beside the FAQs. Bigger type, as the card is drawn smaller. */
 .hero-cta { display: grid; place-items: center; margin-top: 14px; min-height: 66px; font-size: 21px; text-decoration: none; }
