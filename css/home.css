@@ -43,8 +43,9 @@ svg { flex: none; }
 .head-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 80px; }
 .brand {
   display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy);
-  /* The card is drawn at 0.765 of its size from its right edge, so its
-     visible left side is 8.5% of its width in from where it is placed. */
+  /* The cards over the photo are drawn smaller than their layout width
+     (--s on .hero-cards), with their visible left side 8.5% of that width
+     in from where they're placed, so the logo lines up with them. */
   margin-left: calc(var(--card-x) + var(--card-w) * .085);
 }
 .brand-mark { width: 36px; height: 36px; fill: none; stroke-linecap: round; stroke-linejoin: round; }
@@ -83,7 +84,8 @@ svg { flex: none; }
    in, is roughly 16:9, and the card overlaps its left edge, centred on it. */
 .first {
   --overlap: clamp(90px, 8vw, 130px);
-  /* Base photo height: 16:9.2 of its width, kept between 500px and 600px
+  /* Base photo height: 16:9.2 of the width it had before the cards were
+     shrunk the last time (it now starts further left), kept between 500px and 600px
      unless the screen is tall enough for more. On short laptop screens the
      floor drops below 500px so the whole "Why Insulate" heading still shows
      without scrolling, with a little space under it. */
@@ -100,7 +102,9 @@ svg { flex: none; }
      starts 10px below the logo */
   margin-top: -11px;
 }
-.photo { position: relative; margin-left: calc(var(--card-w) - var(--overlap)); }
+/* Starts where the cards overlap it by the same amount as before they were
+   last shrunk (84.7% = 8.5% in + 61.2% wide + the old 15% overlap) */
+.photo { position: relative; margin-left: calc(var(--card-w) * .847 - var(--overlap)); }
 /* Drawn over the photos rather than on them, so it stays steady while they fade */
 .photo::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--outline); border-radius: 24px; pointer-events: none; }
 .photo-img {
@@ -134,22 +138,24 @@ svg { flex: none; }
 .photo-dot[aria-current="true"] { width: 30px; }
 
 /* The two cards over the photo: "This home benefits from insulation" and,
-   under it, the ECOMAP card. Both are shrunk to 0.765 (10% then 15% smaller)
-   towards their right edge, so they overlap the photo by the same amount.
+   under it, the ECOMAP card. Both are drawn at 0.612 of their size (10%,
+   then 15%, then 20% smaller), with their left side kept in line with the logo.
    Together they reach from 16px below the photo's top to 16px above its
    bottom; on screens too short for both, the ECOMAP card hangs below it. */
 .hero-cards {
   /* A quarter of the top card's height, which grows as the card narrows */
   --eco-h: calc(146px + (520px - var(--card-w)) * .2);
-  --eco-gap: calc(16px / .765);
+  --s: .612;
+  --eco-gap: calc(16px / var(--s));
   position: absolute; z-index: 5; top: 16px;
   left: calc(clamp(16px, 5vw, 80px) + var(--card-x)); width: var(--card-w);
-  min-height: calc((var(--photo-h) - 32px) / .765);
+  min-height: calc((var(--photo-h) - 32px) / var(--s));
   display: flex; flex-direction: column; gap: var(--eco-gap);
-  transform: translateX(-15%) scale(.765); transform-origin: 100% 0;
+  /* 30.3% = 100% - 8.5% - 61.2%, so the visible left side stays 8.5% in */
+  transform: translateX(-30.3%) scale(var(--s)); transform-origin: 100% 0;
   /* Outlines here are rings rather than borders: browsers round borders to whole
      pixels before the scale, which left them fainter than the others */
-  --ring: calc(1px / .765);
+  --ring: calc(1px / var(--s));
 }
 .card, .eco-card { background: var(--white); border-radius: 24px; box-shadow: 0 0 0 var(--ring) var(--outline), 0 10px 40px rgba(15, 39, 66, .16); }
 .card {
@@ -158,18 +164,20 @@ svg { flex: none; }
      there's room; otherwise as near that as it can without going within 16px
      of the photo's top or crowding the ECOMAP card. If it's taller than the
      photo less those 16px gaps, it's centred on the photo instead. */
-  transform: translateY(clamp(min(0px, calc(((var(--photo-h) - 32px) / .765 - 100%) / 2)), calc((var(--photo-h) * .4 - 16px) / .765 - 50%), calc((var(--photo-h) - 32px) / .765 - 100% - var(--eco-gap) - var(--eco-h))));
+  transform: translateY(clamp(min(0px, calc(((var(--photo-h) - 32px) / var(--s) - 100%) / 2)), calc((var(--photo-h) * .4 - 16px) / var(--s) - 50%), calc((var(--photo-h) - 32px) / var(--s) - 100% - var(--eco-gap) - var(--eco-h))));
 }
 .eco-card {
   position: relative; flex: none; margin-top: auto; height: var(--eco-h);
-  display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px;
-  padding: 16px 32px;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 3px;
+  padding: 12px 24px;
 }
-.eco-card h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); }
-.eco-card p { margin: 0; font-size: 16.5px; line-height: 1.35; color: var(--muted); text-wrap: balance; }
+.eco-card h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 24px; line-height: 1.12; letter-spacing: -0.01em; color: var(--ink); }
+.eco-card p { margin: 0; font-size: 18px; line-height: 1.3; color: var(--muted); text-wrap: balance; }
+.eco-card strong { font-weight: 700; color: var(--ink); }
 .eco-card u { text-underline-offset: 3px; }
-.eco-card a { display: inline-flex; align-items: center; gap: 4px; margin-top: 2px; font-size: 16.5px; font-weight: 600; color: var(--navy-2); text-underline-offset: 3px; }
-.eco-card a svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+/* The link is the largest text in the card */
+.eco-card a { display: inline-flex; align-items: center; gap: 6px; margin-top: 2px; font-family: var(--display); font-size: 30px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: var(--navy-2); text-underline-offset: 3px; }
+.eco-card a svg { width: .8em; height: .8em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 /* The whole card opens the map */
 .eco-card a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
 .eco-card:hover a { color: var(--navy); }
@@ -346,7 +354,7 @@ svg { flex: none; }
   .first { --photo-h: clamp(520px, calc(100vh - 200px), 600px); --photo-h: clamp(520px, calc(100svh - 200px), 600px); }
   .photo-img.job-1 { object-position: 65% 40%; }
   .card { padding: 28px; }
-  .eco-card { padding: 16px 28px; }
+  .eco-card { padding: 12px 24px; }
   /* Two columns: 1 and 3 on the left, 2 and 4 lower on the right */
   .reviews { --rise: 200px; }
   .rev-list { grid-template-columns: repeat(2, 1fr); }
@@ -363,9 +371,10 @@ svg { flex: none; }
   .photo-ctl { top: 12px; bottom: auto; left: 12px; right: auto; }
   .hero-cards { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; min-height: 0; margin: -56px auto 0; gap: 12px; --ring: 1px; }
   .card { transform: none; padding: 28px; border-radius: 22px; }
-  .eco-card { height: auto; margin-top: 0; padding: 18px 28px; border-radius: 22px; }
-  .eco-card h2 { font-size: 20px; }
-  .eco-card :is(p, a) { font-size: 15.5px; }
+  .eco-card { height: auto; margin-top: 0; padding: 14px 24px; border-radius: 22px; }
+  .eco-card h2 { font-size: 21px; }
+  .eco-card p { font-size: 16.5px; }
+  .eco-card a { font-size: 24px; }
   .hero-tiles { grid-auto-rows: auto minmax(76px, auto); }
   .ht-head { padding: 14px 10px 12px; font-size: 16px; }
   .hero-tiles svg { width: 30px; height: 30px; }
@@ -388,7 +397,7 @@ svg { flex: none; }
   .photo::after { border-radius: 18px; }
   .hero-cards { margin: -48px 8px 0; }
   .card { padding: 22px 18px; border-radius: 18px; }
-  .eco-card { padding: 16px 18px; border-radius: 18px; }
+  .eco-card { padding: 12px 18px; border-radius: 18px; }
   .card-sub { font-size: 16px; margin-bottom: 18px; }
   .first { padding-bottom: 40px; }
   .why h2 { padding-bottom: 32px; }
