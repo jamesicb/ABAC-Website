@@ -1,0 +1,443 @@
+/* Layout: slim header (logo left, SEAI badge right), then a large rounded
+   photo of a finished house on the right with the quote card overlapping
+   its left edge, then a pale row of service tiles. */
+:root {
+  --navy: #0f2742;
+  --navy-2: #173a63;
+  --blue: #1d4f8c;
+  --green: #1f8a5b;
+  --green-2: #27a46d;
+  --ink: #15233a;
+  --muted: #5a6779;
+  --line: #dde4ee;
+  /* Outline on the photo, quote cards, tiles, reviews and FAQs (--line made 50% stronger twice) */
+  --outline: #b3c3da;
+  --field: #b7c2d0;
+  --pale: #edf3fa;
+  --white: #ffffff;
+  --display: "Lexend", "Segoe UI", system-ui, sans-serif;
+  --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* Quote card width and how far it sits in from the page edge. The logo
+     uses these too, so its left side lines up with the card's. */
+  --card-w: clamp(380px, 32vw, 520px);
+  --card-x: 0px;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--body); font-size: 16px; line-height: 1.5; color: var(--ink); background: var(--white); }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+svg { flex: none; }
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { width: 100%; max-width: 1640px; margin: 0 auto; padding-inline: clamp(16px, 5vw, 80px); }
+.skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--white); color: var(--navy); padding: 10px 14px; border-radius: 6px; font-weight: 600; }
+.skip:focus { top: 12px; }
+:focus-visible { outline: 3px solid var(--green-2); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+/* ---------- Header ---------- */
+.site-head { background: var(--white); }
+.head-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 80px; }
+.brand {
+  display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy);
+  /* The cards over the photo are drawn smaller than their layout width
+     (--s on .hero-cards), with their visible left side 8.5% of that width
+     in from where they're placed, so the logo lines up with them. */
+  margin-left: calc(var(--card-x) + var(--card-w) * .085);
+}
+.brand-mark { width: 36px; height: 36px; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.bm-roof { stroke: var(--green-2); stroke-width: 4.5; }
+.bm-wall { stroke: var(--navy-2); stroke-width: 4.5; }
+.bm-layer { stroke: #7ea7d4; stroke-width: 3; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+.brand-text b { font-family: var(--display); font-weight: 600; font-size: 21px; letter-spacing: -0.01em; }
+.brand-text small { font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-top: 3px; font-weight: 600; }
+/* Badges (10-year guarantee, Google rating, SEAI registered): hang from the top of
+   the page and dip over the photo */
+.head-in { position: relative; }
+.badges {
+  position: absolute; z-index: 10; top: 0; right: calc(clamp(16px, 5vw, 80px) + 32px);
+  display: flex; gap: 8px; margin: 0; padding: 0; list-style: none;
+}
+.badge { filter: drop-shadow(0 4px 8px rgba(15, 39, 66, .28)); }
+/* Every badge has the same three rows (logo on a white circle, main word,
+   small line), the same sizes and the same spacing, so they line up. */
+.sb-shape {
+  display: grid; grid-template-rows: 22px 18px 11px; row-gap: 5px; justify-items: center; align-items: center; align-content: center;
+  width: 75px; height: 95px; padding-bottom: 15px;
+  background: linear-gradient(180deg, #1f8a5b, #176f49); color: var(--white);
+  clip-path: polygon(0 0, 100% 0, 100% 84%, 50% 100%, 0 84%);
+}
+.b-disc { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--white); }
+.b-disc svg { width: 14px; height: 14px; }
+.sb-icon { fill: none; stroke: #176f49; stroke-width: 2.2; stroke-linejoin: round; }
+.sb-icon .sb-tick { stroke-width: 2.6; stroke-linecap: round; }
+.badge b { font-family: var(--display); font-weight: 700; font-size: 15px; line-height: 18px; letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; }
+.badge small { font-size: 8.5px; line-height: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+.stars { width: 50px; height: 10px; fill: #fbbc04; }
+
+/* ---------- First section: photo with overlapping quote card ---------- */
+/* Proportions follow Airbnb's: the photo starts about a quarter of the way
+   in, is roughly 16:9, and the card overlaps its left edge, centred on it. */
+.first {
+  --overlap: clamp(90px, 8vw, 130px);
+  /* Base photo height: 16:9.2 of the width it had before the cards were
+     shrunk the last time (it now starts further left), kept between 500px and 600px
+     unless the screen is tall enough for more. On short laptop screens the
+     floor drops below 500px so the whole "Why Insulate" heading still shows
+     without scrolling, with a little space under it. */
+  --ph-ratio: calc((min(100vw, 1640px) - 2 * clamp(16px, 5vw, 80px) - var(--card-w) + var(--overlap)) * .575);
+  --ph-floor: clamp(380px, calc((100vh - 153px) / 1.1), 500px);
+  --ph-min: clamp(var(--ph-floor), calc((100vh - 170px) / 1.1), 600px);
+  --ph-max: max(var(--ph-floor), calc((100vh - 170px) / 1.1));
+  --ph: max(var(--ph-min), min(var(--ph-ratio), var(--ph-max)));
+  --photo-h: calc(var(--ph) * 1.1);
+  /* Gap between the photo and the heading below it */
+  --below: 24px;
+  position: relative; padding-bottom: var(--below);
+  /* The header is 80px tall and the logo ends 59px down, so the photo
+     starts 10px below the logo */
+  margin-top: -11px;
+}
+/* Starts where the cards overlap it by the same amount as before they were
+   last shrunk (84.7% = 8.5% in + 61.2% wide + the old 15% overlap) */
+.photo { position: relative; margin-left: calc(var(--card-w) * .847 - var(--overlap)); }
+/* Drawn over the photos rather than on them, so it stays steady while they fade */
+.photo::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--outline); border-radius: 24px; pointer-events: none; }
+.photo-img {
+  width: 100%; height: var(--photo-h);
+  object-fit: cover; object-position: 50% 40%; border-radius: 24px; background: var(--pale);
+}
+
+/* Job photos take turns every 3 seconds (js/home.js). The first sets the
+   size; the others sit on top of it and fade in when it's their turn. */
+.photo .photo-img:not(:first-child) { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
+.photo-img { opacity: 0; transition: opacity .8s ease; }
+.photo-img.is-on { opacity: 1; }
+.photo-img.job-2 { object-position: 50% 45%; }
+.photo-img.job-3 { object-position: 50% 15%; }
+.photo-img.job-4 { object-position: 50% 30%; }
+.photo-img.job-5 { object-position: 50% 40%; }
+.photo-img.job-6 { object-position: 50% 35%; }
+.photo-img.job-7 { object-position: 50% 36%; }
+@media (prefers-reduced-motion: reduce) { .photo-img { transition: none; } }
+
+.photo-ctl {
+  position: absolute; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 2px;
+  padding: 2px 8px 2px 4px; border-radius: 99px; background: rgba(15, 39, 66, .55);
+}
+.photo-ctl button { display: grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; }
+.photo-pause svg { width: 14px; height: 14px; stroke: var(--white); stroke-width: 3; stroke-linecap: round; fill: var(--white); stroke-linejoin: round; }
+.photo-pause .i-play, .photo-pause[aria-pressed="true"] .i-pause { display: none; }
+.photo-pause[aria-pressed="true"] .i-play { display: block; }
+.photo-dot::before { content: ""; width: 8px; height: 8px; border-radius: 99px; background: rgba(255, 255, 255, .55); transition: width .3s, background .3s; }
+.photo-dot[aria-current="true"]::before { width: 18px; background: var(--white); }
+.photo-dot[aria-current="true"] { width: 30px; }
+
+/* The two cards over the photo: "This home benefits from insulation" and,
+   under it, the ECOMAP card. Both are drawn at 0.612 of their size (10%,
+   then 15%, then 20% smaller), with their left side kept in line with the logo.
+   Together they reach from 16px below the photo's top to 16px above its
+   bottom; on screens too short for both, the ECOMAP card hangs below it. */
+.hero-cards {
+  /* A quarter of the top card's height, which grows as the card narrows */
+  --eco-h: calc(146px + (520px - var(--card-w)) * .2);
+  --s: .612;
+  --eco-gap: calc(16px / var(--s));
+  position: absolute; z-index: 5; top: 16px;
+  left: calc(clamp(16px, 5vw, 80px) + var(--card-x)); width: var(--card-w);
+  min-height: calc((var(--photo-h) - 32px) / var(--s));
+  display: flex; flex-direction: column; gap: var(--eco-gap);
+  /* 30.3% = 100% - 8.5% - 61.2%, so the visible left side stays 8.5% in */
+  transform: translateX(-30.3%) scale(var(--s)); transform-origin: 100% 0;
+  /* Outlines here are rings rather than borders: browsers round borders to whole
+     pixels before the scale, which left them fainter than the others */
+  --ring: calc(1px / var(--s));
+}
+.card, .eco-card { background: var(--white); border-radius: 24px; box-shadow: 0 0 0 var(--ring) var(--outline), 0 10px 40px rgba(15, 39, 66, .16); }
+.card {
+  padding: 32px;
+  /* Its middle sits 10% of the photo's height above the photo's middle where
+     there's room; otherwise as near that as it can without going within 16px
+     of the photo's top or crowding the ECOMAP card. If it's taller than the
+     photo less those 16px gaps, it's centred on the photo instead. */
+  transform: translateY(clamp(min(0px, calc(((var(--photo-h) - 32px) / var(--s) - 100%) / 2)), calc((var(--photo-h) * .4 - 16px) / var(--s) - 50%), calc((var(--photo-h) - 32px) / var(--s) - 100% - var(--eco-gap) - var(--eco-h))));
+}
+.eco-card {
+  position: relative; flex: none; margin-top: auto; height: var(--eco-h);
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 3px;
+  padding: 12px 24px;
+}
+.eco-card h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 24px; line-height: 1.12; letter-spacing: -0.01em; color: var(--ink); }
+.eco-card p { margin: 0; font-size: 18px; line-height: 1.3; color: var(--muted); text-wrap: balance; }
+.eco-card strong { font-weight: 700; color: var(--ink); }
+.eco-card u { text-underline-offset: 3px; }
+/* The link is the largest text in the card */
+.eco-card a { display: inline-flex; align-items: center; gap: 6px; margin-top: 2px; font-family: var(--display); font-size: 30px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: var(--navy-2); text-underline-offset: 3px; }
+.eco-card a svg { width: .8em; height: .8em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+/* The whole card opens the map */
+.eco-card a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.eco-card:hover a { color: var(--navy); }
+.card h1, .quote2 h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 2.3vw, 36px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
+.card-sub { margin: 10px 0 20px; font-size: 16.5px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
+
+.lead-form { display: grid; gap: 10px; }
+.box { display: grid; border: 1.5px solid var(--field); border-radius: 14px; background: var(--white); }
+.box-split { grid-template-columns: 1fr 1fr; }
+.cell { position: relative; display: grid; gap: 2px; padding: 10px 16px 8px; min-width: 0; border-radius: 13px; }
+.box-split .cell + .cell::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 1px; background: var(--field); }
+.cell:focus-within { box-shadow: 0 0 0 2px var(--navy-2); }
+.cell label { font-size: 13px; font-weight: 600; color: var(--ink); }
+.cell input { width: 100%; border: 0; padding: 2px 0; font: inherit; font-size: 16px; color: var(--ink); background: transparent; outline: none; }
+.cell input::placeholder { color: #7c8797; }
+.field.has-err { box-shadow: 0 0 0 2px #b3261e; }
+.errs { margin: 0; padding: 10px 14px 10px 30px; background: #fdecea; border-radius: 10px; color: #8c1d18; font-size: 14.5px; }
+.errs a { color: inherit; }
+.hp { position: absolute; left: -9999px; }
+
+.cta {
+  margin-top: 8px; width: 100%; min-height: 58px; border: 0; border-radius: 12px; cursor: pointer;
+  background: linear-gradient(90deg, var(--navy-2), var(--blue)); color: var(--white);
+  font-family: var(--display); font-weight: 500; font-size: 18px;
+}
+.cta:hover { background: linear-gradient(90deg, var(--navy), var(--navy-2)); }
+.lead-form[aria-busy="true"] .cta { opacity: .7; }
+.form-foot { margin: 0; font-size: 13px; color: var(--muted); }
+
+/* "This home benefits from insulation": four small benefit tiles, two by two.
+   The card is drawn smaller on laptops and tablets, so the labels start big. */
+.hero-tiles { container-type: inline-size; list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto minmax(72px, auto); gap: 12px; }
+/* Each tile has a heading (icon and title) over the figure for the house in the
+   photo. Tiles share their rows, so the headings line up even when one wraps. */
+.hero-tiles li { grid-row: span 2; display: grid; grid-template-rows: auto 1fr; grid-template-rows: subgrid; row-gap: 0; background: var(--pale); border-radius: 16px; box-shadow: inset 0 0 0 var(--ring) var(--outline); text-align: center; color: var(--navy); }
+.ht-head { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 12px 14px; box-shadow: 0 var(--ring) 0 #ccd7e6; font-size: 19px; font-weight: 600; line-height: 1.25; }
+
+/* ---------- Heading under the photo (and over the testimonials) ---------- */
+.why h2, .reviews h2 {
+  margin: 0 auto; padding-top: 4px; padding-bottom: 44px; text-align: center;
+  font-family: var(--display); font-weight: 600; font-size: clamp(26px, 2.1vw, 34px);
+  line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance;
+}
+
+/* ---------- Benefit tiles ---------- */
+/* Four separate tinted tiles on white, two by two */
+.services { padding-bottom: 56px; }
+.svc-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.svc-list li { display: grid; overflow: hidden; background: var(--pale); border: 1px solid var(--outline); border-radius: 16px; }
+.svc { display: flex; flex-direction: column; align-items: center; gap: 22px; width: 100%; padding: 52px 16px 46px; border: 0; background: none; text-align: center; font-family: inherit; font-size: 18px; font-weight: 500; color: var(--navy); cursor: pointer; transition: background .2s; }
+.svc:focus-visible { outline: 3px solid var(--navy-2); outline-offset: -3px; border-radius: 16px; }
+.svc-label { display: grid; gap: 4px; }
+.svc-hint { font-size: 14px; font-weight: 400; color: var(--muted); }
+.svc:hover { background: var(--white); }
+.svc:hover svg { transform: translateY(-3px); }
+/* Benefit icons, on the tiles and in their pop-ups */
+.svc svg, .more-icon, .hero-tiles svg { width: 64px; height: 64px; fill: none; stroke: var(--navy-2); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
+:is(.svc svg, .more-icon, .hero-tiles svg) .f { fill: #cfe0f2; }
+:is(.svc svg, .more-icon, .hero-tiles svg) .f-bolt { fill: #ffd60a; }
+:is(.svc svg, .more-icon, .hero-tiles svg) .f-leaf { fill: #85bb65; }
+:is(.svc svg, .more-icon, .hero-tiles svg) .f-value { fill: #2563eb; }
+:is(.svc svg, .more-icon, .hero-tiles svg) .f-uplift { fill: #7c5ac7; }
+/* BER label bars: A green, C yellow, E orange */
+:is(.svc svg, .more-icon, .hero-tiles svg) .f-ber-a { fill: #2e9e4f; }
+:is(.svc svg, .more-icon, .hero-tiles svg) .f-ber-c { fill: #f2c200; }
+:is(.svc svg, .more-icon, .hero-tiles svg) .f-ber-e { fill: #ef7d2d; }
+:is(.svc svg, .more-icon, .hero-tiles svg) .s-euro { stroke: var(--green); stroke-width: 4.5; }
+/* The arrow and smile sit on the darker fills, so they're drawn in white */
+:is(.svc svg, .more-icon, .hero-tiles svg) .on-fill { stroke: var(--white); }
+.hero-tiles svg { flex: none; width: 36px; height: 36px; }
+/* When the tiles are narrow (under about 200px each) the icon sits above the
+   title, so the title gets the full width */
+@container (max-width: 412px) { .ht-head { flex-direction: column; gap: 6px; } }
+/* Button under the tiles, as wide as the two tiles together; it jumps to the
+   quote form beside the FAQs. Bigger type, as the card is drawn smaller. */
+.hero-cta { display: grid; place-items: center; margin-top: 14px; min-height: 66px; font-size: 21px; text-decoration: none; }
+/* The figure for the house in the photo; it fades out and back in as the photo changes */
+.ht-body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px; }
+.ht-val { font-family: var(--display); font-weight: 600; font-size: 26px; line-height: 1.1; color: var(--ink); transition: opacity .3s ease; }
+.ht-note { font-size: 16px; line-height: 1.3; color: var(--muted); transition: opacity .3s ease; }
+.hero-tiles.is-swapping :is(.ht-val, .ht-note) { opacity: 0; }
+.hero-note { margin: 8px 0 0; text-align: center; font-size: 15px; color: var(--muted); }
+.svc sub, .more sub, .hero-tiles sub { font-size: .7em; line-height: 0; }
+
+/* ---------- Benefit details pop-up ---------- */
+.more { width: min(480px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 0; border-radius: 20px; background: var(--white); color: var(--ink); box-shadow: 0 20px 60px rgba(15, 39, 66, .3); }
+.more::backdrop { background: rgba(15, 39, 66, .55); }
+.more-in { position: relative; display: grid; justify-items: center; gap: 14px; padding: 40px 32px 32px; text-align: center; }
+.more-close { position: absolute; top: 12px; right: 12px; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 99px; background: var(--pale); cursor: pointer; }
+.more-close:hover { background: var(--line); }
+.more-close svg { width: 18px; height: 18px; fill: none; stroke: var(--navy); stroke-width: 2.4; stroke-linecap: round; }
+.more h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); }
+.more p { margin: 0 0 6px; font-size: 17px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+/* Keeps a figure range like €40,000–€50,000 on one line */
+.nb { white-space: nowrap; }
+.more strong { font-weight: 700; color: var(--ink); }
+.more p.more-note { margin-top: -10px; font-size: 13.5px; line-height: 1.45; }
+.more-cta { display: grid; place-items: center; margin-top: 0; text-decoration: none; }
+/* Pop-ups after a quote form is sent (or fails to send) */
+:is(.svc svg, .more-icon, .hero-tiles svg) .f-ok { fill: var(--green); stroke: var(--green); }
+:is(.svc svg, .more-icon, .hero-tiles svg) .f-warn { fill: #d97706; stroke: #d97706; }
+.more-act { justify-self: stretch; }
+.more a { color: var(--navy-2); }
+.sent-details { justify-self: stretch; margin: 0; padding: 12px 14px; border-radius: 10px; background: var(--pale); text-align: left; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13.5px; line-height: 1.5; }
+.sent-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.more .copy { display: inline-flex; align-items: center; border: 0; border-radius: 10px; background: var(--navy-2); color: var(--white); padding: 10px 16px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; }
+
+/* ---------- Testimonials ---------- */
+/* Cards 1 and 3 sit level under the heading; cards 2 and 4 sit lower by half
+   of --rise. When the row scrolls into view each card rises from below the
+   screen: 1 and 3 the full --rise, 2 and 4 half as far, so all four start
+   from the same line. */
+.reviews { --rise: 240px; padding-bottom: 64px; }
+.reviews h2 { padding-top: 24px; }
+.rev-list { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; align-items: start; }
+.rev-list li { --start: var(--rise); --rest: 0px; }
+.rev-list li:nth-child(even) { --start: calc(var(--rise) / 2); --rest: calc(var(--rise) / 2); }
+.rev { margin-top: var(--rest); overflow: hidden; background: var(--white); border: 1px solid var(--outline); border-radius: 16px; box-shadow: 0 6px 24px rgba(15, 39, 66, .08); }
+.rev-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 40%; background: var(--pale); }
+.rev-body { display: grid; gap: 14px; padding: 20px 22px 22px; }
+.rev-stars { width: 110px; height: 22px; fill: #fbbc04; }
+.rev-quote { display: grid; gap: 10px; margin: 0; }
+.rev-quote p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink); }
+.rev-name { margin: 2px 0 0; font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* The rise itself; js/home.js adds these classes (not when reduced motion is on) */
+.reviews.will-rise .rev { opacity: 0; transform: translateY(var(--start)); transition: transform 2.2s cubic-bezier(.2, .7, .2, 1), opacity 1s ease; }
+.reviews.will-rise li.is-up .rev { opacity: 1; transform: none; }
+.reviews.will-rise li:nth-child(2) .rev { transition-delay: .24s; }
+.reviews.will-rise li:nth-child(3) .rev { transition-delay: .48s; }
+.reviews.will-rise li:nth-child(4) .rev { transition-delay: .72s; }
+
+/* ---------- FAQs with a second quote form ---------- */
+/* Two panels side by side, stretched to the same height */
+/* Sits above the testimonial cards so a card still rising slides up behind it */
+.faq-quote { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: stretch; padding-bottom: 72px; }
+.faq { display: flex; flex-direction: column; padding: 36px 40px 16px; background: var(--pale); border: 1px solid var(--outline); border-radius: 24px; }
+/* js/home.js measures an invisible copy with each answer open to find the
+   height that fits the longest one */
+.faq.faq-measure { position: absolute; top: 0; left: 0; visibility: hidden; pointer-events: none; }
+.faq-measure .faq-item summary, .faq-measure .faq-item::details-content { transition: none; }
+.faq h2 { margin: 0 0 12px; font-family: var(--display); font-weight: 600; font-size: clamp(26px, 2.1vw, 34px); line-height: 1.2; letter-spacing: -0.02em; color: var(--ink); }
+/* The rows share out any spare height so the questions fill the panel
+   when it is stretched to match the form beside it */
+.faq-list { flex: 1; display: flex; flex-direction: column; }
+.faq-row { flex: 1 0 auto; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid #ccd7e6; }
+.faq-row:last-child { border-bottom: 0; }
+/* Each question is a drop-down: the arrow turns over and the answer opens below.
+   Opening one closes the others (name="faq" in index.html). */
+.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 0; list-style: none; cursor: pointer; transition: padding .35s ease; }
+.faq-item[open] summary { padding-bottom: 10px; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:focus-visible { outline: 3px solid var(--navy-2); outline-offset: 4px; border-radius: 8px; }
+.faq-item h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 18.5px; line-height: 1.35; color: var(--navy); }
+.faq-arrow { flex: none; width: 36px; height: 36px; padding: 8px; background: var(--white); border: 1px solid #ccd7e6; border-radius: 50%; fill: none; stroke: var(--navy); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s ease, background-color .2s ease; }
+.faq-item summary:hover .faq-arrow { background: #dbe7f5; }
+.faq-item[open] .faq-arrow { transform: rotate(180deg); }
+.faq-item p { margin: 0 56px 0 0; padding-bottom: 24px; font-size: 16px; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+/* Slide the answer open where the browser supports it; elsewhere it just appears */
+@media (prefers-reduced-motion: no-preference) {
+  .faq { interpolate-size: allow-keywords; }
+  .faq-item::details-content { block-size: 0; overflow: hidden; transition: block-size .35s ease, content-visibility .35s allow-discrete; }
+  .faq-item[open]::details-content { block-size: auto; }
+}
+.faq-item a { color: var(--navy-2); }
+.faq-item strong { font-weight: 700; color: var(--ink); }
+.quote2 { display: flex; flex-direction: column; justify-content: center; padding: 36px 40px; background: var(--white); border: 1px solid var(--outline); border-radius: 24px; box-shadow: 0 10px 40px rgba(15, 39, 66, .16); }
+
+/* ---------- Responsive ---------- */
+/* Tablets: no room for the photo beside the card, so the card sits over
+   the left side of a full-width photo. */
+@media (max-width: 1023px) {
+  :root { --card-w: 360px; --card-x: 24px; }
+  .photo { margin-left: 0; }
+  .first { --photo-h: clamp(520px, calc(100vh - 200px), 600px); --photo-h: clamp(520px, calc(100svh - 200px), 600px); }
+  .photo-img.job-1 { object-position: 65% 40%; }
+  .card { padding: 28px; }
+  .eco-card { padding: 12px 24px; }
+  /* Two columns: 1 and 3 on the left, 2 and 4 lower on the right */
+  .reviews { --rise: 200px; }
+  .rev-list { grid-template-columns: repeat(2, 1fr); }
+  /* FAQs above the form */
+  .faq-quote { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+}
+
+/* Phones: stack them, with the card overlapping the bottom of the photo. */
+@media (max-width: 699px) {
+  .photo-img { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; }
+  .photo::after { border-radius: 22px; }
+  .photo-img.job-1 { object-position: 50% 40%; }
+  /* The card covers the bottom of the photo here, so the controls go top left */
+  .photo-ctl { top: 12px; bottom: auto; left: 12px; right: auto; }
+  .hero-cards { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; min-height: 0; margin: -56px auto 0; gap: 12px; --ring: 1px; }
+  .card { transform: none; padding: 28px; border-radius: 22px; }
+  .eco-card { height: auto; margin-top: 0; padding: 14px 24px; border-radius: 22px; }
+  .eco-card h2 { font-size: 21px; }
+  .eco-card p { font-size: 16.5px; }
+  .eco-card a { font-size: 24px; }
+  .hero-tiles { grid-auto-rows: auto minmax(76px, auto); }
+  .ht-head { padding: 14px 10px 12px; font-size: 16px; }
+  .hero-tiles svg { width: 30px; height: 30px; }
+  .ht-val { font-size: 21px; }
+  .ht-note { font-size: 13.5px; }
+  .hero-note { font-size: 13px; }
+  .hero-cta { min-height: 58px; font-size: 18px; }
+  .first { margin-top: 0; }
+  .brand { margin-left: 0; }
+}
+
+@media (max-width: 640px) {
+  .head-in { min-height: 64px; }
+  .brand { margin-left: 8px; }
+  .brand-mark { width: 30px; height: 30px; }
+  .brand-text b { font-size: 17px; }
+  .brand-text small { font-size: 9px; letter-spacing: .14em; }
+  .badges { right: 32px; }
+  .photo-img { aspect-ratio: 1 / 1; border-radius: 18px; }
+  .photo::after { border-radius: 18px; }
+  .hero-cards { margin: -48px 8px 0; }
+  .card { padding: 22px 18px; border-radius: 18px; }
+  .eco-card { padding: 12px 18px; border-radius: 18px; }
+  .card-sub { font-size: 16px; margin-bottom: 18px; }
+  .first { padding-bottom: 40px; }
+  .why h2 { padding-bottom: 32px; }
+  .services { padding-bottom: 32px; }
+  .svc-list { gap: 10px; }
+  /* One column: no stagger, and each card rises as it comes into view */
+  .reviews { --rise: 120px; padding-bottom: 48px; }
+  .reviews h2 { padding-top: 16px; padding-bottom: 28px; }
+  .rev-list { grid-template-columns: 1fr; gap: 16px; }
+  .rev-list li:nth-child(even) { --start: var(--rise); --rest: 0px; }
+  .reviews.will-rise li .rev { transition-delay: 0s; }
+  .faq-quote { gap: 16px; padding-bottom: 40px; }
+  .faq, .quote2 { padding: 26px 20px; border-radius: 18px; }
+  .faq { padding-bottom: 6px; }
+  .faq-item summary { gap: 14px; padding: 18px 0; }
+  .faq-item[open] summary { padding-bottom: 8px; }
+  .faq-item h3 { font-size: 17px; }
+  .faq-item p { margin-right: 0; padding-bottom: 20px; }
+  .faq-arrow { width: 32px; height: 32px; padding: 7px; }
+  .svc-list li { border-radius: 14px; }
+  .svc { padding: 32px 10px 28px; gap: 14px; font-size: 16px; }
+  .svc-hint { font-size: 13px; }
+  .more-in { padding: 36px 22px 24px; }
+  .more h3 { font-size: 22px; }
+  .more p { font-size: 16px; }
+  .svc svg { width: 50px; height: 50px; }
+}
+
+/* Small phones: only room for the SEAI badge beside the logo */
+@media (max-width: 560px) {
+  .badge:not(:last-child) { display: none; }
+}
+
+@media (max-width: 380px) {
+  .box-split { grid-template-columns: 1fr; }
+  .box-split .cell + .cell::before { left: 14px; right: 14px; top: 0; bottom: auto; width: auto; height: 1px; }
+  .brand-text small { display: none; }
+  .badges { right: 24px; }
+  /* Narrower dot buttons so the controls stay clear of the SEAI badge */
+  .photo-ctl { gap: 0; }
+  .photo-ctl button { width: 20px; }
+  .photo-dot[aria-current="true"] { width: 26px; }
+}

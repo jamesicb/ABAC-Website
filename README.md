@@ -1,15 +1,28 @@
 # Absolute Acrylics website
 
-Static site: `index.html`, `privacy.html`, `css/site.css`, `js/site.js`, and media in `assets/`.
+Static site: `index.html`, `privacy.html`, `css/home.css`, `js/home.js`, and media in `assets/`.
 
-- `assets/sequence/` holds 113 frames from the approved Higgsfield video of the real job. The opening scrubs through them on a canvas as you scroll, in five stages (Start, Before, Insulation, Finish, Completed). The stage timings live in `STAGES` and `TIMELINE` in `js/site.js`. Phones load every second frame.
-- Visitors who prefer reduced motion, have Save-Data on, or have no JavaScript get a static opening (`.opening`) with the completed-house image and the stages as a list, and no long scroll.
-- `assets/images/`: `work-before` and `work-after` are James's real job photos (the skip's lettering is blurred), `finish-render` and `finish-brick` are crops of the after photo, `completed-house` is the film's last frame, and `layers-cutaway` is a Higgsfield illustration (labelled as one on the page).
-- `assets/source/` holds the original job photos.
-- `assets/keyframes/` and `assets/review/` are the approved source keyframes and review sheets (not loaded by the page).
+- The homepage has a slim header (logo, and three badges that dip over the photo: 10-year guarantee, Google rating (4.76) and SEAI registered; phones under 560px wide show only the SEAI one), then a large rounded photo of the finished job with a card overlapping its left edge (both cards over the photo are drawn at 61% size, set by `--s` in `css/home.css`, so they fit over the photo on most laptop screens), raised 10% of the photo's height above centre (less on short screens, so it stays 16px inside the photo) ("This home benefits from insulation" over four small tiles: BER rating, energy savings, property value increase and SEAI grant). Under it, near the bottom of the photo, a matching card a quarter of its height reads "Visit our Industry First “ECOMAP”" and "Location and details of our completed jobs NEAR YOU!" (NEAR YOU bold, underlined and in the heading's near-black), and the whole card links to https://ecomapv2.com/ in a new tab. On screens too short for both cards over the photo, the ECOMAP card hangs below the photo and `js/home.js` moves the heading and tiles below down just enough to clear it. After the photo come four benefit tiles in a 2x2 grid (energy savings, property value increase, property uplift and CO₂ reduction). On tablets the card sits over the left of a full-width photo, and on phones it sits below the photo.
+- The photo rotates between seven finished jobs every 3 seconds, with a pause button and dots to jump between them (`js/home.js`). The photos are `assets/images/finished-house-*.webp`, `job-5-*.webp`, `job-6-*.webp`, `job-2-*.webp`, `job-4-*.webp`, `job-3-*.webp` and `job-7-*.webp` (shown in that order), made from James's photos in `assets/source/` (`job-after.jpg`, `job-2.jpg` to `job-7.jpg`). The job 2 to 7 sources have camera details removed, and house numbers and names, a reflected number plate, a parcel label, a bin sticker and a person seen through a window hidden.
+- Under the tiles is a testimonials section ("Hear From Our Customers") with four review cards. When it scrolls into view the cards rise from below the screen: cards 1 and 3 rise the full way to sit under the heading, cards 2 and 4 rise half as far and sit lower (`--rise` in `css/home.css`). On phones the cards stack in one column and each rises as it comes into view. The four cards hold reviews James supplied, word for word with the names as he gave them. The photos are general job photos, not the reviewers' homes. Keep customer names out of image file names and alt text.
+- Under the testimonials is an FAQs panel (four insulation questions, answered only with confirmed facts and figures James supplied) beside a second free quote form. Each question is a drop-down: its arrow opens the answer, and opening one closes the others. Side by side, `js/home.js` keeps the FAQs panel tall enough for its longest answer, so opening one never makes either panel grow. On computers the two panels sit side by side at the same height; on tablets and phones they stack.
+- The quote form (beside the FAQs, near the bottom) asks for name, phone number, email (optional) and address. Each benefit tile under "Why Insulate Your Home?" says "(click for details)" and opens a short pop-up explaining it, with a "Get a free quote" button that jumps to the form. `index.html#enquire` jumps straight to it. The four small tiles in the top card don't open anything; under them, an "Enquire for free quote" button as wide as the two tiles together jumps to the form. Each tile can also show a figure for the house in the photo, changing as the photos rotate: add `data-ber`, `data-energy`, `data-value` and `data-grant` to that photo's `<img>` in `index.html`, plus an optional small line under a figure with `data-ber-note`, `data-energy-note`, `data-value-note` or `data-grant-note`. Only use figures James supplies; a tile with no figure shows just its label. All seven photos carry their houses' figures. Under the tiles a small line reads "(All values are estimates and vary between houses)".
+- `privacy.html` still uses the older `css/site.css`.
+- The earlier cinematic scroll version lives on the `claude/cinematic-scroll-site-wiweu9` branch.
 
 Run locally with any static server, for example `python3 -m http.server 8080`, then open http://localhost:8080.
 
 ## Quote form
 
-The form posts to FormSubmit (`https://formsubmit.co/ajax/fiona.abac@gmail.com`). The first time it is used, FormSubmit emails fiona.abac@gmail.com an activation link; quote requests arrive once that link is clicked. If sending fails, the visitor is shown the phone number and a copy of their details to email instead.
+Both quote forms (the top card and the one beside the FAQs) work the same way. Each enquiry is sent two ways at once, and the visitor sees the thank-you pop-up (James's wording) if either one gets through:
+
+- **Supabase.** Saved as a row in the `quote_enquiries` table (name, phone, email, address, which form, the time it came in, and a `contacted` tick box for the team). Read them in the Supabase dashboard under Table Editor > `quote_enquiries`.
+- **Email.** Posted to FormSubmit (`https://formsubmit.co/ajax/fiona.abac@gmail.com`). The first time it is used, FormSubmit emails fiona.abac@gmail.com an activation link; emails arrive once that link is clicked.
+
+If both fail, a pop-up shows the phone number and a copy of their details to email instead.
+
+### Supabase setup
+
+The site uses the Supabase project `tfnjbqnagdfrexoegbdi` (EU, Frankfurt). The table was created from `supabase/quote_enquiries.sql`, which lets the website add enquiries but not read, change or delete them; run it in SQL Editor to recreate the table in another project.
+
+`SUPABASE_URL` and `SUPABASE_ANON_KEY` at the top of the "Quote form" section of `js/home.js` hold the project URL and its default publishable key. These are safe to have in the page. Never put the `service_role` or secret key in the site. Blank them to send by email only.
