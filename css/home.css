@@ -172,7 +172,7 @@ svg { flex: none; }
 .photo-dot[aria-current="true"]::before { width: 18px; background: var(--white); }
 .photo-dot[aria-current="true"] { width: 30px; }
 
-/* The two cards over the photo: "This home benefits from insulation" and,
+/* The two cards over the photo: "This Home’s benefits from insulation" and,
    under it, the ECOMAP card. Both are drawn at 0.612 of their size (10%,
    then 15%, then 20% smaller), with their left side kept in line with the logo.
    Together they reach from 16px below the photo's top to 16px above its
@@ -245,7 +245,7 @@ svg { flex: none; }
 .lead-form[aria-busy="true"] .cta { opacity: .7; }
 .form-foot { margin: 0; font-size: 13px; color: var(--muted); }
 
-/* "This home benefits from insulation": four small benefit tiles, two by two.
+/* "This Home’s benefits from insulation": four small benefit tiles, two by two.
    The card is drawn smaller on laptops and tablets, so the labels start big. */
 .hero-tiles { container-type: inline-size; list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto minmax(72px, auto); gap: 12px; }
 /* Each tile has a heading (icon and title) over the figure for the house in the
