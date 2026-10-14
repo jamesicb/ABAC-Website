@@ -44,7 +44,7 @@ svg { flex: none; }
 .brand {
   display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy);
   /* The cards over the photo are drawn smaller than their layout width
-     (--s on .hero-cards), with their visible left side 8.5% of that width
+     (--s on .first), with their visible left side 8.5% of that width
      in from where they're placed, so the logo lines up with them. */
   margin-left: calc(var(--card-x) + var(--card-w) * .085);
 }
@@ -59,7 +59,7 @@ svg { flex: none; }
    the page and dip over the photo */
 .head-in { position: relative; }
 .badges {
-  position: absolute; z-index: 10; top: 0; right: calc(clamp(16px, 5vw, 80px) + 32px);
+  position: absolute; z-index: 10; top: 0; right: calc(clamp(16px, 5vw, 80px) + 32px + var(--cut, 0px));
   display: flex; gap: 8px; margin: 0; padding: 0; list-style: none;
 }
 .badge { filter: drop-shadow(0 4px 8px rgba(15, 39, 66, .28)); }
@@ -84,6 +84,10 @@ svg { flex: none; }
    in, is roughly 16:9, and the card overlaps its left edge, centred on it. */
 .first {
   --overlap: clamp(90px, 8vw, 130px);
+  /* The cards over the photo are drawn at this size. On screens wide for
+     their height, js/home.js raises it to use the room the photo can't
+     (see .photo's max-width), as far as the photo's height allows. */
+  --s: .612;
   /* Base photo height: 16:9.2 of the width it had before the cards were
      shrunk the last time (it now starts further left), kept between 500px and 600px
      unless the screen is tall enough for more. On short laptop screens the
@@ -105,8 +109,12 @@ svg { flex: none; }
 /* Starts where the cards overlap it by the same amount as before they were
    last shrunk (84.7% = 8.5% in + 61.2% wide + the old 15% overlap) */
 .photo {
-  position: relative; margin-left: calc(var(--card-w) * .847 - var(--overlap));
+  position: relative; margin-left: calc(var(--card-w) * (var(--s) + .235) - var(--overlap));
   height: var(--photo-h); overflow: hidden; border-radius: 24px; background: var(--pale);
+  /* Never wider than the 4:3 photos need at --fit, so they have no blurred
+     strips; on screens wide for their height the frame stops short of the
+     right edge and js/home.js moves the badges in to match */
+  max-width: calc(var(--photo-h) * 4 / 3 / var(--fit));
   container-type: size;
   /* Each photo shows at least this much of its height, so a photo taller
      than the frame isn't zoomed right in; any room left at its sides is
@@ -146,6 +154,10 @@ svg { flex: none; }
 .photo-img.job-5 { --py: .4; }
 .photo-img.job-6 { --py: .35; }
 .photo-img.job-7 { --py: .36; }
+/* The two squarest photos would still be narrower than the frame, so they
+   show a little less of their height and sit at its right edge: what's left
+   of their blurred strip is on the left, behind the cards */
+@media (min-width: 1024px) { .photo-img:is(.job-2, .job-7) { --px: 1; --fit: .71; } }
 @media (prefers-reduced-motion: reduce) { .photo-img, .photo-bg { transition: none; } }
 
 .photo-ctl {
@@ -168,14 +180,13 @@ svg { flex: none; }
 .hero-cards {
   /* A quarter of the top card's height, which grows as the card narrows */
   --eco-h: calc(146px + (520px - var(--card-w)) * .2);
-  --s: .612;
   --eco-gap: calc(16px / var(--s));
   position: absolute; z-index: 5; top: 16px;
   left: calc(clamp(16px, 5vw, 80px) + var(--card-x)); width: var(--card-w);
   min-height: calc((var(--photo-h) - 32px) / var(--s));
   display: flex; flex-direction: column; gap: var(--eco-gap);
-  /* 30.3% = 100% - 8.5% - 61.2%, so the visible left side stays 8.5% in */
-  transform: translateX(-30.3%) scale(var(--s)); transform-origin: 100% 0;
+  /* Shifted left by (100% - 8.5% - --s), so the visible left side stays 8.5% in */
+  transform: translateX(calc((var(--s) - .915) * 100%)) scale(var(--s)); transform-origin: 100% 0;
   /* Outlines here are rings rather than borders: browsers round borders to whole
      pixels before the scale, which left them fainter than the others */
   --ring: calc(1px / var(--s));
@@ -381,7 +392,7 @@ svg { flex: none; }
    the left side of a full-width photo. */
 @media (max-width: 1023px) {
   :root { --card-w: 360px; --card-x: 24px; }
-  .photo { margin-left: 0; --cl: 275px; }
+  .photo { margin-left: 0; max-width: none; --cl: 275px; }
   .first { --photo-h: clamp(520px, calc(100vh - 200px), 600px); --photo-h: clamp(520px, calc(100svh - 200px), 600px); }
   .photo-img.job-1 { --px: .65; }
   .card { padding: 28px; }
