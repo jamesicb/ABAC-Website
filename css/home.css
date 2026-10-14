@@ -167,9 +167,10 @@ svg { flex: none; }
   transform: translateY(clamp(min(0px, calc(((var(--photo-h) - 32px) / var(--s) - 100%) / 2)), calc((var(--photo-h) * .4 - 16px) / var(--s) - 50%), calc((var(--photo-h) - 32px) / var(--s) - 100% - var(--eco-gap) - var(--eco-h))));
 }
 /* Its three lines form an inverted triangle, each on one line and
-   centred: the title fills the card's width and is the largest, the next
-   line is 90% as wide, and the link is 85% the size of that line. All
-   three scale with the card's width (cqi), so the shape holds at any size. */
+   centred, with equal steps: the title fills the card's width (98%) and is
+   the largest, the next line is 90% as wide, and the link is a pill 82%
+   as wide whose text is 85% the size of that line. All three scale with
+   the card's width (cqi), so the shape holds at any size. */
 .eco-card {
   position: relative; flex: none; margin-top: auto; height: var(--eco-h);
   display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px;
@@ -179,11 +180,11 @@ svg { flex: none; }
 .eco-card p { margin: 0; font-size: 4.05cqi; line-height: 1.3; color: var(--muted); white-space: nowrap; }
 .eco-card strong { font-weight: 700; color: var(--ink); }
 .eco-card u { text-underline-offset: 3px; }
-.eco-card a { display: inline-flex; align-items: center; gap: .22em; margin-top: 1px; font-family: var(--display); font-size: 3.44cqi; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: var(--navy-2); text-underline-offset: 3px; }
+.eco-card a { display: inline-flex; align-items: center; justify-content: center; gap: .22em; width: 82%; margin-top: 3px; padding: .42em 0; border-radius: 999px; background: var(--pale); box-shadow: inset 0 0 0 var(--ring) var(--outline); font-family: var(--display); font-size: 3.44cqi; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: var(--navy-2); text-decoration: none; }
 .eco-card a svg { width: .8em; height: .8em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 /* The whole card opens the map */
 .eco-card a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
-.eco-card:hover a { color: var(--navy); }
+.eco-card:hover a { color: var(--navy); background: #e1ebf7; }
 .card h1, .quote2 h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 2.3vw, 36px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
 .card-sub { margin: 10px 0 20px; font-size: 16.5px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
 
