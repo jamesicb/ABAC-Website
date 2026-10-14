@@ -287,7 +287,8 @@ svg { flex: none; }
 :is(.svc svg, .more-icon, .hero-tiles svg) .f-ok { fill: var(--green); stroke: var(--green); }
 :is(.svc svg, .more-icon, .hero-tiles svg) .f-warn { fill: #d97706; stroke: #d97706; }
 .more-act { justify-self: stretch; }
-.more a { color: var(--navy-2); }
+/* Text links only: the "Get a free quote" buttons keep their white text */
+.more a:not(.cta) { color: var(--navy-2); }
 .sent-details { justify-self: stretch; margin: 0; padding: 12px 14px; border-radius: 10px; background: var(--pale); text-align: left; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13.5px; line-height: 1.5; }
 .sent-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .more .copy { display: inline-flex; align-items: center; border: 0; border-radius: 10px; background: var(--navy-2); color: var(--white); padding: 10px 16px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; }
