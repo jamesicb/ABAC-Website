@@ -17,6 +17,21 @@
   }
   function ready(img) { return !img.dataset.src && img.complete && img.naturalWidth > 0; }
 
+  // Each photo is sized from its own shape, with a blurred copy of it behind
+  // to fill any room at its sides (see .photo-img in css/home.css)
+  slides.forEach((img) => {
+    img.style.setProperty('--r', img.getAttribute('width') / img.getAttribute('height'));
+    const bg = document.createElement('span');
+    bg.className = 'photo-bg';
+    bg.setAttribute('aria-hidden', 'true');
+    bg.classList.toggle('is-on', img.classList.contains('is-on'));
+    img.before(bg);
+    img.bg = bg;
+    const paint = () => { if (img.currentSrc) bg.style.backgroundImage = `url("${img.currentSrc}")`; };
+    if (img.complete) paint();
+    img.addEventListener('load', paint);
+  });
+
   // The card's tiles show the figures for the house in the photo (data-ber etc. on each photo)
   const heroTiles = document.querySelector('.hero-tiles');
   const heroVals = [...heroTiles.querySelectorAll('.ht-val, .ht-note')];
@@ -38,7 +53,7 @@
     current = (i + slides.length) % slides.length;
     showFigures(slides[current]);
     load(slides[current]);
-    slides.forEach((s, n) => s.classList.toggle('is-on', n === current));
+    slides.forEach((s, n) => { s.classList.toggle('is-on', n === current); s.bg.classList.toggle('is-on', n === current); });
     dots.forEach((d, n) => d.setAttribute('aria-current', String(n === current)));
     load(slides[(current + 1) % slides.length]);
   }

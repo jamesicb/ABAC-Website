@@ -104,26 +104,49 @@ svg { flex: none; }
 }
 /* Starts where the cards overlap it by the same amount as before they were
    last shrunk (84.7% = 8.5% in + 61.2% wide + the old 15% overlap) */
-.photo { position: relative; margin-left: calc(var(--card-w) * .847 - var(--overlap)); }
-/* Drawn over the photos rather than on them, so it stays steady while they fade */
-.photo::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--outline); border-radius: 24px; pointer-events: none; }
-.photo-img {
-  width: 100%; height: var(--photo-h);
-  object-fit: cover; object-position: 50% 40%; border-radius: 24px; background: var(--pale);
+.photo {
+  position: relative; margin-left: calc(var(--card-w) * .847 - var(--overlap));
+  height: var(--photo-h); overflow: hidden; border-radius: 24px; background: var(--pale);
+  container-type: size;
+  /* Each photo shows at least this much of its height, so a photo taller
+     than the frame isn't zoomed right in; any room left at its sides is
+     filled with a blurred copy of it */
+  --fit: .78;
+  /* How far the cards reach over the photo's left edge: a photo narrower
+     than the frame is centred in the part they leave clear */
+  --cl: calc(var(--card-w) * .1);
 }
+/* Drawn over the photos rather than on them, so it stays steady while they fade */
+.photo::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--outline); border-radius: inherit; pointer-events: none; }
 
-/* Job photos take turns every 3 seconds (js/home.js). The first sets the
-   size; the others sit on top of it and fade in when it's their turn. */
-.photo .photo-img:not(:first-child) { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
-.photo-img { opacity: 0; transition: opacity .8s ease; }
+/* Job photos take turns every 3 seconds (js/home.js), fading in over each
+   other. Each is sized from its own shape (--r, width / height, set by
+   js/home.js from its width and height attributes): it covers the frame
+   unless that would show less than --fit of its height. --px and --py
+   pick which part shows when it's cropped, like object-position. */
+.photo-img {
+  --dh: max(100cqh, min(100cqw / var(--r, 1.5), 100cqh / var(--fit)));
+  --dw: calc(var(--dh) * var(--r, 1.5));
+  position: absolute; max-width: none; width: var(--dw); height: var(--dh);
+  left: calc((100cqw - var(--dw)) * var(--px, .5) + min(var(--cl), max(0px, 100cqw - var(--dw))) * (1 - var(--px, .5)));
+  top: calc((100cqh - var(--dh)) * var(--py, .4));
+  object-fit: cover;
+  opacity: 0; transition: opacity .8s ease;
+}
 .photo-img.is-on { opacity: 1; }
-.photo-img.job-2 { object-position: 50% 45%; }
-.photo-img.job-3 { object-position: 50% 15%; }
-.photo-img.job-4 { object-position: 50% 30%; }
-.photo-img.job-5 { object-position: 50% 40%; }
-.photo-img.job-6 { object-position: 50% 35%; }
-.photo-img.job-7 { object-position: 50% 36%; }
-@media (prefers-reduced-motion: reduce) { .photo-img { transition: none; } }
+/* The blurred copy behind each photo (added by js/home.js) */
+.photo-bg {
+  position: absolute; inset: -48px; background: center / cover no-repeat;
+  filter: blur(28px) brightness(.92); opacity: 0; transition: opacity .8s ease;
+}
+.photo-bg.is-on { opacity: 1; }
+.photo-img.job-2 { --py: .45; }
+.photo-img.job-3 { --py: .15; }
+.photo-img.job-4 { --py: .3; }
+.photo-img.job-5 { --py: .4; }
+.photo-img.job-6 { --py: .35; }
+.photo-img.job-7 { --py: .36; }
+@media (prefers-reduced-motion: reduce) { .photo-img, .photo-bg { transition: none; } }
 
 .photo-ctl {
   position: absolute; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 2px;
@@ -358,9 +381,9 @@ svg { flex: none; }
    the left side of a full-width photo. */
 @media (max-width: 1023px) {
   :root { --card-w: 360px; --card-x: 24px; }
-  .photo { margin-left: 0; }
+  .photo { margin-left: 0; --cl: 275px; }
   .first { --photo-h: clamp(520px, calc(100vh - 200px), 600px); --photo-h: clamp(520px, calc(100svh - 200px), 600px); }
-  .photo-img.job-1 { object-position: 65% 40%; }
+  .photo-img.job-1 { --px: .65; }
   .card { padding: 28px; }
   .eco-card { padding: 12px 24px; }
   /* Two columns: 1 and 3 on the left, 2 and 4 lower on the right */
@@ -372,9 +395,8 @@ svg { flex: none; }
 
 /* Phones: stack them, with the card overlapping the bottom of the photo. */
 @media (max-width: 699px) {
-  .photo-img { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; }
-  .photo::after { border-radius: 22px; }
-  .photo-img.job-1 { object-position: 50% 40%; }
+  .photo { height: auto; aspect-ratio: 4 / 3; border-radius: 22px; --cl: 0px; }
+  .photo-img.job-1 { --px: .5; }
   /* The card covers the bottom of the photo here, so the controls go top left */
   .photo-ctl { top: 12px; bottom: auto; left: 12px; right: auto; }
   .hero-cards { position: relative; top: auto; left: auto; transform: none; width: auto; max-width: 600px; min-height: 0; margin: -56px auto 0; gap: 12px; --ring: 1px; }
@@ -398,8 +420,7 @@ svg { flex: none; }
   .brand-text b { font-size: 17px; }
   .brand-text small { font-size: 9px; letter-spacing: .14em; }
   .badges { right: 32px; }
-  .photo-img { aspect-ratio: 1 / 1; border-radius: 18px; }
-  .photo::after { border-radius: 18px; }
+  .photo { aspect-ratio: 1 / 1; border-radius: 18px; }
   .hero-cards { margin: -48px 8px 0; }
   .card { padding: 22px 18px; border-radius: 18px; }
   .eco-card { padding: 12px 18px; border-radius: 18px; }
