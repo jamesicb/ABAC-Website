@@ -172,6 +172,29 @@
   const ecoCard = document.querySelector('.eco-card');
   const whyTitle = document.getElementById('why-title');
   const svcList = document.querySelector('.svc-list');
+  const first = document.querySelector('.first');
+  const photo = document.querySelector('.photo');
+  const mainCard = document.querySelector('.card');
+  const wide = matchMedia('(min-width: 1024px)');
+  // On screens wide for their height the photo frame can't use all the width
+  // (see .photo's max-width in css/home.css). The cards grow into that room,
+  // keeping their shape, as far as the photo's height allows; whatever is
+  // still left is cut from the right, and the badges move in with the frame.
+  function fitHero() {
+    first.style.removeProperty('--s');
+    document.documentElement.style.removeProperty('--cut');
+    if (!wide.matches) return;
+    const edge = () => first.getBoundingClientRect().right - parseFloat(getComputedStyle(first).paddingRight);
+    let spare = edge() - photo.getBoundingClientRect().right;
+    if (spare > 0.5) {
+      const ph = photo.getBoundingClientRect(), m = mainCard.getBoundingClientRect(), e = ecoCard.getBoundingClientRect();
+      const s = parseFloat(getComputedStyle(first).getPropertyValue('--s'));
+      const grow = Math.max(1, Math.min((ph.height - 32) / (m.height + 16 + e.height), (m.width + spare) / m.width));
+      if (grow > 1.001) first.style.setProperty('--s', (s * grow).toFixed(4));
+      spare = edge() - photo.getBoundingClientRect().right;
+    }
+    if (spare > 0.5) document.documentElement.style.setProperty('--cut', `${Math.round(spare)}px`);
+  }
   function clearEco() {
     whyTitle.style.marginTop = '';
     svcList.style.marginTop = '';
@@ -187,13 +210,14 @@
     const tiles = svcList.getBoundingClientRect();
     if (tiles.top < eco.bottom + gap) svcList.style.marginTop = `${Math.ceil(eco.bottom + gap - tiles.top)}px`;
   }
-  if (heroCards && ecoCard && whyTitle && svcList) {
+  if (heroCards && ecoCard && whyTitle && svcList && first && photo && mainCard) {
     let queued = false;
     const refit = () => {
       if (queued) return;
       queued = true;
-      requestAnimationFrame(() => { queued = false; clearEco(); });
+      requestAnimationFrame(() => { queued = false; fitHero(); clearEco(); });
     };
+    fitHero();
     clearEco();
     if (document.fonts) document.fonts.ready.then(refit);
     addEventListener('resize', refit);
