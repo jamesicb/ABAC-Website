@@ -49,9 +49,6 @@ svg { flex: none; }
   margin-left: calc(var(--card-x) + var(--card-w) * .085);
 }
 .brand-mark { flex: none; width: 36px; height: 36px; }
-.bm-glow { fill: #fcedbb; }
-.bm-rays { fill: #f6c437; }
-.bm-sun { fill: #edb313; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand-text b { font-family: var(--display); font-weight: 600; font-size: 21px; letter-spacing: -0.01em; }
 .brand-text small { font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-top: 3px; font-weight: 600; }
