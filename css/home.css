@@ -293,9 +293,10 @@ svg { flex: none; }
 /* Button under the tiles, as wide as the two tiles together; it jumps to the
    quote form beside the FAQs. Bigger type, as the card is drawn smaller. */
 .hero-cta { display: grid; place-items: center; margin-top: 14px; min-height: 66px; font-size: 21px; text-decoration: none; }
-/* In the sun logo's golds, with navy text (white on gold would be too faint to read) */
-.hero-cta { background: linear-gradient(90deg, #f6c437, #edb313); color: var(--navy); }
-.hero-cta:hover { background: linear-gradient(90deg, #edb313, #dba30d); }
+/* The two "Enquire for free quote" buttons (in the card and on the quote form) are
+   in the sun logo's golds, with navy text (white on gold would be too faint to read) */
+:is(.hero-cta, .lead-form .cta) { background: linear-gradient(90deg, #f6c437, #edb313); color: var(--navy); }
+:is(.hero-cta, .lead-form .cta):hover { background: linear-gradient(90deg, #edb313, #dba30d); }
 /* The figure for the house in the photo; it fades out and back in as the photo changes */
 .ht-body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px; }
 .ht-val { font-family: var(--display); font-weight: 600; font-size: 26px; line-height: 1.1; color: var(--ink); transition: opacity .3s ease; }
