@@ -211,11 +211,12 @@ svg { flex: none; }
 .eco-card p { margin: 0; font-size: 4.05cqi; line-height: 1.3; color: var(--muted); white-space: nowrap; }
 .eco-card strong { font-weight: 700; color: var(--ink); }
 .eco-card u { text-underline-offset: 3px; }
-.eco-card a { display: inline-flex; align-items: center; justify-content: center; gap: .22em; width: 82%; height: 9.12cqi; margin-top: 3px; padding: 0; border-radius: 999px; background: var(--white); box-shadow: inset 0 0 0 var(--ring) var(--outline); font-family: var(--display); font-size: 3.95cqi; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: var(--navy-2); text-decoration: none; }
+.eco-card a { display: inline-flex; align-items: center; justify-content: center; gap: .22em; width: 82%; height: 9.12cqi; margin-top: 3px; padding: 0; border-radius: 999px; background: linear-gradient(90deg, #f6c437, #edb313); font-family: var(--display); font-size: 3.95cqi; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); text-decoration: none; }
 .eco-card a svg { width: .8em; height: .8em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 /* The whole card opens the map */
 .eco-card a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
-.eco-card:hover a { color: var(--navy); background: #e1ebf7; }
+/* Same golds as the quote button above it */
+.eco-card:hover a { background: linear-gradient(90deg, #edb313, #dba30d); }
 .card h1, .quote2 h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 2.3vw, 36px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
 .card-sub { margin: 10px 0 20px; font-size: 16.5px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
 
