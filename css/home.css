@@ -188,7 +188,7 @@ svg { flex: none; }
      pixels before the scale, which left them fainter than the others */
   --ring: calc(1px / var(--s));
 }
-.card, .eco-card { background: var(--white); border-radius: 24px; box-shadow: 0 0 0 var(--ring) var(--outline), 0 10px 40px rgba(15, 39, 66, .16); }
+.card, .eco-card { background: var(--pale); border-radius: 24px; box-shadow: 0 0 0 var(--ring) var(--outline), 0 10px 40px rgba(15, 39, 66, .16); }
 .card {
   padding: 32px;
   /* Its middle sits 10% of the photo's height above the photo's middle where
@@ -211,7 +211,7 @@ svg { flex: none; }
 .eco-card p { margin: 0; font-size: 4.05cqi; line-height: 1.3; color: var(--muted); white-space: nowrap; }
 .eco-card strong { font-weight: 700; color: var(--ink); }
 .eco-card u { text-underline-offset: 3px; }
-.eco-card a { display: inline-flex; align-items: center; justify-content: center; gap: .22em; width: 82%; height: 9.12cqi; margin-top: 3px; padding: 0; border-radius: 999px; background: var(--pale); box-shadow: inset 0 0 0 var(--ring) var(--outline); font-family: var(--display); font-size: 3.95cqi; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: var(--navy-2); text-decoration: none; }
+.eco-card a { display: inline-flex; align-items: center; justify-content: center; gap: .22em; width: 82%; height: 9.12cqi; margin-top: 3px; padding: 0; border-radius: 999px; background: var(--white); box-shadow: inset 0 0 0 var(--ring) var(--outline); font-family: var(--display); font-size: 3.95cqi; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; color: var(--navy-2); text-decoration: none; }
 .eco-card a svg { width: .8em; height: .8em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 /* The whole card opens the map */
 .eco-card a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
@@ -247,7 +247,7 @@ svg { flex: none; }
 .hero-tiles { container-type: inline-size; list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto minmax(72px, auto); gap: 12px; }
 /* Each tile has a heading (icon and title) over the figure for the house in the
    photo. Tiles share their rows, so the headings line up even when one wraps. */
-.hero-tiles li { grid-row: span 2; display: grid; grid-template-rows: auto 1fr; grid-template-rows: subgrid; row-gap: 0; background: var(--pale); border-radius: 16px; box-shadow: inset 0 0 0 var(--ring) var(--outline); text-align: center; color: var(--navy); }
+.hero-tiles li { grid-row: span 2; display: grid; grid-template-rows: auto 1fr; grid-template-rows: subgrid; row-gap: 0; background: var(--white); border-radius: 16px; box-shadow: inset 0 0 0 var(--ring) var(--outline); text-align: center; color: var(--navy); }
 /* Headings as big as fits each on one line beside its icon ("Property Value
    Increase" takes two), scaling with the tiles' width, with the padding
    trimmed so the card stays the same height */
